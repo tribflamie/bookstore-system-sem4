@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>House | Mycart</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/home/css/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/home/css/global.css}" rel="stylesheet">
+        <link th:href="@{/home/css/cart.css}" rel="stylesheet">
+        <link th:rel="stylesheet" type="text/css" th:href="@{/home/css/font-awesome.min.css}" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet"> 
+        <script th:src="@{/home/js/jquery-2.1.1.min.js}"></script>
+        <script th:src="@{/home/js/bootstrap.min.js}"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            .top_1r {
+                padding-top: 10px;
+            }
+
+            .big {
+                font-size: 18px;
+            }
+
+            .mgt {
+                margin-top: 5px;
+            }
+
+            .button {
+                display: inline-block;
+                padding: 6px 12px;
+                margin-bottom: 0;
+                font-size: 14px;
+                font-weight: normal;
+                line-height: 1.42857143;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: middle;
+                -ms-touch-action: manipulation;
+                touch-action: manipulation;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                background-image: none;
+                border: 1px solid transparent;
+                border-radius: 4px;
+                color: #fff;
+                background-color: #5bc0de;
+                border-color: #46b8da;
+            }
+
+            .button:hover {
+                background-color: #31b0d5;
+                border-color: #269abc;
+            }
+
+            .button.mgt {
+                margin-top: 10px;
+                margin-left: 10px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <section id="top">
+            <div class="container">
+                <div class="row">
+                    <div class="top_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="top_1m text-center clearfix">
+                                <h3 class="mgt"><a th:href="@{/}"><span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a></h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="top_1l clearfix">
+                                <p class="mgt font_16 text-center"><i class="fa fa-map col_1"></i> <span class="col_6">Address:</span> 115 Hồ Tùng Mậu.P Bến Nghé.Q1.TP.HCMa</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="top_1r text-right clearfix">
+                                <div th:if="${username != null}">
+                                    <h6 class="big mgt">Welcome, <span th:text="${username}"></span>
+                                        <a class="button mgt" th:href="@{/userdetails/{id}(id=${session.user})}">Profile</a>
+                                        <a class="button mgt" th:href="@{/logout}">Logout</a>
+                                    </h6>
+                                </div>
+                                <div th:if="${username == null}">
+                                    <h6 class="big mgt">
+                                        <a class="button mgt" th:href="@{/login}">Login</a>
+                                        <a class="button mgt" th:href="@{/register}">Register</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="header" class="clearfix cd-secondary-nav">
+            <nav class="navbar nav_t">
+                <div class="container">
+                    <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" th:href="@{/}"> <span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a>
+                    </div>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+
+                            <li><a class="m_tag active_tab" th:href="@{/}">Home</a></li>
+                            <li><a class="m_tag" th:href="@{/about}">About</a></li>
+                            <li><a class="m_tag" th:href="@{/products}">MENU</a></li>
+                            <li><a class="m_tag" th:href="@{/blog}">Blog</a></li>
+
+                            <li><a class="m_tag" th:href="@{/contactus}">Contact Us</a></li>
+                            <li class="dropdown">
+                                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Pages<span class="caret"></span></a>
+                                <ul class="dropdown-menu drop_3" role="menu">
+                                    <li><a th:href="@{/mycart}">Shopping Cart</a></li>
+                                    <li th:if="${username != null}"><a class="border_none" th:href="@{/purchasehistory}">Product History</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><a class="m_tag" href="#aboutModal" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i></a></li>
+
+                            <li class="dropdown">
+                                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-bag"></i></a>
+                                <ul class="dropdown-menu drop_1" role="menu">
+                                    <li>
+                                        <div class="drop_1i clearfix">
+                                            <div class="col-sm-6">
+
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il text-right clearfix"><h5 class="mgt"><a href="cart.html">VIEW CART</a></h5></div>
+                                            </div>
+                                        </div>
+                                        <span th:each="p: ${pcart}">
+                                            <span th:if="${username == p.userId.username and p.status != true}">
+                                                <div class="drop_1i1 clearfix">
+                                                    <div class="col-sm-6" style="margin-top: 8px">
+                                                        <div class="drop_1i1l clearfix"><h6 class="mgt bold"><a href="#" th:text="${p.productid.productname}"></a> <br><span>$<span class="normal col_2" th:text="${p.productid.sale}"></span> </span><span style="font-size: 14px;">quantity:<span th:text="${p.quantity}"></span></h6></div>
+                                                    </div>
+                                                    <div class="col-sm-4" style="margin-top: 8px">
+                                                        <div class="drop_1i1r clearfix"><a href="#"><img th:src="@{'images/'+${p.productid.image}}" class="iw" alt="abc"></a></div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="drop_1i1l text-right clearfix"><h6 class="mgt bold"> <span><a th:href="@{/deletecart/{id}(id = ${p.id})}"><i class="fa fa-remove"></i></a></span></h6></div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </span>
+                                        <div class="drop_1i2 clearfix">
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il clearfix"><h5 class="mgt">TOTAL</h5></div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il text-right clearfix"><h5 class="mgt">$<span th:text="${totlal}"></span></h5></div>
+                                            </div>
+                                        </div>
+                                        <div class="drop_1i3 text-center clearfix">
+                                            <div class="col-sm-12">
+                                                <h5><a class="button" href="/mycart">CHECKOUT</a></h5>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+
+        </section>
+        <section id="center" class="center_o clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="center_o1 text-center">
+                            <h1 class="mgt">Shopping Cart</h1>
+                            <h4><a href="#">Home</a> / Shopping Cart</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cart_page" class="clearfix cart">
+            <div class="container">
+                <div class="row">
+                    <div class="cart_1 clearfix">
+                        <div class="col-sm-12">
+                            <p class="mgt"><a href="#">Home</a> / <a href="#">Shopping Cart</a></p>
+                        </div>
+                    </div>
+                    <div class="cart_2 clearfix">
+                        <div class="col-sm-6">
+                            <h3 class="bold col_1">MY CART</h3>
+                        </div>
+                        <div class="col-sm-6">
+                            <h5 class="text-right"><a href="/products">Continue Shopping</a></h5>
+                        </div>
+                    </div>
+                    <div class="cart_3 clearfix">
+                        <div class="col-sm-8">
+                            <div class="cart_3l clearfix">
+                                <h5 class="mgt">PRODUCT</h5>
+                            </div>
+                            <span th:each="p: ${pcart}">
+                                <span th:if="${username == p.userId.username and p.status != true}">
+                                    <div class="cart_3l1 clearfix" id="product-${p.productid.id}">
+                                        <div class="col-sm-3 space_left">
+                                            <div class="cart_3l1i clearfix">
+                                                <a href="#"><img th:src="@{'images/'+${p.productid.image}}" alt="Product Image" class="iw" height="150px"></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <div class="cart_3l1i1 clearfix">
+                                                <h5 class="mgt"><a href="#" th:text="${p.productid.productname}"></a></h5>
+                                                <h5>
+                                                    <span>Unit Price: $</span><span th:text="${p.sellingprice}"></span>
+                                                    <span style="margin-left: 120px">Subtotal: $</span><span th:text="${p.subtotal}"></span>
+                                                </h5>
+                                                <h5>Quantity:</h5>
+                                            </div>
+                                            <div class="cart_3l1i2 clearfix">
+                                                <form class="forms-sample" th:action="@{/mycart}" th:object="${productcart}" method="post" onsubmit="return validateQuantity()">
+                                                    <input type="hidden" name="id" th:value="${p.id}" />
+                                                    <input type="hidden" name="productid.id" th:value="${p.productid.id}" />
+                                                    <input type="hidden" name="sellingprice" th:value="${p.productid.sale}" />
+                                                    <input type="hidden" name="status" value="false" />
+                                                    <div class="input-group number-spinner">
+                                                        <input aria-label="quantity" class="input-qty form-control text-center quantity-input" max="100" name="quantity" type="number" th:value="${p.quantity}">
+                                                    </div>
+                                                    <h6 class="mgt">
+                                                        <a class="button_1 mgt" th:href="@{/deleteproductcart/{id}(id = ${p.id})}" onclick="return confirm('Are you sure delete')">REMOVE</a>
+                                                    </h6>
+                                                    
+                                                </form>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+
+                                </span>
+                            </span>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="cart_3r clearfix">
+                                <h5 class="mgt head_1">SUBTOTAL</h5>
+                                <span th:if="${username != null}">
+                                    <h3 class="text-center">$<span th:text="${totlal}"></span></h3> 
+                                </span>
+                                <span th:if="${username == null}">
+                                    <h3 class="text-center">$0.0</h3> 
+                                </span>
+                                <hr>
+                                <!--                                <h6>Additional comments</h6>
+                                                                <textarea class="form-control"></textarea>-->
+                                <span th:if="${username == null}">
+                                    <h5 class="text-center"><a class="button" th:href="@{/login}" style="background-color: #fc8080">PROCEED TO CHECKOUT</a></h5><br>
+                                </span>
+                                <span th:if="${username != null}">
+                                    <h5 class="text-center" ><a class="button" th:href="@{/checkout} " style="background-color: #fc8080">PROCEED TO CHECKOUT</a></h5><br>
+                                </span>
+                                <!--                             
+<h5>GET SHIPPING ESTIMATES</h5>-->
+                                <hr>
+                            </div>
+                            <!--                            <div class="cart_3r1 clearfix">
+                                                            <h6>Country</h6>
+                                                            <select class="form-control" id="subject" name="subject">
+                                                                <option>America</option>
+                                                                <option>India</option>
+                                                                <option>England</option>
+                                                                <option>Africa</option>
+                                                            </select><br>
+                                                            <h6>State</h6>
+                                                            <select class="form-control" id="subject_1" name="subject">
+                                                                <option>Delhi</option>
+                                                                <option>Uttar Pradesh</option>
+                                                                <option>Punjab</option>
+                                                                <option>Madhya Pradesh</option>
+                                                            </select><br>
+                                                            <h6>Postal/Zip Code</h6>
+                                                            <input class="form-control" type="text">
+                                                            <h5 class="text-center"><a class="button_1" href="#">CALCULATE SHIPPING</a></h5>
+                                                        </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>	 
+        </section>
+
+        <section id="enquiry">
+            <div class="container">
+                <div class="row">
+                    <div class="enquiry_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h4 class="mgt">NEWSLETTER</h4>
+                            <p>Subscribe to our newsletter and get <span class="col_1">20%</span> off your first purchase</p>
+                            <div class="input-group">
+                                <input type="text" class="form-control form_2" placeholder="Your Email">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button">
+                                        SUBSCRIBE</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="footer_1l clearix">
+                                <h4>GALLERY</h4>
+                                <div class="footer_1li clearfix">
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh7.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh8.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh9.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer_1li clearfix">
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh10.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh11.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh12.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="footer_1m clearix">
+                                <h4>QUICK LINKS</h4>
+                                <div class="footer_1mi clearfix">
+                                    <div class="col-sm-6 space_left col-xs-6">
+                                        <div class="footer_1mil clearfix">
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Our Blends</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">New Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Top Sellers</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">About Us</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">MENU</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Contact Us</a></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 space_right col-xs-6">
+                                        <div class="footer_1mil clearfix">
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Beans</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Preparation Tools</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Drunk Coffee</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Ice Cream</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Other</a></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="footer_1r clearix">
+                                <h4>GET IN TOUCH</h4>
+                                <p class="font_16"><i class="fa fa-map col_1"></i> Address : -115/Hồ Tùng Mậu/Bến Nghe/Q1/HCM</p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">+91 (123) 456 7890</a></p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">CoffeePAO@gmail.com</a></p>
+                                <ul class="social-network social-circle">
+                                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer_2 text-center clearfix">
+                        <div class="col-sm-12">
+                            <p class="mgt">© 2024 Your Website Coffee  Management System<a class="col_1" th:href="@{/}">Coffee PAO</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="input-group clearfix">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                /*****Fixed Menu******/
+                var secondaryNav = $('.cd-secondary-nav'),
+                        secondaryNavTopPosition = secondaryNav.offset().top;
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+
+                $(window).on('scroll', function () {
+                    if ($(window).scrollTop() > secondaryNavTopPosition + navbar_height) {
+                        secondaryNav.addClass('is-fixed');
+                        document.body.style.paddingTop = navbar_height + 'px';
+
+                    } else {
+                        secondaryNav.removeClass('is-fixed');
+                        document.body.style.paddingTop = '0'
+                    }
+                });
+
+            });
+        </script>
+
+        <script>
+            function validateQuantity() {
+                var quantityInput = document.getElementsByName('quantity')[0];
+                var quantityValue = parseInt(quantityInput.value.trim(), 10);
+
+                if (quantityValue < 1) {
+                    alert('The quantity cannot be negative or zero!');
+                    location.reload();
+                    return false; // Ngăn chặn form submit nếu số lượng âm
+                }
+
+                return true; // Cho phép submit form nếu số lượng không âm
+            }
+
+            $(document).on('click', '.number-spinner button', function () {
+                var btn = $(this),
+                        input = btn.closest('.number-spinner').find('input'),
+                        oldValue = parseInt(input.val().trim()),
+                        newVal = 0;
+
+                if (btn.attr('data-dir') == 'up') {
+                    newVal = oldValue + 1;
+                } else {
+                    if (oldValue > 1) {
+                        newVal = oldValue - 1;
+                    } else {
+                        newVal = 1;
+                    }
+                }
+
+                // Cập nhật giá trị mới vào input
+                input.val(newVal);
+            });
+        </script>
+       <script th:inline="javascript">
+    $(document).ready(function () {
+        // Bắt sự kiện khi số lượng thay đổi và mất focus
+        $('.input-qty').on('blur', function () {
+            var newVal = parseInt($(this).val().trim());
+
+            // Kiểm tra nếu newVal là số âm hoặc bằng 0
+            if (newVal <= 0) {
+                alert('The quantity cannot be negative or zero!');
+                // Đặt giá trị số lượng là 1
+                $(this).val(1);
+            } else {
+                // Submit form ngay khi số lượng hợp lệ
+                $(this).closest('form').submit();
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,30 @@
+.pages {
+                margin-top: 20px; /* Khoảng cách với phần nội dung khác */
+            }
+
+            .pages ul {
+                list-style-type: none; /* Bỏ đi dấu chấm đầu dòng của danh sách */
+                padding: 0;
+                text-align: center; /* Căn giữa nút phân trang */
+            }
+
+            .pages ul li {
+                display: inline-block; /* Hiển thị các nút trên cùng một dòng */
+                margin-right: 5px; /* Khoảng cách giữa các nút */
+            }
+
+            .pages ul li button {
+                background-color: #f0f0f0; /* Màu nền của nút phân trang */
+                border: 1px solid #ccc; /* Viền của nút */
+                color: #333; /* Màu chữ của nút */
+                padding: 8px 12px; /* Kích thước nút */
+                cursor: pointer; /* Con trỏ chuột thành dấu nhấp chuột */
+                transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi màu nền */
+                width: 42px;
+                height: 42px;
+                overflow: visible;
+            }
+
+            .pages ul li button:hover {
+                background-color: #ddd; /* Màu nền khi di chuột qua */
+            }

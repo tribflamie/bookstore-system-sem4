@@ -1,0 +1,27 @@
+.star-rating {
+    font-size: 0; /* Prevents white space between inline-block elements */
+}
+
+.star {
+    display: inline-block;
+    width: 20px; /* Adjust size as needed */
+    height: 20px; /* Adjust size as needed */
+    background-image: url('../img/filled-star1.png'); /* Path to your star icon */
+    background-size: contain;
+}
+
+.star.filled {
+    background-image: url('../img/star1.png'); /* Path to your filled star icon */
+}
+
+.rating {
+    font-size: 24px;
+}
+
+.star1 {
+    cursor: pointer;
+}
+
+.selected {
+    color: gold;
+}

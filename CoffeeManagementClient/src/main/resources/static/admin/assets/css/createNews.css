@@ -1,0 +1,178 @@
+
+#exampleInputName1.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a;
+    border: 1px solid #2c2e33;
+}
+#exampleInputDescription.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a;
+    border: 1px solid #2c2e33;
+}
+#exampleInputStatus.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    border: 1px solid #2c2e33;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a
+}
+#content.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a
+}
+#username.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a
+}
+#username.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a
+}
+
+.product1, .product2 {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product1 .col-sm-6,
+.product2 .col-sm-6 {
+    width: 50%;
+    padding-right: 15px; /* Thêm khoảng cách giữa các cột */
+    box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước ngoài cùng của phần tử */
+}
+.content-wrapper {
+    background: #e6ffe6;
+    color: #2f567a;
+}
+#name.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a
+}
+.page-title {
+    color: #2f567a;
+    font-size: 1.125rem;
+    margin-bottom: 0;
+}
+.contact_1l {
+    background-color: #f9f9f9; /* Màu nền nhẹ nhàng */
+    padding: 20px; /* Khoảng cách nội dung với viền ngoài */
+    border: 1px solid #ddd; /* Viền bo tròn và màu sắc nhạt */
+    border-radius: 5px; /* Độ cong của viền */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ để nổi bật */
+}
+
+.error-message {
+    display: block;
+    margin-top: 5px; /* Để cách thông báo lỗi với input một khoảng */
+}
+
+.error-message.hide {
+    display: none;
+}
+.page-title {
+    color: #2f567a;
+    font-size: 1.125rem;
+    margin-bottom: 0;
+}
+
+.card-body {
+    background-color: #f9f9f9; /* Màu nền nhẹ nhàng */
+    padding: 20px; /* Khoảng cách nội dung với viền ngoài */
+    border: 1px solid #ddd; /* Viền bo tròn và màu sắc nhạt */
+    border-radius: 5px; /* Độ cong của viền */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ để nổi bật */
+}
+.card .card-title {
+    color: #2f567a;
+    margin-bottom: 1.125rem;
+    text-transform: capitalize;
+}
+.product2 h5 {
+    
+   margin-top: 10px;; /* Khoảng cách dưới của tiêu đề */
+    
+}
+.product3 h5 {
+    
+   margin-top: 10px;; /* Khoảng cách dưới của tiêu đề */
+    
+}
+/* Optional: Custom styles for better visual appearance */
+.custom-file {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.custom-file-input {
+    cursor: pointer;
+    width: 100%;
+}
+
+.custom-file-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.error-message {
+    font-size: 0.875rem; /* Smaller font size for error messages */
+}
+
+
+
+@media (max-width: 768px) {
+    .product1 .col-sm-6,
+    .product2 .col-sm-6 {
+        width: 100%;
+        padding-right: 0;
+    }
+}
+

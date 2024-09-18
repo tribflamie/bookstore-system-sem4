@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>Coffee Management System</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- plugins:css -->
+        <link rel="stylesheet" th:href="@{/admin/assets/vendors/mdi/css/materialdesignicons.min.css}">
+        <link rel="stylesheet" th:href="@{/admin/assets/vendors/css/vendor.bundle.base.css}">
+        <!-- endinject -->
+        <!-- Plugin css for this page -->
+        <link rel="stylesheet" th:href="@{/admin/assets/vendors/select2/select2.min.css}">
+        <link rel="stylesheet" th:href="@{/admin/assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css}">
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <!-- endinject -->
+        <!-- Layout styles -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" th:href="@{/admin/assets/css/style.css}">
+        <link rel="stylesheet" th:href="@{/admin/assets/css/error.css}">
+
+        <link rel="stylesheet" th:href="@{/admin/assets/css/createNews.css}">
+        <style>
+
+            #successMessageName {
+                display: none;
+                padding: 12px 20px; /* Tăng độ dày và padding để nổi bật hơn */
+                background-color: #DFF0D8; /* Sử dụng màu nền xanh nhạt để làm nổi bật */
+                border: 1px solid #3D8B40; /* Viền nhẹ màu xanh lá cây */
+                color: #ff3333; /* Màu chữ xanh lá cây tương phản với màu nền */
+                margin-bottom: 15px; /* Tăng khoảng cách dưới */
+                border-radius: 5px; /* Bo góc để làm mềm hơn */
+                text-align: center; /* Căn giữa nội dung */
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+            }
+            #content.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a;
+    border: 1px solid #2c2e33;
+}
+.note-editable{
+    background-color: #ffffff;
+    padding: 10px;
+    overflow: auto;
+    word-wrap: break-word;
+    
+}
+.note-toolbar {
+    background: #fff;
+}
+.note-resizebar {
+    background-color: #ffffff;
+}
+        </style>
+
+    </head>
+    <body>
+        <div class="container-scroller">
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+                    <a class="sidebar-brand brand-logo" th:href="@{/admin}"><img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 50%; border-radius: 50%"></a>
+                    <a class="sidebar-brand brand-logo-mini" th:href="@{/admin}"><img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 50%; border-radius: 50%"></a>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item profile">
+                        <div class="profile-desc">
+                            <div class="profile-pic">
+                                <div class="count-indicator">
+                                    <img class="img-xs rounded-circle " th:src="@{/admin/assets/images/faces/face15.jpg}" alt="">
+                                    <span class="count bg-success"></span>
+                                </div>
+                                <div class="profile-name">
+                                    <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
+                                    <span>Gold Member</span>
+                                </div>
+                            </div>
+                            <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
+                                 aria-labelledby="profile-dropdown">
+                                <a href="#" class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-settings text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-onepassword  text-info"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-calendar-today text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item nav-category">
+                        <span class="nav-link">Navigation</span>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/admin}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/speedometer.png}" height="35px"/>
+                            </span>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </li><br>
+
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/listblog}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/blog-template.png}" height="38px"/>
+                            </span>
+                            <span class="menu-title">News</span>
+                        </a>
+                    </li><br>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/product}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/dairy-products.png}" height="38px"/>
+                            </span>
+                            <span class="menu-title">Product</span>
+                        </a>
+                    </li><br>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/category}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/categories.png}" height="38px"/>
+                            </span>
+                            <span class="menu-title">Category</span>
+                        </a>
+                    </li><br>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/comment}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/comment.png}" height="38px"/>
+                            </span>
+                            <span class="menu-title">Comment</span>
+                        </a>
+                    </li><br>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/admin/feedbacks/all}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/hinh24.png}" height="38px"/>
+                            </span>
+                            <span class="menu-title">Feedback</span>
+                        </a>
+                    </li><br>
+
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/order}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/ordering.png}" height="38px"/>
+                            </span>
+                            <span class="menu-title">Order</span>
+                        </a>
+                    </li><br>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/listuser}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/office.png}" height="38px"/>
+                            </span>
+                            <span class="menu-title">User Management</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:partials/_navbar.html -->
+                <nav class="navbar p-0 fixed-top d-flex flex-row">
+                    <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+                        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="@{/home/img/logo100.jpg}"
+                                                                                       alt="logo" /></a>
+                    </div>
+                    <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+                        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                            <span class="mdi mdi-menu"></span>
+                        </button>
+                        <ul class="navbar-nav w-100">
+                            <li class="nav-item w-100">
+                                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                                    <input type="text" class="form-control" placeholder="Search products">
+                                </form>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav navbar-nav-right">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                                    <div class="navbar-profile">
+                                        <img class="img-xs rounded-circle" th:src="@{/admin/assets/images/faces/face15.jpg}" alt="">
+                                        <p class="mb-0 d-none d-sm-block navbar-profile-name" th:text="${username}"></p>
+                                        <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                                     aria-labelledby="profileDropdown">
+                                    <h6 class="p-3 mb-0">Profile</h6>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-dark rounded-circle">
+                                                <i class="mdi mdi-settings text-success"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <p class="preview-subject mb-1">Settings</p>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item preview-item" th:href="@{/logout}">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-dark rounded-circle">
+                                                <i class="mdi mdi-logout text-danger"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <p class="preview-subject mb-1">Log out</p>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <p class="p-3 mb-0 text-center">Advanced settings</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                                data-toggle="offcanvas">
+                            <span class="mdi mdi-format-line-spacing"></span>
+                        </button>
+                    </div>
+                </nav>
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        <div class="page-header">
+                            <h3 class="page-title"> Blog Tables </h3>
+                        </div>
+                        <div id="successMessageName">
+                            Name cannot be spared!!
+                        </div>
+                        <div class="row"> 
+                            <div class="col-lg-12 grid-margin stretch-card">
+                                <div class="col-12 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">News</h4>
+                                            <div class="container">
+                                                <form id="myForm" th:action="@{/createblog}" method="post" th:object="${blog}" enctype="multipart/form-data">
+                                                    <div class="product1 clearfix">
+                                                        <div  class="col-sm-6 space_left">
+                                                            <h5>News Name<span class="col_3">*</span></h5>
+
+                                                            <input type="text" class="form-control" id="exampleInputName1" th:field="*{name}" placeholder="News Name">
+                                                            <div id="nameError" class="error-message"></div>
+                                                        </div>
+                                                        <div  class="col-sm-6 space_left">
+                                                            <h5>Status<span class="col_3">*</span></h5>
+
+                                                            <select class="form-control" id="exampleInputStatus" th:field="*{status}">
+                                                                <option value="New">New</option>
+                                                                <option value="Hot">Hot</option>
+                                                            </select>
+                                                            <div id="statusError" class="error-message"></div>
+                                                        </div>
+                                                         <div class="col-sm-6 space_left">
+                                                            <h5>Date <span class="col_3">*</span></h5>
+                                                            <input type="date" class="form-control" id="name" th:field="*{date}" placeholder="Date">
+                                                            <div class="alert alert-danger error-message" th:if="${param.data != null}">
+                                                                <p>The day is not to be looked afterg.</p>
+                                                            </div>
+                                                        </div>
+                                                        <div  class="col-sm-6 space_left">
+                                                            <h5>Active<span class="col_3">*</span></h5>
+
+                                                            <select class="form-control" id="exampleInputStatus" th:field="*{active}">
+                                                                <option value="Not Activated">Not Activated</option>
+                                                                <option value="Activated">Activated</option>
+
+                                                            </select>
+                                                            <div id="statusError" class="error-message"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product2 clearfix">
+
+                                                        <div class="col-sm-12 space_left">
+                                                            <h5>Description<span class="col_3">*</span></h5>
+
+                                                            <textarea class="form-control" id="exampleInputDescription" th:field="*{description}" placeholder="Description" style="height: 100px;"></textarea>
+                                                            <div id="descriptionError" class="error-message"></div>
+                                                        </div> 
+                                                    </div>
+                                                    <div class="product2 clearfix">
+
+                                                        <div class="col-sm-12 space_left">
+                                                            <h5>Content<span class="col_3">*</span></h5>
+
+                                                            <textarea class="form-control summernote" id="content" th:field="*{content}" placeholder="Content" style="height: 100px;"></textarea>
+                                                            <div id="descriptionError" class="error-message"></div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="product3 clearfix">
+                                                        <div class="col-sm-6 space_left">
+                                                            <h5>File upload <span class="text-danger">*</span></h5>
+
+                                                            <div class="custom-file">
+                                                                <input type="file" name="file" id="fileInput" class="custom-file-input" onchange="updateFileName()">
+                                                                <label class="custom-file-label" for="fileInput">Choose file</label>
+                                                            </div>
+
+                                                            <div id="imageError" class="error-message text-danger mt-2"></div>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                                                    <a class="btn btn-dark" href="/listblog">Cancel</a>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../partials/_footer.html -->
+                    <footer class="footer">
+                        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Coffee Management System 2024</span>
+                        </div>
+                    </footer>
+                    <!-- partial -->
+                </div>
+
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+
+
+        <!-- plugins:js -->
+        <script th:src="@{/admin/assets/vendors/js/vendor.bundle.base.js}"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page -->
+        <script th:src="@{/admin/assets/vendors/select2/select2.min.js}"></script>
+        <script th:src="@{/admin/assets/vendors/typeahead.js/typeahead.bundle.min.js}"></script>
+        <!-- End plugin js for this page -->
+        <!-- inject:js -->
+        <script th:src="@{/admin/assets/js/off-canvas.js}"></script>
+        <script th:src="@{/admin/assets/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/admin/assets/js/misc.js}"></script>
+        <script th:src="@{/admin/assets/js/settings.js}"></script>
+        <script th:src="@{/admin/assets/js/todolist.js}"></script>
+        <!-- endinject -->
+        <!-- Custom js for this page -->
+        <script th:src="@{/admin/assets/js/file-upload.js}"></script>
+        <script th:src="@{/admin/assets/js/typeahead.js}"></script>
+        <script th:src="@{/admin/assets/js/select2.js}"></script>
+
+        <script>
+            function validateForm(event) {
+                var name = document.getElementById('exampleInputName1').value.trim();
+                var description = document.getElementById('exampleInputDescription').value.trim();
+                var image = document.getElementById('fileInput').value.trim();
+                var nameError = document.getElementById('nameError');
+                var descriptionError = document.getElementById('descriptionError');
+                var imageError = document.getElementById('imageError');
+                var isValid = true;
+
+                if (name === '') {
+                    nameError.innerHTML = 'Please enter your name.';
+                    nameError.style.display = 'block';
+                    document.getElementById('exampleInputName1').focus();
+                    isValid = false;
+                } else {
+                    nameError.innerHTML = '';
+                    nameError.style.display = 'none';
+                }
+
+                if (description === '') {
+                    descriptionError.innerHTML = 'Please enter a description.';
+                    descriptionError.style.display = 'block';
+                    document.getElementById('exampleInputDescription').focus();
+                    isValid = false;
+                } else {
+                    descriptionError.innerHTML = '';
+                    descriptionError.style.display = 'none';
+                }
+
+                if (image === '') {
+                    imageError.innerHTML = 'Please select an image to upload.';
+                    imageError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    imageError.innerHTML = '';
+                    imageError.style.display = 'none';
+                }
+
+                if (!isValid) {
+                    event.preventDefault(); // Prevent form submission if validation fails
+                }
+            }
+            document.getElementById('myForm').addEventListener('submit', validateForm);
+        </script>
+        <script th:inline="javascript">
+            /* Thymeleaf script để kiểm tra và hiển thị thông báo thành công */
+            /*<![CDATA[*/
+            var createSuccess = /*[[@{${errorblog}}]]*/ false; // Lấy giá trị từ Spring Model
+
+            if (createSuccess) {
+                var successMessage = document.getElementById('successMessageName');
+                successMessage.style.display = 'block';
+                setTimeout(function () {
+                    successMessage.style.display = 'none';
+                }, 50000); // 5000 milliseconds = 5 seconds
+            }
+            /*]]>*/
+        </script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+        <script>
+                    $(document).ready(function () {
+                        $('.summernote').summernote({
+                            height: 200, // Chiều cao của trình soạn thảo
+                            minHeight: 100, // Chiều cao tối thiểu
+                            maxHeight: 400, // Chiều cao tối đa
+                            focus: true, // Tự động focus khi khởi tạo
+                            toolbar: [
+                                ['style', ['style']],
+                                ['font', ['bold', 'italic', 'underline', 'clear']],
+                                ['para', ['ul', 'ol', 'paragraph']],
+                                ['insert', ['link', 'picture', 'video']],
+                                ['view', ['fullscreen', 'codeview', 'help']]
+                            ] // Các nút chức năng trong toolbar
+                        });
+                    });
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>PAO | Admin</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- plugins:css -->
+        <link rel="stylesheet" th:href="@{/admin/assets/vendors/mdi/css/materialdesignicons.min.css}">
+        <link rel="stylesheet" th:href="@{/admin/assets/vendors/css/vendor.bundle.base.css}">
+        <!-- endinject -->
+        <!-- Plugin css for this page -->
+        <link rel="stylesheet" th:href="@{/admin/assets/vendors/jvectormap/jquery-jvectormap.css}">
+        <link rel="stylesheet" th:href="@{/admin/assets/vendors/flag-icon-css/css/flag-icon.min.css}">
+        <link rel="stylesheet" th:href="@{/admin/assets/vendors/owl-carousel-2/owl.carousel.min.css}">
+        <link rel="stylesheet" th:href="@{/admin/assets/vendors/owl-carousel-2/owl.theme.default.min.css}">
+        <link rel="stylesheet" th:href="@{/admin/assets/css/editchung.css}">
+
+
+
+
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <!-- endinject -->
+        <!-- Layout styles -->
+        <link rel="stylesheet" th:href="@{/admin/assets/css/style.css}">
+        <!-- End layout styles -->
+        <!--        <link rel="shortcut icon" th:href="@{/admin/assets/images/favicon.png]" />-->
+        <style>
+            /* Để chỉnh sửa thanh input dài ra hơn */
+            .form-control {
+                width: 100%;
+            }
+
+            /* Để làm cho nút "Lọc kết quả" có kích thước phù hợp và không dính liền với input */
+            #btn-dashboard-filter {
+                margin-top: 32px; /* Điều chỉnh khoảng cách giữa nút và input */
+            }
+
+            /* Để làm cho các label có khoảng cách tốt hơn và phù hợp với kích thước */
+            label {
+                margin-bottom: 8px;
+            }
+            .content-wrapper {
+                background: #e6ffe6;
+                color: #2f567a;
+            }
+            .page-title {
+                color: #2f567a;
+                font-size: 1.125rem;
+                margin-bottom: 0;
+            }
+            .card .card-title {
+                color: #2f567a;
+                margin-bottom: 1.125rem;
+                text-transform: capitalize;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container-scroller">
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+                    <a class="sidebar-brand brand-logo" th:href="@{/admin}"><img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 50%; border-radius: 50%"></a>
+                    <a class="sidebar-brand brand-logo-mini" th:href="@{/admin}"><img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 50%; border-radius: 50%"></a>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item profile">
+                        <div class="profile-desc">
+                            <div class="profile-pic">
+                                <div class="count-indicator">
+                                    <img class="img-xs rounded-circle " th:src="@{/admin/assets/images/faces/face15.jpg}" alt="">
+                                    <span class="count bg-success"></span>
+                                </div>
+                                <div class="profile-name">
+                                    <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
+                                    <span>Gold Member</span>
+                                </div>
+                            </div>
+                            <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
+                                 aria-labelledby="profile-dropdown">
+                                <a href="#" class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-settings text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-onepassword  text-info"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-calendar-today text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item nav-category">
+                        <span class="nav-link">Navigation</span>
+                    </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/admin}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/speedometer.png}" height="35px"/>
+                            </span>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </li><br>
+
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/listblog}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/blog-template.png}" height="38px"/>
+                            </span>
+                            <span class="menu-title">News</span>
+                        </a>
+                    </li><br>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/product}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/dairy-products.png}" height="38px"/>
+                            </span>
+                            <span class="menu-title">Product</span>
+                        </a>
+                    </li><br>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/category}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/categories.png}" height="38px"/>
+                            </span>
+                            <span class="menu-title">Category</span>
+                        </a>
+                    </li><br>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/comment}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/comment.png}" height="38px"/>
+                            </span>
+                            <span class="menu-title">Comment</span>
+                        </a>
+                    </li><br>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/admin/feedbacks/all}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/hinh24.png}" height="38px"/>
+                            </span>
+                            <span class="menu-title">Feedback</span>
+                        </a>
+                    </li><br>
+
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/order}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/ordering.png}" height="38px"/>
+                            </span>
+                            <span class="menu-title">Order</span>
+                        </a>
+                    </li><br>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/listuser}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/office.png}" height="38px"/>
+                            </span>
+                            <span class="menu-title">User Management</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:partials/_navbar.html -->
+                <nav class="navbar p-0 fixed-top d-flex flex-row">
+                    <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+                        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="@{/home/img/logo100.jpg}"
+                                                                                       alt="logo" /></a>
+                    </div>
+                    <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+                        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                            <span class="mdi mdi-menu"></span>
+                        </button>
+                        <ul class="navbar-nav w-100">
+                            <li class="nav-item w-100">
+                                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                                    <input type="text" class="form-control" placeholder="Search products">
+                                </form>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav navbar-nav-right">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                                    <div class="navbar-profile">
+                                        <img class="img-xs rounded-circle" th:src="@{/admin/assets/images/faces/face15.jpg}" alt="">
+                                        <p class="mb-0 d-none d-sm-block navbar-profile-name" th:text="${username}"></p>
+                                        <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                                     aria-labelledby="profileDropdown">
+                                    <h6 class="p-3 mb-0">Profile</h6>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item preview-item">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-dark rounded-circle">
+                                                <i class="mdi mdi-settings text-success"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <p class="preview-subject mb-1">Settings</p>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item preview-item" th:href="@{/logout}">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-dark rounded-circle">
+                                                <i class="mdi mdi-logout text-danger"></i>
+                                            </div>
+                                        </div>
+                                        <div class="preview-item-content">
+                                            <p class="preview-subject mb-1">Log out</p>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <p class="p-3 mb-0 text-center">Advanced settings</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                                data-toggle="offcanvas">
+                            <span class="mdi mdi-format-line-spacing"></span>
+                        </button>
+                    </div>
+                </nav>
+                <!-- partial -->
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        <!--                        <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h4>Bảng Thống Kê Đơn Hàng và Doanh Số</h4>
+                                                        <form autocomplete="off" >
+                                                             CSRF protection 
+                        
+                        
+                                                            <div class="row mt-3">
+                                                                <div class="col-md-3">
+                                                                    <label for="datepicker">Từ ngày:</label>
+                                                                    <input type="text" id="datepicker" class="form-control" >
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label for="datepicker2">Đến ngày:</label>
+                                                                    <input type="text" id="datepicker2" class="form-control" >
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label>&nbsp;</label>
+                                                                    <input type="submit" id="btn-dashboard-filter" class="btn btn-primary btn-sm" value="Lọc kết quả">
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div id="myfirstchart" style="height: 250px;"></div>
+                        
+                                                    </div>
+                                                </div>-->
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-md-4 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Transaction History</h4>
+                                        <canvas id="transaction-history" class="transaction-chart"></canvas>
+                                        <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+                                            <div class="text-md-center text-xl-left">
+                                                <h6 class="mb-1">Transfer to Cash On Delivery</h6>
+                                                <p class="text-muted mb-0"></p>
+                                            </div>
+                                            <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+                                                <h6 class="font-weight-bold mb-0">$<span th:text="${totalcash}"></span></h6>
+                                            </div>
+                                        </div>
+                                        <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+                                            <div class="text-md-center text-xl-left">
+                                                <h6 class="mb-1">Transfer to Paypal</h6>
+                                                <p class="text-muted mb-0"></p>
+                                            </div>
+                                            <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+                                                <h6 class="font-weight-bold mb-0">$<span th:text="${totalpaypal}"></span></h6>
+                                            </div>
+                                        </div>
+                                        <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+                                            <div class="text-md-center text-xl-left">
+                                                <h6 class="mb-1">Tranfer to VNPay</h6>
+                                                <p class="text-muted mb-0"></p>
+                                            </div>
+                                            <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+                                                <h6 class="font-weight-bold mb-0">$<span th:text="${totalvnpay}"></span></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-row justify-content-between">
+                                            <h4 class="card-title mb-1">Open Projects</h4>
+                                            <p class="text-muted mb-1">Your data status</p>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="preview-list">
+
+
+                                                    <div class="preview-item border-bottom">
+                                                        <div class="preview-thumbnail">
+                                                            <div class="preview-icon bg-info">
+                                                                <i class="mdi mdi-clock"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="preview-item-content d-sm-flex flex-grow">
+                                                            <div class="flex-grow">
+                                                                <h6 class="preview-subject">TOTAL Quantiry PRODUCT</h6>
+                                                                <p class="text-muted mb-0">Quantiry:<span th:text="${productcount}"></span></p>
+                                                            </div>
+                                                            <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                                                <p class="text-muted">Similar in 30 Days</p>
+                                                                <p class="text-muted mb-0">15 tasks, 2 issues</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="preview-item border-bottom">
+                                                        <div class="preview-thumbnail">
+                                                            <div class="preview-icon bg-info">
+                                                                <i class="mdi mdi-clock"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="preview-item-content d-sm-flex flex-grow">
+                                                            <div class="flex-grow">
+                                                                <h6 class="preview-subject">TOTAL Quantity Order</h6>
+                                                                <p class="text-muted mb-0">Quantity:<span th:text="${totalOrders}"></span></p>
+                                                            </div>
+                                                            <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                                                <p class="text-muted">Similar in 30 Days</p>
+                                                                <p class="text-muted mb-0">15 tasks, 2 issues</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="preview-item border-bottom">
+                                                        <div class="preview-thumbnail">
+                                                            <div class="preview-icon bg-danger">
+                                                                <i class="mdi mdi-email-open"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="preview-item-content d-sm-flex flex-grow">
+                                                            <div class="flex-grow">
+                                                                <h6 class="preview-subject">TOTAL ORDER</h6>
+                                                                <p class="text-muted mb-0">$<span th:text="${totalamountcattle}"></span></p>
+                                                            </div>
+                                                            <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                                                <p class="text-muted">Similar in 30 Days</p>
+                                                                <p class="text-muted mb-0">35 tasks, 7 issues </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-12 grid-margin">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Order Status</h4>
+                                        <div class="table-responsive">
+                                            <table class="table" id="orderTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Client Name</th>
+                                                        <th>Total</th>
+                                                        <th>Order Date</th>
+                                                        <th>Items</th>
+                                                        <th>Payment Methods</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="orderBody">
+                                                    <!-- Dữ liệu đơn hàng sẽ được cập nhật bằng JavaScript -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- Phân trang -->
+                                        <ul class="pagination justify-content-center" id="pagination">
+                                            <!-- Các nút phân trang sẽ được thêm bằng JavaScript -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:partials/_footer.html -->
+                    <footer class="footer">
+                        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Coffee Management System 2024
+                            </span>
+                        </div>
+                    </footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+        <!-- container-scroller -->
+
+
+        <!-- biểu đồ chart hình tròn -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve the canvas element
+            var canvas = document.getElementById('transaction-history');
+            var cashData = [[${cash
+            }
+            ]];
+            var paypalData = [[${paypal
+            }
+            ]];
+            var vnpayData = [[${vnpay
+            }
+            ]];
+            console.log("Cash data: " + cashData);
+            // Create a new Chart instance
+            var ctx = canvas.getContext('2d');
+            var chart = new Chart(ctx, {
+            type: 'pie', // Specify the chart type as pie chart
+                    data: {
+                    labels: ['Cash On Delivery', 'PayPal', 'VNPAY'], // Example labels
+                            datasets: [{
+                            label: 'Transaction History',
+                                    data: [cashData, paypalData, vnpayData], // Example data for the pie chart
+                                    backgroundColor: [
+                                            'red',
+                                            'blue',
+                                            'yellow'
+                                    ]
+                            }]
+                    },
+                    options: {
+                    // Add any additional options here
+                    }
+            });
+            });
+        </script>
+        <script th:inline="javascript">
+            var currentPage = 1; // Trang hiện tại
+            var pageSize = 5; // Số lượng đơn hàng trên mỗi trang
+
+            var orders = /*[[${orders}]]*/ []; // Danh sách đơn hàng, lấy từ server-side
+
+            // Hàm hiển thị đơn hàng trên từng trang
+            function displayOrders(pageNumber) {
+            var startIndex = (pageNumber - 1) * pageSize;
+            var endIndex = startIndex + pageSize;
+            var paginatedOrders = orders.slice(startIndex, endIndex);
+            var orderBody = document.getElementById('orderBody');
+            orderBody.innerHTML = ''; // Xóa nội dung cũ trước khi cập nhật
+
+            paginatedOrders.forEach(function (order) {
+            var row = document.createElement('tr');
+            row.innerHTML = `
+                 <td><span class="pl-2">${order.userId.username}</span></td>
+                 <td>$${order.total}</td>
+                 <td>${order.updatedate}</td>
+                 <td>${order.items}</td>
+                 <td>${order.payments}</td>
+                 <td>
+                     <a th:href="@{/detailsorder/{id}(id=${order.id})}">
+                         <img th:src="@{/admin/assets/images/search1.png}" height="30px" />
+                     </a>
+                 </td>`;
+            orderBody.appendChild(row);
+            });
+            }
+
+            // Hàm tạo nút phân trang
+            function createPaginationButtons() {
+            var pagination = document.getElementById('pagination');
+            pagination.innerHTML = ''; // Xóa nội dung cũ trước khi cập nhật
+
+            var totalPages = Math.ceil(orders.length / pageSize);
+            for (var i = 1; i <= totalPages; i++) {
+            var button = document.createElement('li');
+            button.classList.add('page-item');
+            button.innerHTML = `<a class="page-link" href="#" onclick="changePage(${i})">${i}</a>`;
+            if (i === currentPage) {
+            button.classList.add('active');
+            }
+            pagination.appendChild(button);
+            }
+            }
+
+            // Hàm thay đổi trang
+            function changePage(pageNumber) {
+            currentPage = pageNumber;
+            displayOrders(currentPage);
+            var paginationButtons = document.getElementById('pagination').getElementsByTagName('li');
+            for (var i = 0; i < paginationButtons.length; i++) {
+            paginationButtons[i].classList.remove('active');
+            }
+            paginationButtons[currentPage - 1].classList.add('active');
+            }
+
+            // Hiển thị trang đầu tiên khi trang web được tải
+            displayOrders(currentPage);
+            createPaginationButtons();</script>
+        <script th:src="@{/admin/assets/vendors/js/vendor.bundle.base.js}"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page -->
+        <script th:src="@{/admin/assets/vendors/chart.js/Chart.min.js}"></script>
+        <script th:src="@{/admin/assets/vendors/progressbar.js/progressbar.min.js}"></script>
+        <script th:src="@{admin/vassets/vendors/jvectormap/jquery-jvectormap.min.js}"></script>
+        <script th:src="@{/admin/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js}"></script>
+        <script th:src="@{/admin/assets/vendors/owl-carousel-2/owl.carousel.min.js}"></script>
+        <!-- End plugin js for this page -->
+        <!-- inject:js -->
+        <script th:src="@{/admin/assets/js/off-canvas.js}"></script>
+        <script th:src="@{/admin/assets/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/admin/assets/js/misc.js}"></script>
+        <script th:src="@{/admin/assets/js/settings.js}"></script>
+        <script th:src="@{/admin/assets/js/todolist.js}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+        <script th:inline="javascript">
+           $(document).ready(function () {
+           // Khởi tạo datepicker cho từ ngày và đến ngày
+           $('#datepicker').datepicker({
+           format: 'yyyy-mm-dd', // Định dạng ngày tháng
+                   autoclose: true // Tự động đóng khi chọn xong
+           });
+           $('#datepicker2').datepicker({
+           format: 'yyyy-mm-dd', // Định dạng ngày tháng
+                   autoclose: true // Tự động đóng khi chọn xong
+           });
+           });
+        </script>
+
+
+
+        <!--        <script>
+                    $(document).ready(function() {
+                    new Morris.Bar({
+                    // ID of the element in which to draw the chart.
+                    element: 'myfirstchart',
+                            // Chart data records -- each entry in this array corresponds to a point on
+                            // the chart.
+                            data: [
+                            { year: '2008', value: 20 },
+                            { year: '2009', value: 10 },
+                            { year: '2010', value: 5 },
+                            { year: '2011', value: 5 },
+                            { year: '2012', value: 20 }
+                            ],
+                            // The name of the data record attribute that contains x-values.
+                            xkey: 'year',
+                            // A list of names of data record attributes that contain y-values.
+                            ykeys: ['value'],
+                            // Labels for the ykeys -- will be displayed when you hover over the
+                            // chart.
+                            labels: ['Value']
+                            });
+                    $('#btn-dashboard-filter').click(function(e) {
+                    e.preventDefault();
+                    var updatedate = $('#datepicker').val(); // Giả sử bạn sử dụng datepicker để chọn ngày cập nhật
+        
+        //            $.ajax({
+        //            type: 'GET', // Thay đổi từ POST thành GET vì bạn muốn lấy dữ liệu từ API
+        //                    url: '/admin/filter',
+        //                    contentType: 'application/json',
+        //                    data: { updatedate: updatedate }, // Gửi ngày cập nhật lên server
+        //                    success: function(data) {
+        //                    // Cập nhật giao diện với dữ liệu từ server, ví dụ như hiển thị danh sách đơn hàng
+        //                    updateUI(data);
+        //                    },
+        //                    error: function(xhr) {
+        //                    console.error('Lỗi khi lấy dữ liệu từ server');
+        //                    }
+        //            });
+        //            });
+                    
+        
+                    });
+                </script>-->
+
+        <!-- endinject -->
+        <!-- Custom js for this page -->
+        <!--        <script th:src="@{/admin/assets/js/dashboard.js}"></script>-->
+        <!-- End custom js for this page -->
+    </body>
+</html>

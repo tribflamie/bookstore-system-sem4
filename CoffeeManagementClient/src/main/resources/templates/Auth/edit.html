@@ -1,0 +1,744 @@
+
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>Details-User | PAO Coffee</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/home/css/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/home/css/global.css}" rel="stylesheet">
+        <link th:href="@{/home/css/index.css}" rel="stylesheet">
+        <link th:href="@{/home/css/popup.css}" rel="stylesheet">
+        <link th:href="@{/home/css/phantrang.css}" rel="stylesheet">
+
+
+        <link th:rel="stylesheet" type="text/css" th:href="@{/home/css/font-awesome.min.css}" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet"> 
+        <script th:src="@{/home/js/jquery-2.1.1.min.js}"></script>
+        <script th:src="@{/home/js/bootstrap.min.js}"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            /* Container and general layout */
+            .container {
+
+                margin: auto;
+                padding: 20px;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Profile image */
+            .profile-img img {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                border: 3px solid #fff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Profile heading and tabs */
+            .profile-head {
+                margin-bottom: 30px;
+            }
+
+            .profile-head h5 {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+
+            .profile-head h6 {
+                font-size: 16px;
+                font-weight: normal;
+                color: #666;
+                margin-bottom: 20px;
+            }
+
+            .nav-tabs .nav-item {
+                margin-bottom: 0;
+            }
+
+            .nav-tabs .nav-link {
+                border: none;
+                padding: 10px 20px;
+                font-weight: bold;
+                color: #333;
+                background: transparent;
+                border-radius: 0;
+            }
+
+            .nav-tabs .nav-link.active {
+                color: #007bff;
+                border-bottom: 2px solid #007bff;
+            }
+
+            /* Edit profile button */
+            .profile-edit-btn {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 8px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .profile-edit-btn:hover {
+                background-color: #0056b3;
+            }
+
+            /* Profile details */
+            .profile-details {
+                background-color: #f9f9f9;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 20px;
+
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .profile-details label {
+                font-weight: bold;
+            }
+
+            .profile-details p {
+                color: #666;
+                margin-bottom: 10px;
+            }
+            @media (max-width: 992px) {
+                .profile-details {
+                    padding: 15px;
+                }
+            }
+            @media (max-width: 768px) {
+                .col-md-4 {
+                    margin-bottom: 20px;
+                }
+            }
+
+            /* Purchase history table */
+            .table {
+                width: 100%;
+                margin-bottom: 30px;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .table th,
+            .table td {
+                padding: 12px;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            .table th {
+                background-color: #f0f0f0;
+                border-bottom: 2px solid #ddd;
+            }
+
+            .table tbody tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+            .table-bordered th,
+            .table-bordered td {
+                border: 1px solid #ddd;
+            }
+
+            /* Status colors */
+            .status-completed {
+                color: #00d25b;
+                font-weight: bold;
+            }
+
+            .status-in-progress {
+                color: #ffab00;
+                font-weight: bold;
+            }
+            .nho {
+        text-transform: lowercase;
+    }
+
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                .profile-img img {
+                    width: 150px;
+                    height: 150px;
+                }
+            }
+            .row.align-items-center {
+                display: flex;
+                align-items: center;
+            }
+            .edit-link {
+                display: inline-block;
+                padding: 8px 16px;
+                background-color: #007bff;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 4px;
+                text-align: center;
+                transition: background-color 0.3s ease;
+            }
+
+            .edit-link:hover {
+                background-color: #ff4d4d;
+            }
+            .edit-group {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .edit_1, .edit_2 {
+                flex-basis: 48%; /* Adjust this value based on your preference */
+            }
+
+
+
+        </style>
+
+    </head>
+    <body>
+        <section id="top">
+            <div class="container">
+                <div class="row">
+                    <div class="top_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="top_1m text-center clearfix">
+                                <h3 class="mgt"><a th:href="@{/}">
+                                        <span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="top_1l clearfix">
+                                <p class="mgt font_16 text-center"><i class="fa fa-map col_1"></i> <span class="col_6">Address:</span> 115 Hồ Tùng Mậu.P Bến Nghé.Q1.TP.HCM</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="top_1r text-right clearfix">
+                                <div th:if="${user != null}">
+                                    <h6 class="big mgt">Welcome, <span th:text="${user.username}"></span>  <a class="button mgt" th:href="@{/logout}">logout</a></h6>
+                                </div>
+                                <div th:if="${user == null}">
+                                    <h6 class="big mgt">
+                                        <a class="button mgt" th:href="@{/login}">Login</a>
+
+                                        <a class="button mgt" th:href="@{/register}">Register</a>
+                                    </h6>   
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="header" class="clearfix cd-secondary-nav">
+            <nav class="navbar nav_t">
+                <div class="container">
+                    <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html"> <span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a>
+                    </div>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+
+                            <li><a class="m_tag active_tab" th:href="@{/}">Home</a></li>
+                            <li><a class="m_tag" th:href="@{/about}">About</a></li>
+                            <li><a class="m_tag" th:href="@{/products}">Menu</a></li>
+                            <li><a class="m_tag" th:href="@{/blog}">Blog</a></li>
+
+                            <li><a class="m_tag" th:href="@{/contactus}">Contact Us</a></li>
+                            <li class="dropdown">
+                                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Pages<span class="caret"></span></a>
+                                <ul class="dropdown-menu drop_3" role="menu">
+                                    <li><a th:href="@{/mycart}">Shopping Cart</a></li>
+                                    <li th:if="${user != null}"><a class="border_none" th:href="@{/purchasehistory}">Product History</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><a class="m_tag" href="#aboutModal" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i></a></li>
+
+                            <li class="dropdown">
+                                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-bag"></i></a>
+                                <ul class="dropdown-menu drop_1" role="menu">
+                                    <li>
+                                        <div class="drop_1i clearfix">
+                                            <div class="col-sm-6">
+                                                <!--                                                <div class="drop_1il clearfix"><h5 class="mgt">2 ITEMS</h5></div>-->
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il text-right clearfix"><h5 class="mgt"><a href="cart.html">VIEW CART</a></h5></div>
+                                            </div>
+                                        </div>
+                                        <span th:each="p: ${pcart}">
+                                            <span th:if="${user == p.userId.username and p.status != true}">
+                                                <div class="drop_1i1 clearfix">
+                                                    <div class="col-sm-6" style="margin-top: 8px">
+                                                        <div class="drop_1i1l clearfix"><h6 class="mgt bold"><a href="#" th:text="${p.productid.productname}"></a> <br><span>$<span class="normal col_2" th:text="${p.productid.sale}"></span> </span><span style="font-size: 14px;">quantity:<span th:text="${p.quantity}"></span></h6></div>
+                                                    </div>
+                                                    <div class="col-sm-4" style="margin-top: 8px">
+                                                        <div class="drop_1i1r clearfix"><a href="#"><img th:src="@{'images/'+${p.productid.image}}" class="iw" alt="abc"></a></div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="drop_1i1l text-right clearfix"><h6 class="mgt bold"> <span><a th:href="@{/deletecart/{id}(id = ${p.id})}"><i class="fa fa-remove"></i></a></span></h6></div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </span>
+                                        <div class="drop_1i2 clearfix">
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il clearfix"><h5 class="mgt">TOTAL</h5></div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il text-right clearfix"><h5 class="mgt">$<span th:text="${totlal}"></span></h5></div>
+                                            </div>
+                                        </div>
+                                        <div class="drop_1i3 text-center clearfix">
+                                            <div class="col-sm-12">
+                                                <h5><a class="button" href="/mycart">CHECKOUT</a></h5>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+            <div class="popup" id="myPopup">
+                <div class="toast">
+                    <i class="fa fa-check"></i>
+                    <div class="content">
+                        <div class="title">Notification</div>
+                        <span class="error">add to card successfully</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section>
+            <div class="container emp-profile">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="profile-img">
+                                <!-- Dynamic user profile image -->
+                                <img th:src="@{/home/img/usericon.jpg}" width="200px" alt=""/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="profile-head">
+                                <h5>WELCOME : <span th:text="${user.username}">User's Username</span></h5>
+                                <h6>Email: <span class="nho" th:text="${user.email}">User's Email</span></h6>
+                                <!-- Add other dynamic fields as needed -->
+
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <a class="edit-link" th:href="@{'/userdetails/' + ${user.id}}">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-md-2 mx-auto"></div>
+
+
+                    <div class="col-md-8 mx-auto">
+                        <div>
+                           <h3 class="text-center">User Edit</h3>
+                            <div class="profile-details">
+                                <form th:action="@{'/edituser/' + ${user.id}}" method="post">
+                                    <div class="edit-group clearfix">
+                                        <div class="edit_1">
+                                            <div class="form-group">
+                                                <label for="username">Username</label>
+                                                <input type="text" class="form-control" id="username" name="username" th:value="${user.username}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Email</label>
+                                                <input type="email" class="form-control" id="email" name="email" th:value="${user.email}" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="phone">Phone</label>
+                                                <input type="text" class="form-control" id="phone" name="phone" th:value="${user.phone}" required>
+                                            </div>
+                                        </div>
+                                        <div class="edit_2">
+                                            <div class="form-group">
+                                                <label for="password">Password</label>
+                                                <input type="password" class="form-control" id="password" name="password" th:value="${user.password}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="country">Address</label>
+                                                <input type="text" class="form-control" id="country" name="country" th:value="${user.country}" required>
+                                            </div>
+                                             
+                                            
+                                            
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mx-auto"></div>
+
+                </div>
+
+            </div>
+
+
+
+
+
+
+        </section>
+
+        <section id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="footer_1l clearix">
+                                <h4>GALLERY</h4>
+                                <div class="footer_1li clearfix">
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh7.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh8.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh9.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer_1li clearfix">
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh10.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh11.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh12.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="footer_1m clearix">
+                                <h4>QUICK LINKS</h4>
+                                <div class="footer_1mi clearfix">
+                                    <div class="col-sm-6 space_left col-xs-6">
+                                        <div class="footer_1mil clearfix">
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Our Blends</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">New Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Top Sellers</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">About Us</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">MENU</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Contact Us</a></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 space_right col-xs-6">
+                                        <div class="footer_1mil clearfix">
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Beans</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Preparation Tools</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Drunk Coffee</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Ice Cream</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Other</a></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="footer_1r clearix">
+                                <h4>GET IN TOUCH</h4>
+                                <p class="font_16"><i class="fa fa-map col_1"></i> Address : -115/Hồ Tùng Mậu/Bến Nghe/Q1/HCM</p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">+91 (123) 456 7890</a></p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">CoffeePAO@gmail.com</a></p>
+                                <ul class="social-network social-circle">
+                                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer_2 text-center clearfix">
+                        <div class="col-sm-12">
+                            <p class="mgt">© 2024 Your Website Coffee  Management System<a class="col_1" th:href="@{/}">Coffee PAO</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="input-group clearfix">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                /*****Fixed Menu******/
+                var secondaryNav = $('.cd-secondary-nav'),
+                        secondaryNavTopPosition = secondaryNav.offset().top;
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+
+                $(window).on('scroll', function () {
+                    if ($(window).scrollTop() > secondaryNavTopPosition + navbar_height) {
+                        secondaryNav.addClass('is-fixed');
+                        document.body.style.paddingTop = navbar_height + 'px';
+
+                    } else {
+                        secondaryNav.removeClass('is-fixed');
+                        document.body.style.paddingTop = '0'
+                    }
+                });
+
+            });
+        </script>
+        <script th:inline="javascript">
+            // Số sản phẩm trên mỗi trang
+            var itemsPerPage = 4;
+
+            // Danh sách sản phẩm từ server
+            var products = /*[[${listp}]]*/ [];
+
+            // Lấy username từ server-side
+            var username = /*[[${username}]]*/ null;
+
+            // Tính tổng số trang
+            var totalPages = Math.ceil(products.length / itemsPerPage);
+
+            // Hàm hiển thị sản phẩm trên trang cụ thể
+            function displayProducts(pageNumber) {
+                var startIndex = (pageNumber - 1) * itemsPerPage;
+                var endIndex = pageNumber * itemsPerPage;
+                var paginatedProducts = products.slice(startIndex, endIndex);
+
+                // Hiển thị sản phẩm trong paginatedProducts lên trang
+                var productListElement = document.getElementById('product-list');
+                productListElement.innerHTML = ''; // Xóa nội dung cũ trước khi cập nhật
+
+                paginatedProducts.forEach(function (product) {
+                    var productElement = document.createElement('div');
+                    productElement.classList.add('col-sm-4');
+                    var bookNowButton = '';
+                    if (username != null) {
+                        bookNowButton = '<button class="bg_2"><i class="fa fa-shopping-cart"></i></button>';
+                    } else {
+                        bookNowButton = '<a class="bg_2" href="/login"><i class="fa fa-shopping-cart"></i></a>';
+                    }
+                    productElement.innerHTML = `
+               <div id="products-container" class="prod_1im clearfix">
+                   <div class="prod_1i clearfix">
+                       <div class="prod_1i1 clearfix">
+                           <div class="grid clearfix">
+                               <figure class="effect-jazz">
+                                   <a href="/homedetails/${product.id}">
+                                       <img src="/images/${product.image}" class="iw" alt="img25" style="height: 200px">
+                                   </a>
+                               </figure>
+                           </div>
+                       </div>
+                       <div class="prod_1i2 clearfix">
+                           <h6 class="mgt bg_1">
+                               <span>${product.status}</span>
+                           </h6>
+                       </div>
+                   </div>
+                   <div class="prod_1ib text-center clearfix">
+                       <h5>${product.productname}</h5>
+                       <h6 class="col_1 bold">
+                           <span class="normal">
+                               <i class="fa fa-dollar col_2"></i>
+                               <span>${product.price}</span>
+                           </span>
+                           <i class="fa fa-dollar">${product.sale}</i>
+                       </h6>
+                       <ul>
+                           <li>
+                               <a class="bg_1" href="/homedetails/${product.id}">
+                                   <i class="fa fa-search"></i>
+                               </a>
+                               <form class="add-to-cart-form" style="margin-top: -51px; margin-left: 70px;" action="/products" method="post">
+                                   <input type="hidden" id="id" name="productid.id" value="${product.id}" />
+                                   <input type="hidden" name="sellingprice" value="${product.sale}" />
+                                   <input type="hidden" name="status" value="false" />
+                                   <div>${bookNowButton}</div>
+                               </form>
+                           </li>
+                       </ul>
+                   </div>
+               </div>`;
+
+                    if (product.status === 'New') {
+                        productListElement.appendChild(productElement);
+                    }
+
+                });
+            }
+
+            // Hàm tạo nút phân trang
+            function createPaginationButtons(totalPages) {
+                var paginationElement = document.getElementById('pagination');
+                paginationElement.innerHTML = ''; // Xóa nội dung cũ trước khi cập nhật
+
+                for (var i = 1; i <= totalPages; i++) {
+                    var button = document.createElement('button');
+                    button.textContent = i;
+                    button.addEventListener('click', function () {
+                        displayProducts(parseInt(this.textContent));
+                    });
+                    var listItem = document.createElement('li');
+                    listItem.appendChild(button);
+                    paginationElement.appendChild(listItem);
+                }
+            }
+
+            // Hiển thị trang đầu tiên khi trang được tải
+            displayProducts(1);
+            // Tạo nút phân trang
+            createPaginationButtons(totalPages);
+        </script>
+
+
+
+
+        <script>
+            const addToCart = (formData) => {
+                $.ajax({
+                    type: 'POST',
+                    url: '/products',
+                    data: formData,
+                    success: updateUI,
+                    error: handleAjaxError
+                });
+            };
+
+            // Function to update the UI with the response data
+            const updateUI = (response) => {
+                console.log("Response from AJAX request:", response);
+
+                var productId = $(response).find('#productId').val(); // Lấy ID sản phẩm từ phản hồi
+                var productElement = $('#product-' + productId);
+
+                if (productElement.length > 0) {
+                    // Sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
+                    var existingQuantity = parseInt(productElement.find('.quantity').text());
+                    var newQuantity = existingQuantity + 1; // Ví dụ: tăng số lượng lên 1
+
+                    // Cập nhật số lượng trong giao diện người dùng
+                    productElement.find('.quantity').text(newQuantity);
+                } else {
+                    // Nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm sản phẩm mới vào danh sách
+                    $('#products-container').append(response);
+                }
+
+                $('#myPopup').fadeIn('slow').delay(1000).fadeOut('slow');
+            };
+
+
+
+
+            // Function to handle AJAX errors
+            const handleAjaxError = (xhr, status, error) => {
+                console.error('Error:', error);
+                // Handle errors appropriately
+            };
+
+            $(document).ready(function () {
+                $('.add-to-cart-form').submit(function (event) {
+                    event.preventDefault(); // Prevent the default form submission behavior
+                    const formData = $(this).serialize(); // Serialize form data
+                    addToCart(formData); // Call the function to handle the AJAX request
+                });
+            });
+        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </body>
+</html>
+

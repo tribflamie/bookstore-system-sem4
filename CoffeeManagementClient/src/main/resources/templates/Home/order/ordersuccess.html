@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>PAO | Success</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/home/css/order.css}" rel="stylesheet">
+        <style>
+            /* CSS cho phần breadcrumb và header */
+            .breadcrumb-wrapper {
+                background-color: #f8f9fa;
+                padding: 20px 0;
+                text-align: center;
+            }
+
+            .breadcrumb-wrapper h2 {
+                margin: 0;
+                font-size: 24px;
+            }
+
+            .breadcrumb-wrapper ol.breadcrumb {
+                background-color: transparent;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            .breadcrumb-wrapper ol.breadcrumb li {
+                display: inline;
+                font-size: 16px;
+                margin-right: 5px;
+            }
+
+            .breadcrumb-wrapper ol.breadcrumb li a {
+                color: #007bff;
+                text-decoration: none;
+            }
+
+            .breadcrumb-wrapper ol.breadcrumb li.active {
+                color: #6c757d;
+            }
+
+            /* CSS cho phần nội dung thông báo thành công */
+            .content.success {
+                padding: 50px 0;
+                text-align: center;
+            }
+
+            .content.success h1 {
+                color: #28a745;
+                font-size: 36px;
+                margin-bottom: 20px;
+            }
+
+            .content.success p {
+                font-size: 18px;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+
+            .content.success a {
+                color: #007bff;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+            .content.success a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <section class="breadcrumb-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2>Coffee PAO</h2>
+                        <h2>Order Successfully</h2>
+                        <ol class="breadcrumb">
+                            <li><a th:href="@{/}">Home</a></li>
+                            <li class="active">Order Successfully</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content success">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div class="success-wrapper">
+                            <div class="success-text">
+                                <h1>Order Successfully</h1>
+                                <p>Thank you for your order. We will process it as soon as possible.</p>
+                                <p><a th:href="@{/products}">Go back to shop more</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>

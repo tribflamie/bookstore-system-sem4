@@ -1,0 +1,192 @@
+
+/* Container and general layout */
+.container {
+
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile image */
+.profile-img img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile heading and tabs */
+.profile-head {
+    margin-bottom: 30px;
+}
+/* Định dạng chữ in hoa cho tiêu đề */
+.profile-head h5 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-transform: uppercase; /* Chuyển đổi thành chữ in hoa */
+}
+
+/* Định dạng chữ cho mô tả */
+.profile-head h6 {
+    font-size: 16px;
+    font-weight: normal;
+    color: #666;
+    margin-bottom: 20px;
+    text-transform: capitalize; /* Chuyển đổi chữ cái đầu thành in hoa */
+}
+
+
+
+
+.nav-tabs .nav-item {
+    margin-bottom: 0;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    color: #333;
+    background: transparent;
+    border-radius: 0;
+}
+
+.nav-tabs .nav-link.active {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+}
+
+/* Edit profile button */
+.profile-edit-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-edit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Profile details */
+.profile-details {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details label {
+    font-weight: bold;
+}
+
+.profile-details p {
+    color: #666;
+    margin-bottom: 10px;
+}
+@media (max-width: 992px) {
+    .profile-details {
+        padding: 15px;
+    }
+}
+@media (max-width: 768px) {
+    .col-md-4 {
+        margin-bottom: 20px;
+    }
+}
+
+/* Purchase history table */
+.table {
+    width: 100%;
+    margin-bottom: 30px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table th,
+.table td {
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table th {
+    background-color: #f0f0f0;
+    border-bottom: 2px solid #ddd;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #ddd;
+}
+
+/* Status colors */
+.status-completed {
+    color: #00d25b;
+    font-weight: bold;
+}
+
+.status-in-progress {
+    color: #ffab00;
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .profile-img img {
+        width: 150px;
+        height: 150px;
+    }
+}
+.row.align-items-center {
+    display: flex;
+    align-items: center;
+}
+.edit-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.edit-link:hover {
+    background-color: #0056b3;
+}
+.btn-red {
+    background-color: #dc3545; /* Màu đỏ thường được sử dụng trong Bootstrap */
+    border-color: #dc3545; /* Màu viền nút */
+}
+
+.btn-red:hover {
+    background-color: #c82333; /* Màu đỏ nhạt khi rê chuột vào */
+    border-color: #bd2130; /* Màu viền khi rê chuột vào */
+}
+
+.btn-red:focus, .btn-red.focus {
+    box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5); /* Hiệu ứng nhấp chuột */
+}
+
+.btn-red:disabled, .btn-red.disabled {
+    background-color: #dc3545; /* Màu nền nút bị vô hiệu hóa */
+    border-color: #dc3545; /* Màu viền nút bị vô hiệu hóa */
+}
+
+

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>PAO | Blog</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/home/css/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/home/css/global.css}" rel="stylesheet">
+        <link th:href="@{/home/css/blog.css}" rel="stylesheet">
+        <link th:rel="stylesheet" type="text/css" th:href="@{/home/css/font-awesome.min.css}" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet"> 
+        <script th:src="@{/home/js/jquery-2.1.1.min.js}"></script>
+        <script th:src="@{/home/js/bootstrap.min.js}"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            .top_1r {
+                padding-top: 10px;
+            }
+
+            .big {
+                font-size: 18px;
+            }
+
+            .mgt {
+                margin-top: 5px;
+            }
+
+            .button {
+                display: inline-block;
+                padding: 6px 12px;
+                margin-bottom: 0;
+                font-size: 14px;
+                font-weight: normal;
+                line-height: 1.42857143;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: middle;
+                -ms-touch-action: manipulation;
+                touch-action: manipulation;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                background-image: none;
+                border: 1px solid transparent;
+                border-radius: 4px;
+                color: #fff;
+                background-color: #5bc0de;
+                border-color: #46b8da;
+            }
+
+            .button:hover {
+                background-color: #31b0d5;
+                border-color: #269abc;
+            }
+
+            .button.mgt {
+                margin-top: 10px;
+                margin-left: 10px;
+            }
+            .blog-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px; /* Khoảng cách giữa các phần tử, điều chỉnh theo nhu cầu */
+
+            }
+            .blog_pg_1l1 {
+                flex: 1 1 calc(33.333% - 20px); /* 3 phần tử mỗi hàng với khoảng cách 20px */
+                box-sizing: border-box;
+                margin-bottom: 20px; /* Khoảng cách giữa các hàng */
+            }
+
+            .card {
+                display: flex;
+                flex-direction: column; /* Để nội dung bên dưới hình ảnh */
+                border: 1px solid #ddd; /* Đường viền quanh card */
+                border-radius: 8px; /* Bo góc card */
+                overflow: hidden; /* Đảm bảo nội dung không vượt ra ngoài card */
+                background-color: #fff; /* Màu nền của card */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng cho card */
+            }
+
+            .card-img {
+                width: 100%;
+                height: 200px; /* Kích thước cố định cho hình ảnh */
+                overflow: hidden; /* Ẩn phần hình ảnh vượt ra ngoài card */
+            }
+
+            .card-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Đảm bảo hình ảnh lấp đầy khung mà không bị biến dạng */
+            }
+
+            .card-body {
+                padding: 15px; /* Khoảng cách giữa nội dung và viền card */
+            }
+
+            .card-body h3 {
+                margin: 0 0 10px; /* Khoảng cách dưới tiêu đề */
+                font-size: 1.2em; /* Kích thước chữ tiêu đề */
+            }
+
+            .card-body ul {
+                padding-left: 0; /* Loại bỏ khoảng cách trái */
+                list-style: none; /* Loại bỏ dấu chấm đầu danh sách */
+                margin: 0 0 10px; /* Khoảng cách dưới danh sách */
+            }
+
+            .card-body ul li {
+                margin-bottom: 5px; /* Khoảng cách giữa các mục danh sách */
+            }
+
+            .card-body p {
+                margin: 0; /* Loại bỏ khoảng cách mặc định của đoạn văn */
+                line-height: 1.6; /* Khoảng cách giữa các dòng văn bản */
+            }
+
+            /* Responsive design để đảm bảo khi thu nhỏ màn hình, các blog có thể co lại phù hợp */
+            @media (max-width: 1200px) {
+                .blog_pg_1l1 {
+                    flex: 1 1 calc(50% - 20px); /* 2 phần tử mỗi hàng */
+                }
+            }
+
+            @media (max-width: 900px) {
+                .blog_pg_1l1 {
+                    flex: 1 1 100%; /* 1 phần tử mỗi hàng */
+                }
+            }
+
+
+
+
+        </style>
+    </head>
+    <body>
+        <section id="top">
+            <div class="container">
+                <div class="row">
+                    <div class="top_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="top_1m text-center clearfix">
+                                <h3 class="mgt"><a th:href="@{/}"><span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a></h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="top_1l clearfix">
+                                <p class="mgt font_16 text-center"><i class="fa fa-map col_1"></i> <span class="col_6">Address:</span> 115 Hồ Tùng Mậu.P Bến Nghé.Q1.TP.HCM</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="top_1r text-right clearfix">
+                                <div th:if="${username != null}">
+                                    <h6 class="big mgt">Welcome, <span th:text="${username}"></span>
+                                        <a class="button mgt" th:href="@{/userdetails/{id}(id=${session.user})}">Profile</a>
+                                        <a class="button mgt" th:href="@{/logout}">Logout</a>
+                                    </h6>
+                                </div>
+                                <div th:if="${username == null}">
+                                    <h6 class="big mgt">
+                                        <a class="button mgt" th:href="@{/login}">Login</a>
+                                        <a class="button mgt" th:href="@{/register}">Register</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="header" class="clearfix cd-secondary-nav">
+            <nav class="navbar nav_t">
+                <div class="container">
+                    <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html"> <span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">Pao</span></span></a>
+                    </div>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+
+                            <li><a class="m_tag" th:href="@{/}">Home</a></li>
+                            <li><a class="m_tag" th:href="@{/about}">About</a></li>
+                            <li><a class="m_tag" th:href="@{/products}">Menu</a></li>
+                            <li><a class="m_tag active_tab" th:href="@{/blog}">News</a></li>
+
+                            <li><a class="m_tag" th:href="@{/contactus}">Contact Us</a></li>
+                            <li class="dropdown">
+                                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Pages<span class="caret"></span></a>
+                                <ul class="dropdown-menu drop_3" role="menu">
+                                    <li><a th:href="@{/mycart}">Shopping Cart</a></li>
+                                    <li th:if="${username != null}"><a class="border_none" th:href="@{/purchasehistory}">Product History</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><a class="m_tag" href="#aboutModal" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i></a></li>
+
+                            <li class="dropdown">
+                                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-bag"></i></a>
+                                <ul class="dropdown-menu drop_1" role="menu">
+                                    <li>
+                                        <div class="drop_1i clearfix">
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il clearfix"><h5 class="mgt">2 ITEMS</h5></div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il text-right clearfix"><h5 class="mgt"><a href="cart.html">VIEW CART</a></h5></div>
+                                            </div>
+                                        </div>
+                                        <span th:each="p: ${pcart}">
+                                            <span th:if="${username == p.userId.username and p.status != true}">
+                                                <div class="drop_1i1 clearfix">
+                                                    <div class="col-sm-6" style="margin-top: 8px">
+                                                        <div class="drop_1i1l clearfix"><h6 class="mgt bold"><a href="#" th:text="${p.productid.productname}"></a> <br><span>$<span class="normal col_2" th:text="${p.productid.sale}"></span> </span><span style="font-size: 14px;">quantity:<span th:text="${p.quantity}"></span></h6></div>
+                                                    </div>
+                                                    <div class="col-sm-4" style="margin-top: 8px">
+                                                        <div class="drop_1i1r clearfix"><a href="#"><img th:src="@{'images/'+${p.productid.image}}" class="iw" alt="abc"></a></div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="drop_1i1l text-right clearfix"><h6 class="mgt bold"> <span><a th:href="@{/deletecart/{id}(id = ${p.id})}"><i class="fa fa-remove"></i></a></span></h6></div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </span>
+                                        <div class="drop_1i2 clearfix">
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il clearfix"><h5 class="mgt">TOTAL</h5></div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il text-right clearfix"><h5 class="mgt">$<span th:text="${totlal}"></span></h5></div>
+                                            </div>
+                                        </div>
+                                        <div class="drop_1i3 text-center clearfix">
+                                            <div class="col-sm-12">
+                                                <h5><a class="button" href="/mycart">CHECKOUT</a></h5>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+
+        </section>
+
+        <section id="center" class="center_o clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="center_o1 text-center">
+                            <h1 class="mgt">News</h1>
+                            <h4><a href="#">Home</a> / News</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="blog_1 clearfix">
+                        <div class="col-sm-9">
+                            <div class="blog-container">
+                                <div class="blog_pg_1l1 mgt clearfix" th:each="b : ${lblog}" th:if="${b.active == 'Activated'}">
+                                    <div class="card">
+                                        <div class="card-img">
+                                            <a th:href="@{/detailblog/{id}(id = ${b.id})}">
+                                                <img th:src="@{'/images/' + ${b.image}}" class="iw" alt="img25">
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <h3 class="mgt">
+                                                <a href="#" th:text="${b.name}"></a>
+                                            </h3>
+                                            <ul>
+                                                <li><a href="#"><i class="fa fa-user col_1"></i> Eget Nulla</a></li>
+                                                <li><a href="#"><i class="fa fa-calendar col_1" th:text="${b.date}"></i></a></li>
+                                                <li><i class="fa fa-bars col_1" ></i><a href="#" th:text="${b.status}"> </a></li>
+                                            </ul>
+                                            <h3>Description:</h3><span th:text="${b.description}"></span>
+                                            <!-- <h5><a class="button" href="blog_detail.html">Read More</a></h5> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="blog_1r clearfix">
+                                <div class="blog_1r1 clearfix">
+                                    <h4 class="mgt">RECENT POSTS</h4><br>
+                                    <p class="mgt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntur.</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntur.</p>
+                                    <p class="border_none pdb">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididuntur.</p>
+                                </div>
+                                <div class="blog_1r1 clearfix">
+                                    <h4 class="mgt">LATEST TWITTER</h4><br>
+                                    <p class="mgt">Make sure you are following <a class="col_1 bold" href="blog_detail.html">@PortaMarket</a> for all your Semper Porta needs!</p>
+                                    <p>Make sure you are following <a class="col_1 bold" href="blog_detail.html">@PortaMarket</a> for all your Semper Porta needs!</p>
+                                    <p class="border_none pdb">Make sure you are following <a class="col_1 bold" href="blog_detail.html">@PortaMarket</a> for all your Semper Porta needs!</p>
+                                </div>
+                                <div class="blog_1rst text-center clearfix">
+                                    <h4 class="mgt big">About Us</h4><br>
+                                    <div class="carousel slide" id="myCarousel1">
+                                        <div class="carousel-inner">
+                                            <div class="item active  mga">
+                                                <img class="img-circle" th:src="@{/home/img/about.jpg}" alt="abc">
+                                                <p>Class Aptent Taciti Sociosqu Ad Litora Torquent Per Conubia Nostra, Per Inceptos Himenaeos.</p>
+                                                <h4 class="bold">Eget Nulla</h4>
+                                                <h6 class="col_2">Owner</h6>
+                                            </div><!-- /Slide1 --> 
+                                            <div class="item  mga">
+                                                <img class="img-circle" th:src="@{/home/img/hinh2.jpg}" alt="abc">
+                                                <p>Class Aptent Taciti Sociosqu Ad Litora Torquent Per Conubia Nostra, Per Inceptos Himenaeos.</p>
+                                                <h4 class="bold">Lacinia Arcu </h4>
+                                                <h6 class="col_2">Manager</h6>
+                                            </div><!-- /Slide2 --> 
+                                            <!-- /Slide3 --> 
+                                        </div>
+                                        <nav>
+                                            <ul class="control-box pager mgb">
+                                                <li><a data-slide="prev" href="#myCarousel1" class=""><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+                                                <li><a data-slide="next" href="#myCarousel1" class=""><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="enquiry">
+            <div class="container">
+                <div class="row">
+                    <div class="enquiry_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h4 class="mgt">NEWSLETTER</h4>
+                            <p>Subscribe to our newsletter and get <span class="col_1">20%</span> off your first purchase</p>
+                            <div class="input-group">
+                                <input type="text" class="form-control form_2" placeholder="Your Email">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button">
+                                        SUBSCRIBE</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="footer_1l clearix">
+                                <h4>GALLERY</h4>
+                                <div class="footer_1li clearfix">
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh7.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh8.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh9.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer_1li clearfix">
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh10.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh11.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh12.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="footer_1m clearix">
+                                <h4>QUICK LINKS</h4>
+                                <div class="footer_1mi clearfix">
+                                    <div class="col-sm-6 space_left col-xs-6">
+                                        <div class="footer_1mil clearfix">
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Our Blends</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">New Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Top Sellers</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">About Us</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">MENU</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Contact Us</a></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 space_right col-xs-6">
+                                        <div class="footer_1mil clearfix">
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Beans</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Preparation Tools</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Drunk Coffee</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Ice Cream</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Other</a></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="footer_1r clearix">
+                                <h4>GET IN TOUCH</h4>
+                                <p class="font_16"><i class="fa fa-map col_1"></i> Address : -115/Hồ Tùng Mậu/Bến Nghe/Q1/HCM</p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">+91 (123) 456 7890</a></p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">CoffeePAO@gmail.com</a></p>
+                                <ul class="social-network social-circle">
+                                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer_2 text-center clearfix">
+                        <div class="col-sm-12">
+                            <p class="mgt">© 2024 Your Website Coffee  Management System<a class="col_1" th:href="@{/}">Coffee PAO</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="input-group clearfix">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                /*****Fixed Menu******/
+                var secondaryNav = $('.cd-secondary-nav'),
+                        secondaryNavTopPosition = secondaryNav.offset().top;
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+
+                $(window).on('scroll', function () {
+                    if ($(window).scrollTop() > secondaryNavTopPosition + navbar_height) {
+                        secondaryNav.addClass('is-fixed');
+                        document.body.style.paddingTop = navbar_height + 'px';
+
+                    } else {
+                        secondaryNav.removeClass('is-fixed');
+                        document.body.style.paddingTop = '0'
+                    }
+                });
+
+            });
+        </script>
+
+    </body>
+</html>

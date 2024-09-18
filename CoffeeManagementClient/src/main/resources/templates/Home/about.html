@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>PAO | About</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/home/css/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/home/css/global.css}" rel="stylesheet">
+        <link th:href="@{/home/css/index.css}" rel="stylesheet">
+        <link th:href="@{/home/css/about.css}" rel="stylesheet">
+        <link th:rel="stylesheet" type="text/css" th:href="@{/home/css/font-awesome.min.css}" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet"> 
+        <script th:src="@{/home/js/jquery-2.1.1.min.js}"></script>
+        <script th:src="@{/home/js/bootstrap.min.js}"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+         <style>
+            .top_1r {
+    padding-top: 10px;
+}
+
+.big {
+    font-size: 18px;
+}
+
+.mgt {
+    margin-top: 5px;
+}
+
+.button {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+
+.button:hover {
+    background-color: #31b0d5;
+    border-color: #269abc;
+}
+
+.button.mgt {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+        </style>
+    </head>
+    <body>
+        <section id="top">
+            <div class="container">
+                <div class="row">
+                    <div class="top_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="top_1m text-center clearfix">
+                                <h3 class="mgt"><a th:href="@{/}"><span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a></h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="top_1l clearfix">
+                                <p class="mgt font_16 text-center"><i class="fa fa-map col_1"></i> <span class="col_6">Address:</span> 115 Hồ Tùng Mậu.P Bến Nghé.Q1.TP.HCM</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="top_1r text-right clearfix">
+                                <div th:if="${username != null}">
+                                    <h6 class="big mgt">Welcome, <span th:text="${username}"></span>
+                                        <a class="button mgt" th:href="@{/userdetails/{id}(id=${session.user})}">Profile</a>
+                                        <a class="button mgt" th:href="@{/logout}">Logout</a>
+                                    </h6>
+                                </div>
+                                <div th:if="${username == null}">
+                                    <h6 class="big mgt">
+                                        <a class="button mgt" th:href="@{/login}">Login</a>
+                                        <a class="button mgt" th:href="@{/register}">Register</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="header" class="clearfix cd-secondary-nav">
+            <nav class="navbar nav_t">
+                <div class="container">
+                    <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" th:href="@{/}"> <span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a>
+                    </div>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+
+                            <li><a class="m_tag" th:href="@{/}">Home</a></li>
+                            <li><a class="m_tag active_tab" th:href="@{/about}">About</a></li>
+                            <li><a class="m_tag" th:href="@{/products}">Menu</a></li>
+                            <li><a class="m_tag" th:href="@{/blog}">News</a></li>
+                            
+                            <li><a class="m_tag" th:href="@{/contactus}">Contact Us</a></li>
+                            <li class="dropdown">
+                                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Pages<span class="caret"></span></a>
+                                <ul class="dropdown-menu drop_3" role="menu">
+                                    <li><a th:href="@{/mycart}">Shopping Cart</a></li>
+                                    <li th:if="${username != null}"><a class="border_none" th:href="@{/purchasehistory}">Product History</a></li>
+                                   
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><a class="m_tag" href="#aboutModal" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i></a></li>
+
+                            <li class="dropdown">
+                                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-bag"></i></a>
+                                <ul class="dropdown-menu drop_1" role="menu">
+                                    <li>
+                                        <div class="drop_1i clearfix">
+                                            <div class="col-sm-6">
+
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il text-right clearfix"><h5 class="mgt"><a href="cart.html">VIEW CART</a></h5></div>
+                                            </div>
+                                        </div>
+                                        <span th:each="p: ${pcart}">
+                                            <span th:if="${username == p.userId.username and p.status != true}">
+                                                <div class="drop_1i1 clearfix">
+                                                    <div class="col-sm-6" style="margin-top: 8px">
+                                                        <div class="drop_1i1l clearfix"><h6 class="mgt bold"><a href="#" th:text="${p.productid.productname}"></a> <br><span>$<span class="normal col_2" th:text="${p.productid.sale}"></span> </span><span style="font-size: 14px;">quantity:<span th:text="${p.quantity}"></span></h6></div>
+                                                    </div>
+                                                    <div class="col-sm-4" style="margin-top: 8px">
+                                                        <div class="drop_1i1r clearfix"><a href="#"><img th:src="@{'images/'+${p.productid.image}}" class="iw" alt="abc"></a></div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="drop_1i1l text-right clearfix"><h6 class="mgt bold"> <span><a th:href="@{/deletecart/{id}(id = ${p.id})}"><i class="fa fa-remove"></i></a></span></h6></div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </span>
+                                        <div class="drop_1i2 clearfix">
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il clearfix"><h5 class="mgt">TOTAL</h5></div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il text-right clearfix"><h5 class="mgt">$<span th:text="${totlal}"></span></h5></div>
+                                            </div>
+                                        </div>
+                                        <div class="drop_1i3 text-center clearfix">
+                                            <div class="col-sm-12">
+                                                <h5><a class="button" href="/mycart">CHECKOUT</a></h5>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+
+        </section>
+
+        <section id="center" class="center_o clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="center_o1 text-center">
+                            <h1 class="mgt">About Us</h1>
+                            <h4><a th:href="@{/}">Home</a> / About Us</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about_h">
+            <div class="container">
+                <div class="row">
+                    <div class="about_h_1 clearfix">
+                        <div class="col-sm-6">
+                            <div class="about_h_1r clearfix">
+                                <ul class="nav_1 mgt">
+                                    <li class="active"><a data-toggle="tab" href="#home">OUR MISSION </a></li>
+                                    <li class=""><a data-toggle="tab" href="#menu1">QUALITY CONTROL </a></li>
+                                    <li><a data-toggle="tab" href="#menu2">OUR GOALS </a></li>
+                                </ul>
+                                <div class="tab-content clearfix">
+                                    <div id="home" class="tab-pane fade clearfix active in">
+                                        <div class="click clearfix">
+                                            <h4 class="mgt">INTEGRATING INNOVATIONS <br> INTO COFFEE TRADITIONS</h4>
+                                            <p>Our mission is to create a sustainable, environmentally and technologically advanced coffee shop. We adhere to natural coffee traditions combined with innovation. Our mission is to create a sustainable, environmentally and technologically advanced coffee shop. We adhere to natural coffee traditions combined with innovation.
+                                            </p>
+                                            <h5><a class="button_1" href="#">READ MORE</a></h5>
+                                        </div>
+                                    </div>
+
+                                    <div id="menu1" class="tab-pane fade clearfix">
+                                        <div class="click clearfix">
+                                            <h4 class="mgt">ENSURING THE HIGHEST <br> QUALITY OF OUR PRODUCTS</h4>
+                                            <p>Our mission is to create a sustainable, environmentally and technologically advanced coffee shop. We adhere to natural coffee traditions combined with innovation. Our mission is to create a sustainable, environmentally and technologically advanced coffee shop. We adhere to natural coffee traditions combined with innovation.
+                                            </p>
+                                            <h5><a class="button_1" href="#">READ MORE</a></h5>
+                                        </div>
+                                    </div>
+                                    <div id="menu2" class="tab-pane fade clearfix">
+                                        <div class="click clearfix">
+                                            <h4 class="mgt">OUR POSITION IS PRINCIPLED<br> TO FEED YOU WITH TASTY PRODUCE</h4>
+                                            <p>Our mission is to create a sustainable, environmentally and technologically advanced coffee shop. We adhere to natural coffee traditions combined with innovation. Our mission is to create a sustainable, environmentally and technologically advanced coffee shop. We adhere to natural coffee traditions combined with innovation.
+                                            </p>
+                                            <h5><a class="button_1" href="#">READ MORE</a></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="about_h_1l clearfix">
+                                <div class="grid clearfix">
+                                    <figure class="effect-jazz">
+                                        <a href="#"><img th:src="@{/home/img/about.jpg}" class="iw" alt="img25"></a>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </section>
+
+        <section id="center_2" class="clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 text-center clearfix">
+                        <h1 class="mgt">Why we're different</h1>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class=" center_1_main clearfix">
+                        <div class="col-sm-4 center_1_left clearfix">
+                            <div class="center_1_left_inner clearfix">
+                                <h6 class="mgt"><i class="fa fa-tree"></i></h6>
+                                <h4><a href="#">Litora Torquent Conubia</a></h4>
+                                <p>Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 center_1_left clearfix">
+                            <div class="center_1_left_inner clearfix">
+                                <h6 class="mgt"><i class="fa fa-hand-scissors-o"></i></h6>
+                                <h4><a href="#">Litora Augue</a></h4>
+                                <p>Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 center_1_left clearfix">
+                            <div class="center_1_left_inner clearfix">
+                                <h6 class="mgt"><i class="fa fa-leaf"></i></h6>
+                                <h4><a href="#">Litora Sagittis</a></h4>
+                                <p>Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" center_1_main clearfix">
+                        <div class="col-sm-4 center_1_left clearfix">
+                            <div class="center_1_left_inner clearfix">
+                                <h6 class="mgt"><i class="fa fa-recycle"></i></h6>
+                                <h4><a href="#">Litora Torquent Conubia</a></h4>
+                                <p>Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 center_1_left clearfix">
+                            <div class="center_1_left_inner clearfix">
+                                <h6 class="mgt"><i class="fa fa-magic"></i></h6>
+                                <h4><a href="#">Litora Augue</a></h4>
+                                <p>Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 center_1_left clearfix">
+                            <div class="center_1_left_inner clearfix">
+                                <h6 class="mgt"><i class="fa fa-life-ring"></i></h6>
+                                <h4><a href="#">Litora Sagittis</a></h4>
+                                <p>Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="popular">
+            <div class="container">
+                <div class="row">
+                    <div class="farm_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h1 class="mgt">Popular Categories</h1>
+                        </div>
+                    </div>
+                    <div class="popular_2 mgt clearfix">
+                        <div class="col-sm-4">
+                            <div class="popular_3 mgt clearfix">
+                                <div class="col-sm-8 space_all col-xs-8">
+                                    <div class="popular_4">
+                                        <h4 class="mgt">HEADLIGHTS</h4>
+                                        <p>Morbi sed aliquet felis pellentesque daculis multricies metus.</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 space_all col-xs-4">
+                                    <div class="popular_5">
+                                        <a href="#"><img th:src="@{/home/img/download (1).jpg}" alt="abc" height="120" class="iw"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="popular_3 mgt clearfix">
+                                <div class="col-sm-8 space_all col-xs-8">
+                                    <div class="popular_4">
+                                        <h4 class="mgt">LATEST</h4>
+                                        <p>Morbi sed aliquet felis pellentesque daculis multricies metus.</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 space_all col-xs-4">
+                                    <div class="popular_5">
+                                        <a href="#"><img th:src="@{/home/img/images (1).jpg}" height="120" alt="abc" class="iw"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="popular_3 mgt clearfix">
+                                <div class="col-sm-8 space_all col-xs-8">
+                                    <div class="popular_4">
+                                        <h4 class="mgt">TRENDING</h4>
+                                        <p>Morbi sed aliquet felis pellentesque daculis multricies metus.</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 space_all col-xs-4">
+                                    <div class="popular_5">
+                                        <a href="#"><img th:src="@{/home/img/download (2).jpg}" height="120" alt="abc" class="iw"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popular_2 clearfix">
+                        <div class="col-sm-4">
+                            <div class="popular_3 mgt clearfix">
+                                <div class="col-sm-8 space_all col-xs-8">
+                                    <div class="popular_4">
+                                        <h4 class="mgt">POPULAR</h4>
+                                        <p>Morbi sed aliquet felis pellentesque daculis multricies metus.</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 space_all col-xs-4">
+                                    <div class="popular_5">
+                                        <a href="#"><img th:src="@{/home/img/cacaonong.jpg}" height="120" alt="abc" class="iw"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="popular_3 mgt clearfix">
+                                <div class="col-sm-8 space_all col-xs-8">
+                                    <div class="popular_4">
+                                        <h4 class="mgt">NEW</h4>
+                                        <p>Morbi sed aliquet felis pellentesque daculis multricies metus.</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 space_all col-xs-4">
+                                    <div class="popular_5">
+                                        <a href="#"><img th:src="@{/home/img/menu-1.jpg}" height="120" alt="abc" class="iw"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="popular_3 mgt clearfix">
+                                <div class="col-sm-8 space_all col-xs-8">
+                                    <div class="popular_4">
+                                        <h4 class="mgt">BEST</h4>
+                                        <p>Morbi sed aliquet felis pellentesque daculis multricies metus.</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 space_all col-xs-4">
+                                    <div class="popular_5">
+                                        <a href="#"><img th:src="@{/home/img/capuchocolet.jpg}" height="120" alt="abc" class="iw"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="team_h">
+            <div class="container">
+                <div class="row">
+                    <div class="farm_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h1 class="mgt">OUR TEAM</h1>
+                        </div>
+                    </div>  
+                    <div class="team_h1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="team_h1i text-center clearfix">
+                                <img th:src="@{/home/img/22.jpg}" class="iw img-circle" alt="img25">
+                                <h4><a href="#">Lorem Magnis</a></h4>
+                                <p>Richard has a wide experience in every dairy farming aspect as he’s been in the industry for over 20 years.</p>
+                                <ul class="social-network social-circle">
+                                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="team_h1i text-center clearfix">
+                                <img th:src="@{/home/img/23.jpg}" class="iw img-circle" alt="img25">
+                                <h4><a href="#">Eget Nulla</a></h4>
+                                <p>Richard has a wide experience in every dairy farming aspect as he’s been in the industry for over 20 years.</p>
+                                <ul class="social-network social-circle">
+                                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="team_h1i text-center clearfix">
+                                <img th:src="@{/home/img/24.jpg}" class="iw img-circle" alt="img25">
+                                <h4><a href="#">Dapibus Diam</a></h4>
+                                <p>Richard has a wide experience in every dairy farming aspect as he’s been in the industry for over 20 years.</p>
+                                <ul class="social-network social-circle">
+                                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="enquiry">
+            <div class="container">
+                <div class="row">
+                    <div class="enquiry_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h4 class="mgt">NEWSLETTER</h4>
+                            <p>Subscribe to our newsletter and get <span class="col_1">20%</span> off your first purchase</p>
+                            <div class="input-group">
+                                <input type="text" class="form-control form_2" placeholder="Your Email">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button">
+                                        SUBSCRIBE</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="footer_1l clearix">
+                                <h4>GALLERY</h4>
+                                <div class="footer_1li clearfix">
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh7.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh8.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh9.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer_1li clearfix">
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh10.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh11.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh12.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="footer_1m clearix">
+                                <h4>QUICK LINKS</h4>
+                                <div class="footer_1mi clearfix">
+                                    <div class="col-sm-6 space_left col-xs-6">
+                                        <div class="footer_1mil clearfix">
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Our Blends</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">New Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Top Sellers</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">About Us</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">MENU</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Contact Us</a></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 space_right col-xs-6">
+                                        <div class="footer_1mil clearfix">
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Beans</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Preparation Tools</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Drunk Coffee</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Ice Cream</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Other</a></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="footer_1r clearix">
+                                <h4>GET IN TOUCH</h4>
+                                <p class="font_16"><i class="fa fa-map col_1"></i> Address : -115/Hồ Tùng Mậu/Bến Nghe/Q1/HCM</p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">+91 (123) 456 7890</a></p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">CoffeePAO@gmail.com</a></p>
+                                <ul class="social-network social-circle">
+                                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer_2 text-center clearfix">
+                        <div class="col-sm-12">
+                            <p class="mgt">© 2024 Your Website Coffee  Management System<a class="col_1" th:href="@{/}">Coffee PAO</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="input-group clearfix">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                /*****Fixed Menu******/
+                var secondaryNav = $('.cd-secondary-nav'),
+                        secondaryNavTopPosition = secondaryNav.offset().top;
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+
+                $(window).on('scroll', function () {
+                    if ($(window).scrollTop() > secondaryNavTopPosition + navbar_height) {
+                        secondaryNav.addClass('is-fixed');
+                        document.body.style.paddingTop = navbar_height + 'px';
+
+                    } else {
+                        secondaryNav.removeClass('is-fixed');
+                        document.body.style.paddingTop = '0'
+                    }
+                });
+
+            });
+        </script>
+
+    </body>
+</html>

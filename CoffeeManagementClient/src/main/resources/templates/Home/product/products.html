@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>PAO | Product</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/home/css/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/home/css/global.css}" rel="stylesheet">
+        <link th:href="@{/home/css/index.css}" rel="stylesheet">
+        <link th:href="@{/home/css/list.css}" rel="stylesheet">
+        <link th:href="@{/home/css/popup.css}" rel="stylesheet">
+        <link th:href="@{/home/css/phantrang.css}" rel="stylesheet"> 
+        <link th:rel="stylesheet" type="text/css" th:href="@{/home/css/font-awesome.min.css}" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet"> 
+        <script th:src="@{/home/js/jquery-2.1.1.min.js}"></script>
+        <script th:src="@{/home/js/bootstrap.min.js}"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            .top_1r {
+                padding-top: 10px;
+            }
+
+            .big {
+                font-size: 18px;
+            }
+
+            .mgt {
+                margin-top: 5px;
+            }
+
+            .button {
+                display: inline-block;
+                padding: 6px 12px;
+                margin-bottom: 0;
+                font-size: 14px;
+                font-weight: normal;
+                line-height: 1.42857143;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: middle;
+                -ms-touch-action: manipulation;
+                touch-action: manipulation;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                background-image: none;
+                border: 1px solid transparent;
+                border-radius: 4px;
+                color: #fff;
+                background-color: #5bc0de;
+                border-color: #46b8da;
+            }
+
+            .button:hover {
+                background-color: #31b0d5;
+                border-color: #269abc;
+            }
+
+            .button.mgt {
+                margin-top: 10px;
+                margin-left: 10px;
+            }
+            .shop_1r1 {
+                padding: 10px; /* Thêm khoảng cách xung quanh form */
+                border-radius: 5px; /* Bo góc các cạnh của form */
+                background-color: #f8f9fa; /* Màu nền của form */
+            }
+
+            .shop_1r1 .form-control {
+                border-radius: 3px; /* Bo góc các cạnh của input */
+                padding: 8px; /* Thêm padding cho input */
+                max-width: 200px; /* Đặt độ rộng tối đa của input */
+                flex: 1; /* Dùng flex để input lấp đầy phần còn lại */
+            }
+
+
+
+            .shop_1r1 .btn-primary {
+                border-radius: 3px; /* Bo góc các cạnh của button */
+                padding: 8px 16px; /* Thêm padding cho button */
+            }
+            
+            /* CSS cho phần sản phẩm */
+            .card {
+                position: relative; /* Để có thể định vị dòng trạng thái */
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                overflow: hidden;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s;
+            }
+
+            .card:hover {
+                transform: scale(1.05);
+            }
+            .card.out-of-stock .active {
+    color: red;
+    font-weight: bold;
+}
+
+            .card-img img {
+                width: 100%;
+                height: auto;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .card-body {
+                padding: 15px;
+                background-color: #fff;
+            }
+
+            .card-body .status {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background-color: #ff5722; /* Màu nền để nổi bật */
+                color: white;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-size: 0.9rem;
+                font-weight: bold;
+            }
+
+            .card-body h5 {
+                font-size: 1.07rem;
+                margin-bottom: 10px;
+            }
+
+            .card-body .price {
+                font-size: 1.2em;
+                color: #e74c3c; /* Màu sắc giá */
+            }
+
+            .card-body .sale {
+                text-decoration: line-through; /* Gạch bỏ giá cũ */
+                color: #95a5a6; /* Màu sắc giá cũ */
+
+
+            }
+            
+
+
+            .card-body .units, .card-body .active {
+                font-size: 0.9rem;
+                color: #666;
+            }
+
+            .card-body .bg_2 {
+                margin-top: 10px;
+            }
+
+            .card-body .bg_2 button {
+                background-color: #28a745;
+                color: #fff;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .card-body .bg_2 a {
+                display: inline-block;
+                background-color: #28a745;
+                color: #fff;
+                padding: 10px 15px;
+                border-radius: 5px;
+                text-decoration: none;
+            }
+
+            #pagination {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            #pagination li {
+                display: inline;
+                margin: 0 5px;
+            }
+
+            #pagination button {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            #pagination button:hover {
+                background-color: #0056b3;
+            }
+            /* Định dạng cho <li> */
+            li {
+                display: flex; /* Sử dụng Flexbox để căn chỉnh các phần tử bên trong */
+                justify-content: center; /* Căn giữa các phần tử theo chiều ngang */
+                align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+                margin: 10px 0; /* Khoảng cách giữa các mục */
+            }
+
+            /* Định dạng cho các <div> bên trong <li> */
+            li > div {
+                margin: 0 15px; /* Khoảng cách giữa các <div> */
+            }
+
+            /* Định dạng cho .bg_2 */
+            .bg_2 {
+                display: inline-flex; /* Sử dụng Flexbox để căn chỉnh nội dung bên trong */
+                align-items: center; /* Căn giữa nội dung theo chiều dọc */
+                justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+                width: 50px; /* Kích thước cố định cho .bg_2 */
+                height: 50px; /* Kích thước cố định cho .bg_2 */
+                border-radius: 50%; /* Bo góc để tạo hình tròn */
+                background-color: #003300; /* Màu nền của .bg_2 */
+                color: #fff; /* Màu chữ */
+                font-size: 24px; /* Kích thước chữ */
+                text-decoration: none; /* Loại bỏ gạch chân của liên kết */
+            }
+
+            /* Định dạng cho .bg_3 */
+            .bg_3 {
+                display: inline-flex; /* Sử dụng Flexbox để căn chỉnh nội dung bên trong */
+                align-items: center; /* Căn giữa nội dung theo chiều dọc */
+                justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+            }
+
+            /* Định dạng cho nút trong .bg_3 */
+            .bg_3 button, .bg_3 a {
+                display: inline-flex; /* Sử dụng Flexbox để căn chỉnh nội dung bên trong */
+                align-items: center; /* Căn giữa nội dung theo chiều dọc */
+                justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+                width: 50px; /* Kích thước cố định cho nút */
+                height: 50px; /* Kích thước cố định cho nút */
+                border-radius: 50%; /* Bo góc để tạo hình tròn */
+                background-color:#003300; /* Màu nền của nút */
+                color: #fff; /* Màu chữ */
+                font-size: 24px; /* Kích thước chữ */
+                text-decoration: none; /* Loại bỏ gạch chân của liên kết */
+            }
+
+            /* Định dạng cho biểu tượng trong nút */
+            .bg_2 i, .bg_3 i {
+                font-size: 24px; /* Kích thước của biểu tượng */
+            }
+            /* Định dạng cơ bản cho nút giỏ hàng */
+            .bg_2   {
+                display: inline-flex; /* Sử dụng Flexbox để căn chỉnh nội dung bên trong */
+                align-items: center; /* Căn giữa nội dung theo chiều dọc */
+                justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+                width: 50px; /* Kích thước cố định cho nút */
+                height: 50px; /* Kích thước cố định cho nút */
+                border-radius: 50%; /* Bo góc để tạo hình tròn */
+                background-color:#999966 ; /* Màu nền của nút */
+                color: #fff; /* Màu chữ */
+                font-size: 24px; /* Kích thước chữ */
+                text-decoration: none; /* Loại bỏ gạch chân của liên kết */
+                transition: transform 0.3s; /* Hiệu ứng phóng to mượt mà */
+            }
+
+            /* Hiệu ứng hover */
+            .bg_2:hover, .bg_3 button:hover, .bg_3 a:hover {
+                transform: scale(1.1); /* Phóng to khi hover */
+                background-color: #996600;
+                color: #fff
+            }
+            @media (min-width: 768px) {
+                .col-sm-4 {
+                    width: 30%;
+                }
+            }
+
+
+
+
+        </style>
+    </head>
+    <body>
+        <section id="top">
+            <div class="container">
+                <div class="row">
+                    <div class="top_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="top_1m text-center clearfix">
+                                <h3 class="mgt"><a th:href="@{/}"><span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a></h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="top_1l clearfix">
+                                <p class="mgt font_16 text-center"><i class="fa fa-map col_1"></i> <span class="col_6">Address:</span> 115 Hồ Tùng Mậu.P Bến Nghé.Q1.TP.HCM</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="top_1r text-right clearfix">
+                                <div th:if="${username != null}">
+                                    <h6 class="big mgt">Welcome, <span th:text="${username}"></span>
+                                        <a class="button mgt" th:href="@{/userdetails/{id}(id=${session.user})}">Profile</a>
+                                        <a class="button mgt" th:href="@{/logout}">Logout</a>
+                                    </h6>
+                                </div>
+                                <div th:if="${username == null}">
+                                    <h6 class="big mgt">
+                                        <a class="button mgt" th:href="@{/login}">Login</a>
+                                        <a class="button mgt" th:href="@{/register}">Register</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="header" class="clearfix cd-secondary-nav">
+            <nav class="navbar nav_t">
+                <div class="container">
+                    <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" th:href="@{/}"> <span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a>
+                    </div>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+
+                            <li><a class="m_tag" th:href="@{/}">Home</a></li>
+                            <li><a class="m_tag" th:href="@{/about}">About</a></li>
+                            <li><a class="m_tag active_tab" th:href="@{/products}">Menu</a></li>
+                            <li><a class="m_tag" th:href="@{/blog}">News</a></li>
+
+                            <li><a class="m_tag" th:href="@{/contactus}">Contact Us</a></li>
+                            <li class="dropdown">
+                                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Pages<span class="caret"></span></a>
+                                <ul class="dropdown-menu drop_3" role="menu">
+                                    <li><a th:href="@{/mycart}">Shopping Cart</a></li>
+                                    <li th:if="${username != null}"><a class="border_none" th:href="@{/purchasehistory}">Product History</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li>
+                                <a class="m_tag" href="#aboutModal" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i></a>
+                            </li>
+
+                            <li class="dropdown">
+                                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-bag"></i></a>
+                                <ul class="dropdown-menu drop_1" role="menu">
+                                    <li>
+                                        <div class="drop_1i clearfix">
+                                            <div class="col-sm-6">
+
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il text-right clearfix"><h5 class="mgt"><a href="cart.html">VIEW CART</a></h5></div>
+                                            </div>
+                                        </div>
+                                        <span th:each="p: ${pcart}">
+                                            <span th:if="${username == p.userId.username and p.status != true}">
+                                                <div class="drop_1i1 clearfix">
+                                                    <div class="col-sm-6" style="margin-top: 8px">
+                                                        <div class="drop_1i1l clearfix"><h6 class="mgt bold"><a href="#" th:text="${p.productid.productname}"></a> <br><span>$<span class="normal col_2" th:text="${p.productid.sale}"></span> </span><span style="font-size: 14px;">quantity:<span th:text="${p.quantity}"></span></h6></div>
+                                                    </div>
+                                                    <div class="col-sm-4" style="margin-top: 8px">
+                                                        <div class="drop_1i1r clearfix"><a href="#"><img th:src="@{'images/'+${p.productid.image}}" class="iw" alt="abc"></a></div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="drop_1i1l text-right clearfix"><h6 class="mgt bold"> <span><a th:href="@{/deletecart/{id}(id = ${p.id})}"><i class="fa fa-remove"></i></a></span></h6></div>
+                                                    </div>
+
+                                                </div>
+                                            </span>
+                                        </span>
+                                        <div class="drop_1i2 clearfix">
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il clearfix"><h5 class="mgt">TOTAL</h5></div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il text-right clearfix"><h5 class="mgt">$<span th:text="${totlal}"></span></h5></div>
+                                            </div>
+                                        </div>
+                                        <div class="drop_1i3 text-center clearfix">
+                                            <div class="col-sm-12">
+                                                <h5><a class="button" href="/mycart">CHECKOUT</a></h5>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+            <div class="popup" id="myPopup">
+                <div class="toast">
+                    <i class="fa fa-check"></i>
+                    <div class="content">
+                        <div class="title">Notification</div>
+                        <span class="error">add to card successfully</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="center" class="center_o clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="center_o1 text-center">
+                            <h1 class="mgt">Menu</h1>
+                            <h4><a href="#">Home</a> / Menu</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="list">
+            <div class="container">
+                <div class="row">
+                    <div class="list_1 clearfix">
+                        <div class="col-sm-3">
+                            <div class="list_1l clearfix">
+                                <div class="list_1l1 clearfix">
+                                    <form th:action="@{/filtercategory}" method="post">
+                                        <select name="id" class="btn btn-primary dropdown-toggle" onchange="this.form.submit()" style="width: 100%; font-size: 18px;">
+                                            <option th:value="0">Shop By Categories</option>
+                                            <option th:value="0">All</option>
+                                            <option th:each="c : ${cate}" th:if="${c.status == 'Activated'}" th:value="${c.id}" th:text="${c.categoryname}"></option>
+                                        </select>
+                                    </form>
+                                    <!--                                    </div>-->
+                                </div><br>
+                                <div class="list_1l2 clearfix">
+                                    <h4 class="mgt bg_1 normal" style="background-color: #428bca">Filter by</h4>
+                                    <div class="list_1l2i clearfix">
+                                        <!--                                        <h5 class="mgt">Availability</h5>
+                                                                                <h6><input type="checkbox"> <a href="detail.html">In stock (11)</a></h6>
+                                                                                <h6><input type="checkbox"> <a href="detail.html">Out of stock (2)</a></h6>
+                                                                                <hr>-->
+                                        <h5>Price</h5>
+                                        <form th:action="@{/filter}" method="post">
+                                            <label for="minPrice">Minimum Price:</label>
+                                            <input id="minPrice" name="min" type="range" th:value="${min != null} ? ${min} : 0" min="0" max="100" value="${min != null} ? ${min} : 0">
+                                            <span id="minPriceValue" th:text="${min != null} ? ${min} : 0">0</span><br>
+
+                                            <label for="maxPrice">Maximum Price:</label>
+                                            <input id="maxPrice" name="max" type="range" th:value="${max}" min="0" max="100" value="100">
+                                            <span id="maxPriceValue" th:text="${max}">100</span><br>
+
+                                            <input type="submit" class="btn btn-primary mr-8" value="Filter" style="margin: 12px 70px -14px">
+                                        </form>
+                                        <hr>
+                                    </div>
+                                </div><br>
+                                <div class="list_1l3 clearfix">
+                                    <h4 class="mgt bg_1 normal" style="background-color: #428bca">Special Product</h4>
+                                    <div class="list_1l2i clearfix">
+                                        <div class="list_1l2ii mgt clearfix" th:each="i, iterStat : ${plist}" th:if="${iterStat.index < 4}">
+                                            <a th:href="@{/homedetails/{id}(id = ${i.id})}"><img th:src="@{'/images/'+${i.image}}" width="80" height="80" alt="abc"></a>
+                                            <h5 class="mgt"><a th:href="@{/homedetails/{id}(id = ${i.id})}" th:text="${i.productname}"></a></h5>
+                                            <h6 th:text="${i.price}"></h6>
+                                            <span class="col_5">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div><br>
+                                <div class="list_1l4 clearfix">
+                                    <h4 class="mgt bg_1 normal" style="background-color: #428bca">Latest Twitter</h4>
+                                    <div class="list_1l2i clearfix">
+                                        <p class="mgt font_16">Make sure you are following <a class="col_1 bold" href="detail.html">@PortaMarket</a> for all your Semper Porta needs!</p>
+                                        <p class="font_16">Make sure you are following <a class="col_1 bold" href="detail.html">@PortaMarket</a> for all your Semper Porta needs!</p>
+                                        <p class="font_16">Make sure you are following <a class="col_1 bold" href="detail.html">@PortaMarket</a> for all your Semper Porta needs!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="shop_1rm clearfix">
+                                <div class="shop_1r1 clearfix">
+                                    <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" th:action="@{/searchproduct}" method="post" id="searchForm" style="display: flex; align-items: center;">
+                                        <input type="text" class="form-control" name="productname" th:value="${productname}" placeholder="Search products" style="flex: 1; margin-right: 10px; ">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </form>
+                                </div>
+
+                                <div id="product-list" class="row"></div>
+
+                                <div class="pages clearfix text-center">
+                                    <ul id="pagination"  class="pagination"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </section>
+        <section id="enquiry">
+            <div class="container">
+                <div class="row">
+                    <div class="enquiry_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h4 class="mgt">NEWSLETTER</h4>
+                            <p>Subscribe to our newsletter and get <span class="col_1">20%</span> off your first purchase</p>
+                            <div class="input-group">
+                                <input type="text" class="form-control form_2" placeholder="Your Email">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button">
+                                        SUBSCRIBE</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="footer_1l clearix">
+                                <h4>GALLERY</h4>
+                                <div class="footer_1li clearfix">
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh7.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh8.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh9.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer_1li clearfix">
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh10.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh11.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh12.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="footer_1m clearix">
+                                <h4>QUICK LINKS</h4>
+                                <div class="footer_1mi clearfix">
+                                    <div class="col-sm-6 space_left col-xs-6">
+                                        <div class="footer_1mil clearfix">
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Our Blends</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">New Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Top Sellers</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">About Us</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">MENU</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Contact Us</a></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 space_right col-xs-6">
+                                        <div class="footer_1mil clearfix">
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Beans</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Preparation Tools</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Drunk Coffee</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Ice Cream</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Other</a></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="footer_1r clearix">
+                                <h4>GET IN TOUCH</h4>
+                                <p class="font_16"><i class="fa fa-map col_1"></i> Address : -115/Hồ Tùng Mậu/Bến Nghe/Q1/HCM</p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">+91 (123) 456 7890</a></p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">CoffeePAO@gmail.com</a></p>
+                                <ul class="social-network social-circle">
+                                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer_2 text-center clearfix">
+                        <div class="col-sm-12">
+                            <p class="mgt">© 2024 Your Website Coffee  Management System<a class="col_1" th:href="@{/}">Coffee PAO</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="input-group clearfix">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                /*****Fixed Menu******/
+                var secondaryNav = $('.cd-secondary-nav'),
+                        secondaryNavTopPosition = secondaryNav.offset().top;
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+                $(window).on('scroll', function () {
+                    if ($(window).scrollTop() > secondaryNavTopPosition + navbar_height) {
+                        secondaryNav.addClass('is-fixed');
+                        document.body.style.paddingTop = navbar_height + 'px';
+                    } else {
+                        secondaryNav.removeClass('is-fixed');
+                        document.body.style.paddingTop = '0'
+                    }
+                });
+            });
+        </script>
+
+        <!--        <script th:src="@{/home/js/ziehharmonika.js}"></script>-->
+
+        <!--        <script>
+                    $(document).ready(function () {
+                        $('.ziehharmonika').ziehharmonika({
+                            collapsible: true,
+                            prefix: '★',
+                            scroll: false
+                        });
+                    });
+                </script>-->
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script th:inline="javascript">
+    // Số sản phẩm trên mỗi trang
+    var itemsPerPage = 15;
+
+    // Danh sách sản phẩm từ server
+    var products = /*[[${listp}]]*/ [];
+
+    // Lấy username từ server-side
+    var username = /*[[${username}]]*/ null;
+
+    // Tính tổng số trang
+    var totalPages = Math.ceil(products.length / itemsPerPage);
+
+    // Hàm hiển thị sản phẩm trên trang cụ thể
+    function displayProducts(pageNumber) {
+        var startIndex = (pageNumber - 1) * itemsPerPage;
+        var endIndex = pageNumber * itemsPerPage;
+        var paginatedProducts = products.slice(startIndex, endIndex);
+
+        // Hiển thị sản phẩm trong paginatedProducts lên trang
+        var productListElement = document.getElementById('product-list');
+        productListElement.innerHTML = ''; // Xóa nội dung cũ trước khi cập nhật
+
+        paginatedProducts.forEach(function (product) {
+            var productElement = document.createElement('div');
+            productElement.classList.add('col-sm-4');
+            
+            // Xác định lớp CSS dựa trên trạng thái sản phẩm
+            var statusClass = product.active === 'Out of stock' ? 'out-of-stock' : '';
+
+            var bookNowButton = '';
+            if (username != null) {
+    if (product.active !== 'Out of stock') {
+        bookNowButton = '<button class="bg_2"><i class="fa fa-shopping-cart"></i></button>';
+    } else {
+        bookNowButton = '<button class="bg_2" style="display: none;"><i class="fa fa-shopping-cart"></i></button>';
+    }
+} else {
+    if (product.active !== 'Out of stock') {
+        bookNowButton = '<a class="bg_2" href="/login"><i class="fa fa-shopping-cart"></i></a>';
+    } else {
+        bookNowButton = '<a class="bg_2" href="/login" style="display: none;"><i class="fa fa-shopping-cart"></i></a>';
+    }
+}
+
+
+            productElement.innerHTML = `
+        <div class="card ${statusClass}">
+            <div class="card-img">
+                <a href="/homedetails/${product.id}">
+                    <img src="/images/${product.image}" alt="${product.productname}">
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="status">${product.status}</div>
+                <h5>${product.productname}</h5>
+                <h6 class="price">
+                    <i class="fa fa-dollar"></i> ${product.sale}
+                    <span class="sale"><i class="fa fa-dollar"></i> ${product.price}</span>
+                </h6>
+                <p class="units">Units: ${product.units}</p>
+                <p class="active">Condition: ${product.active}</p>
+                <ul>
+                    <li>
+                        <div class="bg_2">
+                            <a class="bg_1" href="/homedetails/${product.id}">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </div>
+                        <div class="bg_3">
+                            <form class="add-to-cart-form" action="/products" method="post">
+                                <input type="hidden" name="productid.id" value="${product.id}" />
+                                <input type="hidden" name="sellingprice" value="${product.sale}" />
+                                <input type="hidden" name="status" value="false" />
+                                <div>${bookNowButton}</div>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>`;
+
+            productListElement.appendChild(productElement);
+        });
+    }
+
+    // Hàm tạo nút phân trang
+    function createPaginationButtons(totalPages) {
+        var paginationElement = document.getElementById('pagination');
+        paginationElement.innerHTML = ''; // Xóa nội dung cũ trước khi cập nhật
+
+        for (var i = 1; i <= totalPages; i++) {
+            var button = document.createElement('button');
+            button.textContent = i;
+            button.addEventListener('click', function () {
+                displayProducts(parseInt(this.textContent));
+            });
+            var listItem = document.createElement('li');
+            listItem.appendChild(button);
+            paginationElement.appendChild(listItem);
+        }
+    }
+
+    // Hiển thị trang đầu tiên khi trang được tải
+    displayProducts(1);
+    // Tạo nút phân trang
+    createPaginationButtons(totalPages);
+</script>
+
+
+
+        <script>
+            const addToCart = (formData) => {
+                $.ajax({
+                    type: 'POST',
+                    url: '/products',
+                    data: formData,
+                    success: updateUI,
+                    error: handleAjaxError
+                });
+            };
+
+// Function to update the UI with the response data
+            const updateUI = (response) => {
+                console.log("Response from AJAX request:", response);
+
+                var productId = $(response).find('#productId').val(); // Lấy ID sản phẩm từ phản hồi
+                var productElement = $('#product-' + productId);
+
+                if (productElement.length > 0) {
+                    // Sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
+                    var existingQuantity = parseInt(productElement.find('.quantity').text());
+                    var newQuantity = existingQuantity + 1; // Ví dụ: tăng số lượng lên 1
+
+                    // Cập nhật số lượng trong giao diện người dùng
+                    productElement.find('.quantity').text(newQuantity);
+                } else {
+                    // Nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm sản phẩm mới vào danh sách
+                    $('#products-container').append(response);
+                }
+
+                $('#myPopup').fadeIn('slow').delay(1000).fadeOut('slow');
+            };
+
+
+
+
+// Function to handle AJAX errors
+            const handleAjaxError = (xhr, status, error) => {
+                console.error('Error:', error);
+                // Handle errors appropriately
+            };
+
+            $(document).ready(function () {
+                $('.add-to-cart-form').submit(function (event) {
+                    event.preventDefault(); // Prevent the default form submission behavior
+                    const formData = $(this).serialize(); // Serialize form data
+                    addToCart(formData); // Call the function to handle the AJAX request
+                });
+            });
+        </script>
+        <script>
+            const minPriceInput = document.getElementById('minPrice');
+            const maxPriceInput = document.getElementById('maxPrice');
+            const minPriceValue = document.getElementById('minPriceValue');
+            const maxPriceValue = document.getElementById('maxPriceValue');
+
+            minPriceInput.addEventListener('input', function () {
+                minPriceValue.textContent = this.value;
+            });
+
+            maxPriceInput.addEventListener('input', function () {
+                maxPriceValue.textContent = this.value;
+            });
+        </script>
+    </body>
+</html>

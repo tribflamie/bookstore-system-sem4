@@ -1,0 +1,103 @@
+
+#username.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a
+}
+#email.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a
+}
+#password.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a
+}
+#phone.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a
+}
+#country.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a
+}
+#status.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a
+}
+#role.form-control {
+    border-color:#eee;
+    background-color: #ffffff;
+    box-shadow:none;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 0;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #2f567a
+}
+#successMessageuser {
+    display: none;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    margin-bottom: 10px;
+}
+.btn-red {
+    background-color: #dc3545; /* Màu đỏ thường được sử dụng trong Bootstrap */
+    border-color: #dc3545; /* Màu viền nút */
+}
+
+.btn-red:hover {
+    background-color: #c82333; /* Màu đỏ nhạt khi rê chuột vào */
+    border-color: #bd2130; /* Màu viền khi rê chuột vào */
+}
+
+.btn-red:focus, .btn-red.focus {
+    box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5); /* Hiệu ứng nhấp chuột */
+}
+
+.btn-red:disabled, .btn-red.disabled {
+    background-color: #dc3545; /* Màu nền nút bị vô hiệu hóa */
+    border-color: #dc3545; /* Màu viền nút bị vô hiệu hóa */
+}

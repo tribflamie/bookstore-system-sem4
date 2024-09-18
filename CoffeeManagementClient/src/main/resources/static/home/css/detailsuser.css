@@ -1,0 +1,111 @@
+/* Styling for profile section */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.profile-img img {
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.profile-head {
+    margin-bottom: 20px;
+}
+
+.profile-head h5 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.profile-head h6 {
+    font-size: 16px;
+    font-weight: normal;
+    color: #666;
+}
+
+.profile-edit-btn {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-edit-btn:hover {
+    background: #0056b3;
+}
+
+/* Styling for tabs */
+.nav-tabs .nav-item {
+    margin-bottom: 0;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    color: #333;
+    background: transparent;
+    border-radius: 0;
+}
+
+.nav-tabs .nav-link.active {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+}
+
+/* Styling for profile details */
+.profile-details {
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.profile-details label {
+    font-weight: bold;
+    color: #555;
+}
+
+.profile-details p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Styling for purchase history table */
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+.table-bordered th,
+.table-bordered td {
+    padding: 8px;
+    vertical-align: middle;
+}
+
+.table-bordered thead th {
+    background-color: #f0f0f0;
+    border-color: #ddd;
+}
+
+.table-bordered tbody td {
+    border-color: #ddd;
+}
+
+/* Styling for status colors */
+.status-completed {
+    color: #00d25b;
+}
+
+.status-in-progress {
+    color: #ffab00;
+}

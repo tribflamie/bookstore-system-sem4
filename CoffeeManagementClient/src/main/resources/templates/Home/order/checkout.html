@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>House | CheckOut</title>
+        <link th:href="@{/home/css/pay.css}" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <div class="iphone">      
+            <header class="header">
+                <h1>Checkout</h1>
+            </header>
+
+
+            <form  class="form" th:action="@{/checkout}" th:object="${orders}" method="post">
+                <div>
+                    <h2>Full name</h2>
+
+                    <div class="card">
+                        <address th:text="${username}">
+
+                        </address>
+                    </div>
+                </div>
+
+                <fieldset>
+                    <legend>Payment Method</legend>
+
+                    <div class="form__radios">
+                        <div class="form__radio">
+                            <label for="visa"><svg class="icon">
+                                <use xlink:href="#icon-visa" />
+                                </svg>Cash On Delivery</label>
+                            <input checked id="Delivery" name="payments" value="Cash On Delivery" type="radio" />
+                        </div>
+
+<!--                        <div class="form__radio">
+                            <label for="paypal"><svg class="icon">
+                                <use xlink:href="#icon-paypal" />
+                                </svg>PayPal</label>
+                            <input id="paypal"  name="payments" value="paypal" type="radio" />
+                        </div>
+
+                        <div class="form__radio">
+                            <label for="mastercard"><svg class="icon">
+                                <use xlink:href="#icon-mastercard" />
+                                </svg>VNPAY</label>
+                            <input id="mastercard"  name="payments" value="VNPAY" type="radio" />
+                        </div>-->
+                    </div>
+                </fieldset>
+                <div>
+                    <h2>Product Cart</h2>
+
+                    <table>
+                        <tbody th:each="p: ${pcart}">
+                        <span th:if="${username == p.userId.username and p.status != true}">
+                            <img height="80px" width="80px" th:src="@{'images/'+${p.productid.image}}" class="iw" alt="abc">
+                        </span>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h2>Shopping Bill</h2>
+
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Quantity</td>
+                                <td align="right" th:text="${totalIterations}"></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>Total</td>
+                                <td align="right">$<span  th:text="${totlal}"></span></td>
+                        <input type="hidden"  name="total" th:value="${totlal}"/>
+                        <input type="hidden"  name="items" th:value="${totalIterations}"/>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+<!--                <input type="hidden" th:field="*{status}" th:value="'In progress'">-->
+                <div>
+                    <button class="button button--full" type="submit"><svg class="icon">
+                        <use xlink:href="#icon-shopping-bag" />
+                        </svg>Buy Now</button>
+                </div>
+            </form>
+
+        </div>
+
+
+    </body>
+
+</html>

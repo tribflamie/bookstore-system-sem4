@@ -1,0 +1,30 @@
+.success-message {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #5cb85c;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 9999;
+}
+
+.success-message .suic {
+    margin-top: 0;
+}
+
+.success-message .sui2 {
+    margin-bottom: 0;
+}
+
+.close1 {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}

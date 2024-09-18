@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>PAO | Details</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/home/css/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/home/css/global.css}" rel="stylesheet">
+        <link th:href="@{/home/css/index.css}" rel="stylesheet">
+        <link th:href="@{/home/css/list.css}" rel="stylesheet">
+        <link th:href="@{/home/css/popup.css}" rel="stylesheet">
+        <link th:href="@{/home/css/rating.css}" rel="stylesheet">
+        <link th:rel="stylesheet" type="text/css" th:href="@{/home/css/font-awesome.min.css}" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet"> 
+        <script th:src="@{/home/js/jquery-2.1.1.min.js}"></script>
+        <script th:src="@{/home/js/bootstrap.min.js}"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            .top_1r {
+                padding-top: 10px;
+            }
+
+            .big {
+                font-size: 18px;
+            }
+
+            .mgt {
+                margin-top: 5px;
+            }
+
+            .button {
+                display: inline-block;
+                padding: 6px 12px;
+                margin-bottom: 0;
+                font-size: 14px;
+                font-weight: normal;
+                line-height: 1.42857143;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: middle;
+                -ms-touch-action: manipulation;
+                touch-action: manipulation;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                background-image: none;
+                border: 1px solid transparent;
+                border-radius: 4px;
+                color: #fff;
+                background-color: #5bc0de;
+                border-color: #46b8da;
+            }
+
+            .button:hover {
+                background-color: #31b0d5;
+                border-color: #269abc;
+            }
+
+            .button.mgt {
+                margin-top: 10px;
+                margin-left: 10px;
+            }
+            .badge {
+                display: inline-flex; /* Sử dụng Flexbox để căn chỉnh nội dung bên trong */
+                align-items: center; /* Căn giữa theo chiều dọc */
+                justify-content: center; /* Căn giữa theo chiều ngang */
+                text-align: center; /* Căn giữa văn bản trong phần tử */
+                color: #fff; /* Màu chữ */
+                text-decoration: none; /* Loại bỏ gạch chân của liên kết */
+                font-size: 16px; /* Kích thước chữ */
+                border-radius: 5px; /* Bo góc cho liên kết */
+            }
+
+            /* Đảm bảo các icon và văn bản nằm giữa */
+            .badge i {
+                margin-right: 8px; /* Khoảng cách giữa biểu tượng và văn bản */
+            }
+
+            /* Bạn có thể thêm màu nền và các thuộc tính khác nếu cần */
+            .badge-warning {
+                background-color: #f39c12; /* Màu nền cho liên kết */
+            }
+            .comment-item {
+                margin-bottom: 20px;
+                padding: 15px;
+                background-color: #f9f9f9;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+
+            .comment-item h5 {
+                margin-bottom: 10px;
+                font-size: 18px;
+            }
+
+            .comment-item .rating {
+                margin-bottom: 10px;
+            }
+
+            .comment-item .rating .star {
+                font-size: 18px;
+                color: #f39c12; /* Màu sắc của sao */
+            }
+
+            .comment-item h4 {
+                margin-bottom: 5px;
+                font-size: 16px;
+            }
+
+            .comment-item p {
+                font-size: 14px;
+                line-height: 1.5;
+                color: #333; /* Màu chữ */
+            }
+            .comment-item .rating .star {
+                font-size: 18px;
+                color: #f39c12; /* Màu sao unfilled */
+            }
+
+            .comment-item .rating .star.filled {
+                color: #ffc107; /* Màu sao filled */
+            }
+            .comment-item .rating {
+                margin-top: 8px;
+                margin-bottom: 12px;
+            }
+
+            .comment-item h4 {
+                margin-top: 12px;
+            }
+
+            .comment-item p {
+                margin-top: 8px;
+            }
+
+
+
+        </style>
+    </head>
+    <body>
+        <section id="top">
+            <div class="container">
+                <div class="row">
+                    <div class="top_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="top_1m text-center clearfix">
+                                <h3 class="mgt"><a th:href="@{/}"><span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a></h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="top_1l clearfix">
+                                <p class="mgt font_16 text-center"><i class="fa fa-map col_1"></i> <span
+                                        class="col_6">Address:</span> 115 Hồ Tùng Mậu.P Bến Nghé.Q1.TP.HCM</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="top_1r text-right clearfix">
+                                <div th:if="${username != null}">
+                                    <h6 class="big mgt">Welcome, <span th:text="${username}"></span>
+                                        <a class="button mgt" th:href="@{/userdetails/{id}(id=${session.user})}">Profile</a>
+                                        <a class="button mgt" th:href="@{/logout}">Logout</a>
+                                    </h6>
+                                </div>
+                                <div th:if="${username == null}">
+                                    <h6 class="big mgt">
+                                        <a class="button mgt" th:href="@{/login}">Login</a>
+                                        <a class="button mgt" th:href="@{/register}">Register</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="header" class="clearfix cd-secondary-nav">
+            <nav class="navbar nav_t">
+                <div class="container">
+                    <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand"  th:href="@{/}"> <span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a>
+                    </div>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+
+                            <li><a class="m_tag" th:href="@{/}">Home</a></li>
+                            <li><a class="m_tag" th:href="@{/about}">About</a></li>
+                            <li><a class="m_tag" th:href="@{/products}">Menu</a></li>
+                            <li><a class="m_tag" th:href="@{/blog}">News</a></li>
+
+                            <li><a class="m_tag" th:href="@{/contactus}">Contact Us</a></li>
+                            <li class="dropdown">
+                                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Pages<span class="caret"></span></a>
+                                <ul class="dropdown-menu drop_3" role="menu">
+                                    <li><a th:href="@{/mycart}">Shopping Cart</a></li>
+                                    <li th:if="${username != null}"><a class="border_none" th:href="@{/purchasehistory}">Product History</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><a class="m_tag" href="#aboutModal" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i></a></li>
+
+                            <li class="dropdown">
+                                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-bag"></i></a>
+                                <ul class="dropdown-menu drop_1" role="menu">
+                                    <li>
+                                        <div class="drop_1i clearfix">
+                                            <div class="col-sm-6">
+
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il text-right clearfix"><h5 class="mgt"><a href="cart.html">VIEW CART</a></h5></div>
+                                            </div>
+                                        </div>
+                                        <span th:each="p: ${pcart}">
+                                            <span th:if="${username == p.userId.username and p.status != true}">
+                                                <div class="drop_1i1 clearfix">
+                                                    <div class="col-sm-6" style="margin-top: 8px">
+                                                        <div class="drop_1i1l clearfix"><h6 class="mgt bold"><a href="#" th:text="${p.productid.productname}"></a> <br><span>$<span class="normal col_2" th:text="${p.productid.sale}"></span> </span><span style="font-size: 14px;">quantity:<span th:text="${p.quantity}"></span></h6></div>
+                                                    </div>
+                                                    <div class="col-sm-4" style="margin-top: 8px">
+                                                        <div class="drop_1i1r clearfix"><a href="#"><img th:src="@{'/images/'+${p.productid.image}}" class="iw" alt="abc"></a></div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="drop_1i1l text-right clearfix"><h6 class="mgt bold"> <span><a th:href="@{/deletecart/{id}(id = ${p.id})}"><i class="fa fa-remove"></i></a></span></h6></div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </span>
+                                        <div class="drop_1i2 clearfix">
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il clearfix"><h5 class="mgt">TOTAL</h5></div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il text-right clearfix"><h5 class="mgt">$<span th:text="${totlal}"></span></h5></div>
+                                            </div>
+                                        </div>
+                                        <div class="drop_1i3 text-center clearfix">
+                                            <div class="col-sm-12">
+                                                <h5><a class="button" href="/mycart">CHECKOUT</a></h5>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+            <div class="popup" id="myPopup">
+                <div class="toast">
+                    <i class="fa fa-check"></i>
+                    <div class="content">
+                        <div class="title">Notification</div>
+                        <span class="error">add to card successfully</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="center" class="center_o clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="center_o1 text-center">
+                            <h1 class="mgt">Shop Detail</h1>
+                            <h4><a th:href="@{/}">Home</a> / Shop Detail</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="list">
+            <div class="container">
+                <div class="row">
+                    <div class="list_1 clearfix">
+                        <div class="col-sm-3">
+                            <div class="list_1l clearfix">
+                                <div class="list_1l3 clearfix" >
+                                    <h4 class="mgt bg_1 normal">Special Product</h4>
+                                    <div class="list_1l2i clearfix" th:each="p, iterStat : ${listp}" th:if="${iterStat.index < 15}">
+                                        <div class="list_1l2ii mgt clearfix">
+                                            <a th:href="@{/homedetails/{id}(id = ${p.id})}"><img th:src="@{'/images/'+${p.image}}" width="80" height="80"
+                                                                                                 alt="abc"></a>
+                                            <h5 class="mgt"><a th:href="@{/homedetails/{id}(id = ${p.id})}" th:text="${p.productname}"></a></h5>
+                                            <h6 th:text="${p.price}"></h6>
+                                            <span class="col_5">
+                                                <div class="rating">
+                                                        <span class="star" th:classappend="${averageRating >= 1 ? 'filled' : 'empty'}"></span>
+                                                        <span class="star" th:classappend="${averageRating >= 2 ? 'filled' : 'empty'}"></span>
+                                                        <span class="star" th:classappend="${averageRating >= 3 ? 'filled' : 'empty'}"></span>
+                                                        <span class="star" th:classappend="${averageRating >= 4 ? 'filled' : 'empty'}"></span>
+                                                        <span class="star" th:classappend="${averageRating >= 5 ? 'filled' : 'empty'}"></span>
+                                                    </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="shop_1rm clearfix">
+                                <div class="shop_1ld1 clearfix">
+                                    <div class="col-sm-6 space_left">
+                                        <div class="shop_1ld1l clearfix">
+                                            <div class="carousel slide article-slide" id="article-photo-carousel">
+
+                                                <!-- Wrapper for slides -->
+                                                <div class="carousel-inner cont-slider">
+
+                                                    <div class="item active">
+                                                        <img title="" th:src="@{'/images/'+${product.image}}" alt="abc" class="iw"
+                                                             style="height:410px;">
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 space_right">
+                                        <div class="shop_1ld1r clearfix">
+                                            <div class="center_detail_2_right_inner clearfix">
+                                                <h3 th:text="${product.productname}"></h3>
+                                               <!-- hiện trung bình sao -->
+                                                <h4>
+                                                    <div class="rating">
+                                                        <span class="star" th:classappend="${averageRating >= 1 ? 'filled' : 'empty'}"></span>
+                                                        <span class="star" th:classappend="${averageRating >= 2 ? 'filled' : 'empty'}"></span>
+                                                        <span class="star" th:classappend="${averageRating >= 3 ? 'filled' : 'empty'}"></span>
+                                                        <span class="star" th:classappend="${averageRating >= 4 ? 'filled' : 'empty'}"></span>
+                                                        <span class="star" th:classappend="${averageRating >= 5 ? 'filled' : 'empty'}"></span>
+                                                    </div>
+
+
+                                                </h4>
+
+                                                <h2>$<span th:text="${product.sale}"></span></h2>
+                                                <h5>Description:<span th:text="${product.description}"></span></h5>
+                                                <h6>Units:<span th:text="${product.units}"></span></h6>
+                                                <h6>Condition:<span th:text="${product.active}"></span></h6>
+
+                                            </div>
+                                            <div class="center_detail_2_right_inner_1 clearfix">
+                                                <ul>
+                                                    <span th:if="${username == null && product.active != 'Out of stock'}">
+                                                        <li><a class="badge badge-warning" style="width: 180px; height: 40px;" href="/login"><i class="fa fa-heart"></i> Add To Cart</a></li>
+                                                    </span>
+
+                                                    <span th:if="${username != null && product.active != 'Out of stock'}">
+                                                        <form class="add-to-cart-form" th:action="@{/products}" th:object="${productcart}" method="post">
+                                                            <input type="hidden" id="id" name="productid.id" th:value="${product.id}" />
+                                                            <input type="hidden"  name="sellingprice" th:value="${product.sale}" />
+                                                            <input type="hidden"  name="status" th:value="false" />
+                                                            <li><button class="badge badge-warning" style="width: 150px"><i class="fa fa-heart"></i> Add To Cart</button></li>
+                                                        </form>
+
+                                                    </span>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="center_detail_2_right_inner_2 clearfix">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#home_description">Evaluate</a>
+                                        </li>
+                                        <li class=""><a data-toggle="tab" href="#menu_review">Comments</a></li>
+                                    </ul>
+
+                                    <div class="tab-content clearfix">
+                                        <div id="home_description" class="tab-pane fade active in clearfix">
+                                            <div class="click clearfix">
+                                                <div>
+                                                    <!-- Đây là nơi danh sách bình luận sẽ được hiển thị -->
+                                                    <div th:each="c : ${comment}" th:if="${c.productid.id == product.id}">
+                                                        <div class="comment-item">
+                                                            <h5 class="mgt">
+                                                                <i class="fa fa-comments"></i>
+                                                                <span th:text="${c.userId.username}">Username</span>
+                                                            </h5>
+                                                            <div class="rating" th:with="rating=${c.rating}">
+                                                                <span class="star" th:classappend="${rating >= 1 ? 'filled' : ''}"></span>
+                                                                <span class="star" th:classappend="${rating >= 2 ? 'filled' : ''}"></span>
+                                                                <span class="star" th:classappend="${rating >= 3 ? 'filled' : ''}"></span>
+                                                                <span class="star" th:classappend="${rating >= 4 ? 'filled' : ''}"></span>
+                                                                <span class="star" th:classappend="${rating >= 5 ? 'filled' : ''}"></span>
+                                                            </div>
+                                                            <h4>Comment:</h4>
+                                                            <p th:text="${c.comment}">Comment text</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="menu_review" class="tab-pane fade clearfix ">
+                                            <div class="click clearfix">
+                                                <div class="click_inner_2 clearfix">
+                                                    <div class="col-sm-1 space_left">
+                                                        <div class="click_inner_2_left text-center clearfix">
+                                                            <h2>
+                                                                <i class="fa fa-user-plus"></i>
+                                                            </h2>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-11 space_left">
+                                                        <div class="click_inner_2_right clearfix">
+                                                            <h4 class="mgt">
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star-o"></i>
+                                                            </h4>
+                                                            <h5><span>Author</span> – July 24, 2018</h5>
+                                                            <h5>Nice Product</h5>
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                                <div  class="click_inner_3 clearfix">
+                                                    <form class="add-to-comment-form" th:action="@{/comments}" th:object="${comments}" method="post">
+                                                        <input type="hidden" id="id" name="productid.id" th:value="${product.id}" />
+                                                        <h4>Add a Comment</h4>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit *</p>
+                                                        <h5>Your Stars</h5>
+                                                        <div class="rating" id="rating">
+                                                            <span class="start" data-value="1">&#9733;</span>
+                                                            <span class="start" data-value="2">&#9733;</span>
+                                                            <span class="start" data-value="3">&#9733;</span>
+                                                            <span class="start" data-value="4">&#9733;</span>
+                                                            <span class="start" data-value="5">&#9733;</span>
+                                                        </div>
+                                                        <div id="selectedRating"></div>
+
+                                                        <input type="hidden" id="ratingInput" name="rating" th:value="*{rating}" />
+
+                                                        <h5>Your Comment *</h5>
+                                                        <textarea class="form-control form_1" th:field="*{comment}" id="commentText"></textarea>
+                                                        <div id="error-message" style="color: red;"></div>
+                                                        <span th:if="${username != null}">
+                                                            <h6><button type="submit" class="button">SUBMIT</button></h6>
+                                                        </span>
+                                                        <span th:if="${username == null}">
+                                                            <h6><a href="/login" class="button">SUBMIT</a></h6>
+                                                        </span>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><br>
+                                <div class="shop_db clearfix">
+                                    <h3>Related products</h3>
+                                </div>
+                                <div class="shop_1rp clearfix">
+                                    <div class="col-sm-4 space_left" th:each="i, iterStat : ${listp}" th:if="${iterStat.index < 3}">
+                                        <div class="prod_1im clearfix">
+                                            <div class="prod_1i clearfix">
+                                                <div class="prod_1i1 clearfix">
+                                                    <div class="grid clearfix">
+                                                        <figure class="effect-jazz">
+                                                            <a th:href="@{/homedetails/{id}(id = ${i.id})}"><img th:src="@{'/images/'+${i.image}}" class="iw" alt="img25" style="height: 200px"></a>
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                                <div class="prod_1i2 clearfix">
+                                                    <h6 class="mgt bg_1">
+                                                        <span th:if="${i.status} == New">New</span>
+                                                        <span th:if="${i.status} == Sale">Sale</span>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="prod_1ib text-center clearfix">
+                                                <h5 th:text="${i.productname}"></h5>
+                                                <h6 class="col_1 bold"><span class="normal"><i
+                                                            class="fa fa-dollar col_2"></i><span th:text="${i.price}"></span></span> <i
+                                                        class="fa fa-dollar"></i><span th:text="${i.sale}"></span></h6>
+                                                <ul>
+                                                    <span th:if="${username == null}">
+                                                        <li><a class="bg_1" th:href="@{/homedetails/{id}(id = ${i.id})}"><i class="fa fa-search"></i></a></li>
+                                                        <li><a class="bg_2" href="/login"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    </span>
+                                                    <span th:if="${username != null}">
+                                                        <li><a class="bg_1" th:href="@{/homedetails/{id}(id = ${i.id})}" style="margin-right: 50px"><i class="fa fa-search"></i></a></li>
+                                                    </span>
+                                                    <span th:if="${username != null}">
+                                                        <form class="forms-sample" style="margin-top: -51px; margin-left: 70px;" th:action="@{/products}" th:object="${productcart}" method="post">
+                                                            <input type="hidden" id="id" name="productid.id" th:value="${i.id}" />
+                                                            <li><button class="bg_2" ><i class="fa fa-shopping-cart"></i></button></li>
+                                                        </form>
+                                                    </span>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="enquiry">
+            <div class="container">
+                <div class="row">
+                    <div class="enquiry_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h4 class="mgt">NEWSLETTER</h4>
+                            <p>Subscribe to our newsletter and get <span class="col_1">20%</span> off your first purchase
+                            </p>
+                            <div class="input-group">
+                                <input type="text" class="form-control form_2" placeholder="Your Email">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button">
+                                        SUBSCRIBE</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="footer_1l clearix">
+                                <h4>GALLERY</h4>
+                                <div class="footer_1li clearfix">
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh7.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh8.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh9.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer_1li clearfix">
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh10.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh11.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh12.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="footer_1m clearix">
+                                <h4>QUICK LINKS</h4>
+                                <div class="footer_1mi clearfix">
+                                    <div class="col-sm-6 space_left col-xs-6">
+                                        <div class="footer_1mil clearfix">
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Our Blends</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">New Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Top Sellers</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">About Us</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">MENU</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Contact Us</a></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 space_right col-xs-6">
+                                        <div class="footer_1mil clearfix">
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Beans</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Preparation Tools</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Drunk Coffee</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Ice Cream</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Other</a></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="footer_1r clearix">
+                                <h4>GET IN TOUCH</h4>
+                                <p class="font_16"><i class="fa fa-map col_1"></i> Address : -115/Hồ Tùng Mậu/Bến Nghe/Q1/HCM</p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">+91 (123) 456 7890</a></p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">CoffeePAO@gmail.com</a></p>
+                                <ul class="social-network social-circle">
+                                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer_2 text-center clearfix">
+                        <div class="col-sm-12">
+                            <p class="mgt">© 2024 Your Website Coffee  Management System<a class="col_1" th:href="@{/}">Coffee PAO</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="input-group clearfix">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                /*****Fixed Menu******/
+                var secondaryNav = $('.cd-secondary-nav'),
+                        secondaryNavTopPosition = secondaryNav.offset().top;
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+
+                $(window).on('scroll', function () {
+                    if ($(window).scrollTop() > secondaryNavTopPosition + navbar_height) {
+                        secondaryNav.addClass('is-fixed');
+                        document.body.style.paddingTop = navbar_height + 'px';
+
+                    } else {
+                        secondaryNav.removeClass('is-fixed');
+                        document.body.style.paddingTop = '0'
+                    }
+                });
+
+            });
+        </script>
+
+        <script th:src="@{/home/js/ziehharmonika.js}"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('.ziehharmonika').ziehharmonika({
+                    collapsible: true,
+                    prefix: '★',
+                    scroll: false
+                });
+            });
+        </script>
+        <!-- phần tính trung bình sao -->
+        <script th:inline="javascript">
+            // Biến averageRating chứa điểm đánh giá trung bình, lấy từ server-side
+            var averageRating = /*[[${averageRating}]]*/ 0; // Thay thế với logic từ server để lấy điểm đánh giá trung bình
+
+            // Hàm để hiển thị điểm đánh giá trung bình dưới dạng sao
+            function displayAverageRating() {
+                var starIcons = document.querySelectorAll('.stars i'); // Lấy tất cả các biểu tượng sao
+                var averageRatingDisplay = document.querySelector('.average-rating'); // Điểm đánh giá trung bình sẽ được hiển thị
+
+                // Làm tròn điểm đánh giá trung bình đến 0.5 gần nhất
+                var roundedRating = Math.round(averageRating * 2) / 2;
+
+                // Hiển thị các sao đã đánh giá
+                for (var i = 0; i < Math.floor(roundedRating); i++) {
+                    starIcons[i].classList.add('checked'); // Thêm lớp 'checked' để làm đầy sao
+                }
+
+                // Nếu có sao nửa, hiển thị sao nửa
+                if (roundedRating % 1 !== 0) {
+                    starIcons[Math.floor(roundedRating)].classList.add('half-checked'); // Thêm lớp 'half-checked' để làm sao nửa
+                }
+
+                // Hiển thị giá trị điểm đánh giá trung bình
+                averageRatingDisplay.textContent = roundedRating.toFixed(1); // Định dạng và hiển thị điểm đánh giá trung bình với 1 chữ số thập phân
+            }
+
+            // Gọi hàm để hiển thị điểm đánh giá trung bình khi trang được tải
+            displayAverageRating();
+        </script>
+
+        <!-- phần đánh giá sao + comment -->
+        <script>
+            $(document).on('click', '.number-spinner button', function () {
+                var btn = $(this),
+                        oldValue = btn.closest('.number-spinner').find('input').val().trim(),
+                        newVal = 0;
+
+                if (btn.attr('data-dir') == 'up') {
+                    newVal = parseInt(oldValue) + 1;
+                } else {
+                    if (oldValue > 1) {
+                        newVal = parseInt(oldValue) - 1;
+                    } else {
+                        newVal = 1;
+                    }
+                }
+                btn.closest('.number-spinner').find('input').val(newVal);
+            });
+
+            const stars = document.querySelectorAll('.start');
+            const selectedRating = document.getElementById('selectedRating');
+            const ratingInput = document.getElementById('ratingInput');
+
+            stars.forEach(star => {
+                star.addEventListener('click', function () {
+                    const value = this.getAttribute('data-value');
+                    selectedRating.textContent = 'Bạn Đã Chọn ' + value + ' Sao.';
+                    // Cập nhật giá trị input ẩn
+                    ratingInput.value = value;
+                    // Xóa lớp chọn từ tất cả các sao
+                    stars.forEach(star => {
+                        star.classList.remove('selected');
+                    });
+                    // Thêm lớp chọn cho sao được nhấp và tất cả các sao trước đó
+                    for (let i = 0; i < value; i++) {
+                        stars[i].classList.add('selected');
+                    }
+                });
+            });
+
+            function loadHomeDetails(productId) {
+                var url = '/homedetails/' + productId;
+                window.location.href = url;
+            }
+
+            function postComment(formData, productId) {
+                var url = '/homedetails/' + productId;
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: formData,
+                    success: function (response) {
+                        loadHomeDetails(productId);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('XHR:', xhr);
+                        console.log('Status:', status);
+                        console.log('Error:', error);
+                    }
+                });
+            }
+
+            $(document).ready(function () {
+                $('.add-to-comment-form').submit(function (event) {
+                    event.preventDefault();
+
+                    const forbiddenWords = ['dm', 'clgt', 'cl', 'cc', 'vl', 'cqq', 'vcc']; // Thay thế bằng các từ cấm thực tế
+                    const commentText = $('#commentText').val().toLowerCase();
+
+                    let containsForbiddenWords = forbiddenWords.some(word => commentText.includes(word));
+
+                    if (containsForbiddenWords) {
+                        $('#error-message').text('Your comment contains forbidden words. Please remove them and try again.');
+                        return;
+                    } else {
+                        $('#error-message').text(''); // Xóa thông báo lỗi nếu hợp lệ
+                    }
+
+                    var formData = $(this).serialize();
+                    var productId = document.querySelector('input[name="productid.id"]').value;
+                    postComment(formData, productId);
+                });
+            });
+        </script>
+
+        <!-- details -->
+        <script>
+            const addToCart = (formData) => {
+                $.ajax({
+                    type: 'POST',
+                    url: '/products',
+                    data: formData,
+                    success: updateUI,
+                    error: handleAjaxError
+                });
+            };
+
+// Function to update the UI with the response data
+            const updateUI = (response) => {
+                console.log("Response from AJAX request:", response);
+
+                var productId = $(response).find('#productId').val(); // Lấy ID sản phẩm từ phản hồi
+                var productElement = $('#product-' + productId);
+
+                if (productElement.length > 0) {
+                    // Sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
+                    var existingQuantity = parseInt(productElement.find('.quantity').text());
+                    var newQuantity = existingQuantity + 1; // Ví dụ: tăng số lượng lên 1
+
+                    // Cập nhật số lượng trong giao diện người dùng
+                    productElement.find('.quantity').text(newQuantity);
+                } else {
+                    // Nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm sản phẩm mới vào danh sách
+                    $('#products-container').append(response);
+                }
+
+                $('#myPopup').fadeIn('slow').delay(1000).fadeOut('slow');
+            };
+
+
+
+
+// Function to handle AJAX errors
+            const handleAjaxError = (xhr, status, error) => {
+                console.error('Error:', error);
+                // Handle errors appropriately
+            };
+
+            $(document).ready(function () {
+                $('.add-to-cart-form').submit(function (event) {
+                    event.preventDefault(); // Prevent the default form submission behavior
+                    const formData = $(this).serialize(); // Serialize form data
+                    addToCart(formData); // Call the function to handle the AJAX request
+                });
+            });
+        </script>
+
+    </body>
+</html>

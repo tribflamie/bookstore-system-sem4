@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>Home | PAO Coffee</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href="@{/home/css/bootstrap.min.css}" rel="stylesheet">
+        <link th:href="@{/home/css/global.css}" rel="stylesheet">
+        <link th:href="@{/home/css/index.css}" rel="stylesheet">
+        <link th:href="@{/home/css/popup.css}" rel="stylesheet">
+        <link th:href="@{/home/css/phantrang.css}" rel="stylesheet"> 
+        <link th:rel="stylesheet" type="text/css" th:href="@{/home/css/font-awesome.min.css}" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet"> 
+        <script th:src="@{/home/js/jquery-2.1.1.min.js}"></script>
+        <script th:src="@{/home/js/bootstrap.min.js}"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            .top_1r {
+                padding-top: 10px;
+            }
+
+            .big {
+                font-size: 18px;
+            }
+
+            .mgt {
+                margin-top: 5px;
+            }
+
+            .button {
+                display: inline-block;
+                padding: 6px 12px;
+                margin-bottom: 0;
+                font-size: 14px;
+                font-weight: normal;
+                line-height: 1.42857143;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: middle;
+                -ms-touch-action: manipulation;
+                touch-action: manipulation;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                background-image: none;
+                border: 1px solid transparent;
+                border-radius: 4px;
+                color: #fff;
+                background-color: #5bc0de;
+                border-color: #46b8da;
+            }
+
+            .button:hover {
+                background-color: #31b0d5;
+                border-color: #269abc;
+            }
+
+            .button.mgt {
+                margin-top: 10px;
+                margin-left: 10px;
+            }
+            /* Container để căn chỉnh sản phẩm */
+            /* Container để căn chỉnh sản phẩm */
+            #product-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px; /* Khoảng cách giữa các sản phẩm */
+            }
+
+            /* Sản phẩm */
+            .prod_1im {
+                width: 100%; /* Đảm bảo rằng sản phẩm chiếm toàn bộ chiều rộng của cột */
+                box-sizing: border-box;
+            }
+
+            /* Cột sản phẩm */
+            .col-sm-3 {
+                flex: 1 1 calc(25% - 20px); /* 4 sản phẩm trên mỗi hàng với khoảng cách giữa chúng */
+                box-sizing: border-box;
+            }
+
+            /* Định dạng cho sản phẩm */
+            .prod_1im {
+                border: 1px solid #ddd; /* Đường viền để sản phẩm dễ nhìn hơn */
+                border-radius: 8px; /* Bo tròn các góc của sản phẩm */
+                overflow: hidden; /* Đảm bảo các phần tử không bị tràn ra ngoài */
+                background: #fff; /* Nền trắng cho sản phẩm */
+                padding: 15px; /* Khoảng cách bên trong sản phẩm */
+            }
+
+            /* Định dạng cho các nút phân trang */
+            .pages ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .pages ul li {
+                display: inline-block;
+                margin: 0 5px;
+            }
+
+            .pages ul li button {
+                padding: 10px 15px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .pages ul li button:hover {
+                background-color: #0056b3;
+            }
+            #successMessage {
+                display: none;
+                padding: 10px;
+                background-color: #4CAF50;
+                color: white;
+                margin-bottom: 10px;
+                animation: slideRight 1s ease-out forwards; /* Thêm animation với tên slideRight, thời gian 1s và hiệu ứng ease-out */
+            }
+
+            @keyframes slideRight {
+                from {
+                    transform: translateX(-100%);
+                }
+                to {
+                    transform: translateX(0);
+                }
+            }
+
+
+
+        </style>
+    </head>
+    <body>
+        <section id="top">
+            <div class="container">
+                <div class="row">
+                    <div class="top_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="top_1m text-center clearfix">
+                                <h3 class="mgt"><a th:href="@{/}">
+                                        <span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="top_1l clearfix">
+                                <p class="mgt font_16 text-center"><i class="fa fa-map col_1"></i> <span class="col_6">Address:</span> 115 Hồ Tùng Mậu.P Bến Nghé.Q1.TP.HCM</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="top_1r text-right clearfix">
+                                <div th:if="${username != null}">
+                                    <div th:if="${session.status == 'Not Activated'}">
+                                        <h6 class="big mgt">
+                                            <span class="error-message">Your account is not activated. Please contact support.</span>
+                                        </h6>
+                                    </div>
+                                    <div th:if="${session.status != 'Not Activated'}">
+                                        <h6 class="big mgt">Welcome, <span th:text="${username}"></span>
+                                            <a class="button mgt" th:href="@{/userdetails/{id}(id=${session.user})}">Profile</a>
+                                            <a class="button mgt" th:href="@{/logout}">Logout</a>
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div th:if="${username == null}">
+                                    <h6 class="big mgt">
+                                        <a class="button mgt" th:href="@{/login}">Login</a>
+                                        <a class="button mgt" th:href="@{/register}">Register</a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="header" class="clearfix cd-secondary-nav">
+            <nav class="navbar nav_t">
+                <div class="container">
+                    <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html"> <span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a>
+                    </div>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+
+                            <li><a class="m_tag active_tab" th:href="@{/}">Home</a></li>
+                            <li><a class="m_tag" th:href="@{/about}">About</a></li>
+                            <li><a class="m_tag" th:href="@{/products}">Menu</a></li>
+                            <li><a class="m_tag" th:href="@{/blog}">News</a></li>
+
+                            <li><a class="m_tag" th:href="@{/contactus}">Contact Us</a></li>
+                            <li class="dropdown">
+                                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Pages<span class="caret"></span></a>
+                                <ul class="dropdown-menu drop_3" role="menu">
+                                    <li><a th:href="@{/mycart}">Shopping Cart</a></li>
+                                    <li th:if="${username != null}"><a class="border_none" th:href="@{/purchasehistory}">Product History</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><a class="m_tag" href="#aboutModal" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i></a></li>
+
+                            <li class="dropdown">
+                                <a class="m_tag" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-shopping-bag"></i></a>
+                                <ul class="dropdown-menu drop_1" role="menu">
+                                    <li>
+                                        <div class="drop_1i clearfix">
+                                            <div class="col-sm-6">
+                                                <!--                                                <div class="drop_1il clearfix"><h5 class="mgt">2 ITEMS</h5></div>-->
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il text-right clearfix"><h5 class="mgt"><a href="cart.html">VIEW CART</a></h5></div>
+                                            </div>
+                                        </div>
+                                        <span th:each="p: ${pcart}">
+                                            <span th:if="${username == p.userId.username and p.status != true}">
+                                                <div class="drop_1i1 clearfix">
+                                                    <div class="col-sm-6" style="margin-top: 8px">
+                                                        <div class="drop_1i1l clearfix"><h6 class="mgt bold"><a href="#" th:text="${p.productid.productname}"></a> <br><span>$<span class="normal col_2" th:text="${p.productid.sale}"></span> </span><span style="font-size: 14px;">quantity:<span th:text="${p.quantity}"></span></h6></div>
+                                                    </div>
+                                                    <div class="col-sm-4" style="margin-top: 8px">
+                                                        <div class="drop_1i1r clearfix"><a href="#"><img th:src="@{'images/'+${p.productid.image}}" class="iw" alt="abc"></a></div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="drop_1i1l text-right clearfix"><h6 class="mgt bold"> <span><a th:href="@{/deletecart/{id}(id = ${p.id})}"><i class="fa fa-remove"></i></a></span></h6></div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </span>
+                                        <div class="drop_1i2 clearfix">
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il clearfix"><h5 class="mgt">TOTAL</h5></div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="drop_1il text-right clearfix"><h5 class="mgt">$<span th:text="${totlal}"></span></h5></div>
+                                            </div>
+                                        </div>
+                                        <div class="drop_1i3 text-center clearfix">
+                                            <div class="col-sm-12">
+                                                <h5><a class="button" href="/mycart">CHECKOUT</a></h5>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+            <div class="popup" id="myPopup">
+                <div class="toast">
+                    <i class="fa fa-check"></i>
+                    <div class="content">
+                        <div class="title">Notification</div>
+                        <span class="error">add to card successfully</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="main clearfix">
+            <div class="main_1 clearfix">
+                <section id="center" class="center_home clearfix"> 
+                    <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+                        <!-- Overlay -->
+                        <div class="overlay"></div>
+
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#bs-carousel" data-slide-to="1" class=""></li>
+                            <li data-target="#bs-carousel" data-slide-to="2" class=""></li>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <div class="item slides active">
+                                <div ><img th:src="@{/home/img/ly1.jpg}" class="iw" alt="img25"></div>
+                                <div class="hero clearfix">
+                                    <div class="col-sm-12">
+                                        <h1 class="big mgt col_5">PURE</h1>
+                                        <h3 class="big col">Coffee products</h3>
+                                        <p class="col_4">Nulla Quis Sem At Nibh Elementum Imperdiet Fusce Nec Tellus Sed Augue Semper Porta Vestibulum Lacinia Arcu Eget Nulla!</p>
+                                        <h5 class="big"><a class="button" href="#">Shop  Now</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item slides">
+                                <div ><img th:src="@{/home/img/ly2.jpg}" class="iw" alt="img25"></div>
+                                <div class="hero clearfix">
+                                    <div class="col-sm-12">
+                                        <h1 class="big mgt col_5">NO PRESERVATIVES</h1>
+                                        <h3 class="big col">DRINK COFFEE</h3>
+                                        <p class="col_4">Nulla Quis Sem At Nibh Elementum Imperdiet Fusce Nec Tellus Sed Augue Semper Porta Vestibulum Lacinia Arcu Eget Nulla!</p>
+                                        <h5 class="big"><a class="button" href="#">Shop  Now</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item slides">
+                                <div ><img th:src="@{/home/img/bg.jpg}" class="iw" alt="img25"></div>
+                                <div class="hero clearfix">
+                                    <div class="col-sm-12">
+                                        <h1 class="big mgt col_5">FRESH</h1>
+                                        <h3 class="big col">COFFEE BEANS</h3>
+                                        <p class="col_4">Nulla Quis Sem At Nibh Elementum Imperdiet Fusce Nec Tellus Sed Augue Semper Porta Vestibulum Lacinia Arcu Eget Nulla!</p>
+                                        <h5 class="big"><a class="button" href="#">Shop  Now</a></h5>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="main_2 clearfix">
+                <section id="qual">
+                    <div class="container">
+                        <div class="row">
+                            <div class="qual_m clearfix">
+                                <div class="qual_1 text-center clearfix">
+                                    <div class="col-sm-12">
+                                        <h3 class="mgt col_5">Quality Tested by Time</h3>
+                                        <p class="col_4">We are a leading manufacturer and processor of store-branded <br>coffee products for retailers in HCM. Headquartered at 115 Ho Tung Mau District 1, we provide nationally recognized high quality coffee products.</p>
+                                        <h5><a class="button_1" href="#">READ MORE</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <section id="farm">
+            <div class="container">
+                <div class="row">
+                    <div class="farm_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h1 class="mgt">WELCOME TO OUR STORE</h1>
+                        </div>
+                    </div>
+                    <div class="farm_2 clearfix">
+                        <div class="col-sm-4">
+                            <div class="farm_2i text-center clearfix">
+                                <div class="grid clearfix">
+                                    <figure class="effect-jazz">
+                                        <a href="#"><img th:src="@{/home/img/hinh14.png}" class="iw" alt="img25"></a>
+                                    </figure>
+                                </div>
+                                <h4>OUR PRODUCTS</h4>
+                                <p>We provide customers with a variety of products from coffee beans, drunk coffee to other beverages.</p>
+                                <h5><a class="button_1" href="#">READ MORE</a></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="farm_2i text-center clearfix">
+                                <div class="grid clearfix">
+                                    <figure class="effect-jazz">
+                                        <a href="#"><img th:src="@{/home/img/hinh16.png}" class="iw" alt="img25"></a>
+                                    </figure>
+                                </div>
+                                <h4>WHY NO PRESERVATIVES?</h4>
+                                <p>We provide customers with a variety of products from coffee beans, drunk coffee to other beverages.</p>
+                                <h5><a class="button_1" href="#">READ MORE</a></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="farm_2i text-center clearfix">
+                                <div class="grid clearfix">
+                                    <figure class="effect-jazz">
+                                        <a href="#"><img th:src="@{/home/img/hinh22.png}" class="iw" alt="img25"></a>
+                                    </figure>
+                                </div>
+                                <h4>WORKING PROCESS</h4>
+                                <p>We provide customers with a variety of products from coffee beans, drunk coffee to other beverages.</p>
+                                <h5><a class="button_1" href="#">READ MORE</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="prod">
+            <div class="container">
+                <div class="row">
+                    <div class="farm_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h1 class="mgt">PRODUCTS</h1>
+                        </div>
+                    </div>
+                    <div class="prod_1 clearfix">
+                        <div class="carousel slide" id="myCarousel1">
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <div class="col-sm-3" th:each="i, iterStat : ${listp}" th:if="${iterStat.index < 10} and ${i.active} == 'Stocking' and ${i.status} == 'New'">
+                                        <div class="prod_1im clearfix">
+                                            <div class="prod_1i clearfix">
+                                                <div class="prod_1i1 clearfix">
+                                                    <div class="grid clearfix">
+                                                        <figure class="effect-jazz">
+                                                            <a th:href="@{/homedetails/{id}(id = ${i.id})}"><img th:src="@{'/images/'+${i.image}}" class="iw" alt="img25" style="height: 200px"></a>
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                                <div class="prod_1i2 clearfix">
+                                                    <h6 class="mgt bg_1">
+                                                        <span th:if="${i.status} == 'New'">New</span>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="prod_1ib text-center clearfix">
+                                                <h5 th:text="${i.productname}"></h5>
+                                                <h6 class="col_1 bold"><span class="normal"><i class="fa fa-dollar col_2"></i> <span th:text="${i.price}"></span></span>  <i class="fa fa-dollar" th:text="${i.sale}"></i></h6>
+                                                <ul>
+                                                    <span th:if="${username == null}">
+                                                        <li><a class="bg_1" th:href="@{/homedetails/{id}(id = ${i.id})}"><i class="fa fa-search"></i></a></li>
+                                                        <li><a class="bg_2" href="/login"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    </span>
+                                                    <span th:if="${username != null}">
+                                                        <li><a class="bg_1" th:href="@{/homedetails/{id}(id = ${i.id})}" style="margin-right: 50px"><i class="fa fa-search"></i></a></li>
+                                                        <form class="add-to-cart-form" style="margin-top: -51px; margin-left: 70px;" th:action="@{/products}" th:object="${productcart}" method="post">
+                                                            <input type="hidden" id="id" name="productid.id" th:value="${i.id}" />
+                                                            <input type="hidden"  name="sellingprice" th:value="${i.sale}" />
+                                                            <input type="hidden"  name="status" th:value="false" />
+                                                            <li><button class="bg_2" ><i class="fa fa-shopping-cart"></i></button></li>
+                                                        </form>
+                                                    </span>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="col-sm-3" th:each="i, iterStat : ${listp}" th:if="${iterStat.index >= 10 && iterStat.index < 50} and ${i.active} == 'Stocking' and ${i.status} == 'New'">
+                                        <div class="prod_1im clearfix">
+                                            <div class="prod_1i clearfix">
+                                                <div class="prod_1i1 clearfix">
+                                                    <div class="grid clearfix">
+                                                        <figure class="effect-jazz">
+                                                            <a th:href="@{/homedetails/{id}(id = ${i.id})}"><img th:src="@{'/images/'+${i.image}}" class="iw" alt="img25" style="height: 200px"></a>
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                                <div class="prod_1i2 clearfix">
+                                                    <h6 class="mgt bg_1">New</h6>
+                                                </div>
+                                            </div>
+                                            <div class="prod_1ib text-center clearfix">
+                                                <h5 th:text="${i.productname}"></h5>
+                                                <h6 class="col_1 bold"><span class="normal"><i class="fa fa-dollar col_2"></i> <span th:text="${i.price}"></span></span>  <i class="fa fa-dollar" th:text="${i.sale}"></i></h6>
+                                                <ul>
+                                                    <span th:if="${username == null}">
+                                                        <li><a class="bg_1" th:href="@{/homedetails/{id}(id = ${i.id})}"><i class="fa fa-search"></i></a></li>
+                                                        <li><a class="bg_2" href="/login"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    </span>
+                                                    <span th:if="${username != null}">
+                                                        <li><a class="bg_1" th:href="@{/homedetails/{id}(id = ${i.id})}" style="margin-right: 50px"><i class="fa fa-search"></i></a></li>
+                                                        <form class="add-to-cart-form" style="margin-top: -51px; margin-left: 70px;" th:action="@{/products}" th:object="${productcart}" method="post">
+                                                            <input type="hidden" id="id" name="productid.id" th:value="${i.id}" />
+                                                            <li><button class="bg_2" ><i class="fa fa-shopping-cart"></i></button></li>
+                                                        </form>
+                                                    </span>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /Slide3 -->
+                            </div>
+                            <nav>
+                                <ul class="control-box pager mgb">
+                                    <li><a data-slide="prev" href="#myCarousel1" class=""><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+                                    <li><a data-slide="next" href="#myCarousel1" class=""><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="choose">
+            <div class="container">
+                <div class="row">
+                    <div class="farm_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h1 class="mgt">WHY CHOOSE US</h1>
+                        </div>
+                    </div>
+                    <div class="choose_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="choose_1l text-right clearfix">
+                                <span><i class="fa fa-home"></i></span>
+                                <h4><a href="#">MODERN STORE</a></h4>
+                                <p>Ours is a completely innovative store, combining modern and traditional brewing methods.</p>
+                                <hr>
+                                <span><i class="fa fa-home"></i></span>
+                                <h4><a href="#">NO PESTICIDES</a></h4>
+                                <p>Ours is a completely innovative store, combining modern and traditional brewing methods.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="choose_1m clearfix">
+                                <div class="grid clearfix">
+                                    <figure class="effect-jazz">
+                                        <a href="#"><img th:src="@{/home/img/hinh21.jpg}" style="height: 470px" class="iw" alt="img25"></a>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="choose_1l text-left clearfix">
+                                <span><i class="fa fa-home"></i></span>
+                                <h4><a href="#">100% COFFEE</a></h4>
+                                <p>Ours is a completely innovative store, combining modern and traditional brewing methods.</p>
+                                <hr>
+                                <span><i class="fa fa-home"></i></span>
+                                <h4><a href="#">PURE</a></h4>
+                                <p>Ours is a completely innovative store, combining modern and traditional brewing methods.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sale">
+            <div class="sale_m clearfix">
+                <div class="container">
+                    <div class="row">
+                        <div class="sale_1 clearfix">
+                            <div class="col-sm-12">
+                                <h2 class="mgt col_5">SUMMER SALE</h2>
+                                <h4 class="col"><span class="col_1">-40%</span> ON ALL PRODUCTS </h4>
+                                <p class="col_4">Buy the best coffee products for your family at our online store <br> and save more money than anywhere else.</p>
+                                <h5><a class="button" href="#">SHOP NOW</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="news_h">
+            <div class="container">
+                <div class="row">
+                    <div class="farm_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h1 class="mgt">Blog</h1>
+                        </div>
+                    </div>
+                    <div class="news_h1 clearfix">
+                        <!-- Iterate over the blogs and only show the "Hot" ones -->
+                        <div class="col-sm-4" th:each="b : ${lblog}" th:if="${b.status} == 'Hot'">
+                            <div class="blog_pg_1l1 mgt clearfix">
+                                <div class="grid clearfix">
+                                    <figure class="effect-jazz">
+                                        <a th:href="@{/detailblog/{id}(id = ${b.id})}">
+                                            <img th:src="@{'/images/' + ${b.image}}" height="250" class="iw" alt="img25">
+                                        </a>
+                                    </figure>
+                                </div>
+                                <div class="prod_1i2 clearfix">
+                                    <h6 class="mgt bg_1">
+                                        <span th:if="${b.status} == 'New'">New</span>
+                                        <span th:if="${b.status} == 'Hot'">Hot</span>
+                                    </h6>
+                                </div>
+                                <div class="blog_pg_1l1i clearfix">
+                                    <h3 class="mgt"><a href="#" th:text="${b.name}"></a></h3>
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-user col_1"></i> Eget Nulla</a></li>
+                                        <li><a href="#"><i class="fa fa-calendar col_1" th:text="${b.date}"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-bars col_1"></i> The Nest</a></li>
+                                    </ul>
+
+                                    <!-- <h5><a class="button" href="blog_detail.html">Read More</a></h5> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </section>
+
+        <section id="about_h">
+            <div class="container">
+                <div class="row">
+                    <div class="farm_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h1 class="mgt">ABOUT US</h1>
+                        </div>
+                    </div>  
+                    <div class="about_h_1 clearfix">
+                        <div class="col-sm-6">
+                            <div class="about_h_1l clearfix">
+                                <div class="grid clearfix">
+                                    <figure class="effect-jazz">
+                                        <a href="#"><img th:src="@{/home/img/about.jpg}" class="iw" alt="img25"></a>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="about_h_1r clearfix">
+                                <ul class="nav_1 mgt">
+                                    <li class="active"><a data-toggle="tab" href="#home">OUR MISSION </a></li>
+                                    <li class=""><a data-toggle="tab" href="#menu1">QUALITY CONTROL </a></li>
+                                    <li><a data-toggle="tab" href="#menu2">OUR GOALS </a></li>
+                                </ul>
+                                <div class="tab-content clearfix">
+                                    <div id="home" class="tab-pane fade clearfix active in">
+                                        <div class="click clearfix">
+                                            <h4 class="mgt">INTEGRATING INNOVATIONS <br> INTO COFFEE TRADITIONS</h4>
+                                            <p>Our mission is to create a sustainable, environmentally and technologically advanced coffee shop. We adhere to natural coffee traditions combined with innovation. Our mission is to create a sustainable, environmentally and technologically advanced coffee shop. We adhere to natural coffee traditions combined with innovation.
+                                            </p>
+                                            <h5><a class="button_1" href="#">READ MORE</a></h5>
+                                        </div>
+                                    </div>
+
+                                    <div id="menu1" class="tab-pane fade clearfix">
+                                        <div class="click clearfix">
+                                            <h4 class="mgt">ENSURING THE HIGHEST <br> QUALITY OF OUR PRODUCTS</h4>
+                                            <p>Our mission is to create a sustainable, environmentally and technologically advanced coffee shop. We adhere to natural coffee traditions combined with innovation. Our mission is to create a sustainable, environmentally and technologically advanced coffee shop. We adhere to natural coffee traditions combined with innovation.
+                                            </p>
+                                            <h5><a class="button_1" href="#">READ MORE</a></h5>
+                                        </div>
+                                    </div>
+                                    <div id="menu2" class="tab-pane fade clearfix">
+                                        <div class="click clearfix">
+                                            <h4 class="mgt">OUR POSITION IS PRINCIPLED<br> TO FEED YOU WITH TASTY PRODUCE</h4>
+                                            <p>Our mission is to create a sustainable, environmentally and technologically advanced coffee shop. We adhere to natural coffee traditions combined with innovation. Our mission is to create a sustainable, environmentally and technologically advanced coffee shop. We adhere to natural coffee traditions combined with innovation.
+                                            </p>
+                                            <h5><a class="button_1" href="#">READ MORE</a></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </section>
+
+        <section id="team_h">
+            <div class="container">
+                <div class="row">
+                    <div class="farm_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h1 class="mgt">OUR TEAM</h1>
+                        </div>
+                    </div>  
+                    <div class="team_h1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="team_h1i text-center clearfix">
+                                <img th:src="@{/home/img/222.jpg}" class="iw img-circle" alt="img25">
+                                <h4><a href="#">Richard</a></h4>
+                                <p>Richard has extensive experience in all aspects of bartending as he has worked in the industry for over 20 years.
+                                </p>
+                                <ul class="social-network social-circle">
+                                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="team_h1i text-center clearfix">
+                                <img th:src="@{/home/img/223.jpg}" class="iw img-circle" alt="img25">
+                                <h4><a href="#">Eget Nulla</a></h4>
+                                <p>Eget Nulla has extensive experience in all aspects of bartending as he has worked in the industry for over 20 years.
+                                </p>
+                                <ul class="social-network social-circle">
+                                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="team_h1i text-center clearfix">
+                                <img th:src="@{home/img/224.jpg}" class="iw img-circle" alt="img25">
+                                <h4><a href="#">Dapibus Diam</a></h4>
+                                <p>Dapibus Diam has extensive experience in all aspects of bartending as he has worked in the industry for over 20 years.
+                                </p>
+                                <ul class="social-network social-circle">
+                                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sale_o">
+            <div class="sale_m clearfix">
+                <div class="container">
+                    <div class="row">
+                        <div class="sale_1 text-center clearfix">
+                            <div class="col-sm-12">
+                                <h3 class="col_5">Outstanding preparation recipe </h3>
+                                <h1 class="col">FROM OUR BARTENDERS</h1>
+                                <p class="col_4">Buy the best coffee products for your family at our online store <br> and save more money than anywhere else.</p>
+                                <h5><a class="button" href="#">READ MORE</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="client">
+            <div class="container">
+                <div class="row">
+                    <div class="farm_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h1 class="mgt">OUR CLIENTS</h1>
+                        </div>
+                    </div>  
+                    <div class="testim_1 clearfix">
+                        <div id="carousel-example1" class="carousel slide" data-ride="carousel">
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <div class="col-sm-4">
+                                        <div class="testim1 clearfix">
+                                            <h4 class="mgt">Best Coffee</h4>
+                                            <p>You have the best coffee in the city! I have never tasted anything this delicious and I am thinking of becoming your regular customer.</p>
+                                            <div class="testim_1i2i clearfix">
+                                                <img th:src="@{/home/img/226.jpg}" class="img-circle" alt="abc">
+                                                <h4 class="col_1 mgt">Trinh Nguyen <br> <span class="font_16 col_2">HCM City</span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="testim1 clearfix">
+                                            <h4 class="mgt">Beautiful Store</h4>
+                                            <p>Your coffee shop is amazing in so many ways. It has the best baristas and many great coffee products that I buy regularly.</p>
+                                            <div class="testim_1i2i clearfix">
+                                                <img th:src="@{/home/img/227.jpg}" class="img-circle" alt="abc">
+                                                <h4 class="col_1 mgt">Xuan Vinh<br> <span class="font_16 col_2">Nha Trang</span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="testim1 clearfix">
+                                            <h4 class="mgt">Best Product</h4>
+                                            <p>You have the best coffee in the city! I have never tasted anything this delicious and I am thinking of becoming your regular customer.</p>
+                                            <div class="testim_1i2i clearfix">
+                                                <img th:src="@{/home/img/228.jpg}" class="img-circle" alt="abc">
+                                                <h4 class="col_1 mgt"> <br>Ha Trang <span class="font_16 col_2">Khanh Hoa</span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="col-sm-4">
+                                        <div class="testim1 clearfix">
+                                            <h4 class="mgt">Good Mixing</h4>
+                                            <p>You have the best bartenders! I have never seen such beautiful and delicious displays and I am thinking of becoming your regular customer..</p>
+                                            <div class="testim_1i2i clearfix">
+                                                <img th:src="@{/home/img/226.jpg}" class="img-circle" alt="abc">
+                                                <h4 class="col_1 mgt">Thu Ha <br> <span class="font_16 col_2">Dong Nai</span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="testim1 clearfix">
+                                            <h4 class="mgt">Fragrant coffee beans</h4>
+                                            <p>Your shop's coffee beans are very delicious and fragrant, I will visit your shop often.</p>
+                                            <div class="testim_1i2i clearfix">
+                                                <img th:src="@{/home/img/227.jpg}" class="img-circle" alt="abc">
+                                                <h4 class="col_1 mgt">Quang <br> <span class="font_16 col_2">HCM City</span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="testim1 clearfix">
+                                            <h4 class="mgt">Best Product</h4>
+                                            <p>You have the best coffee in the city! I have never tasted anything this delicious and I am thinking of becoming your regular customer.</p>
+                                            <div class="testim_1i2i clearfix">
+                                                <img th:src="@{/home/img/228.jpg}" class="img-circle" alt="abc">
+                                                <h4 class="col_1 mgt">Thu Ngan <br> <span class="font_16 col_2">Long An</span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popular_3 text-center clearfix">
+                            <div class="col-sm-12">
+                                <!-- Controls -->
+                                <div class="controls">
+                                    <a class="left fa fa-chevron-left btn btn-success" href="#carousel-example1" data-slide="prev"></a><a class="right fa fa-chevron-right btn btn-success" href="#carousel-example1" data-slide="next"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section id="enquiry">
+            <div class="container">
+                <div class="row">
+                    <div class="enquiry_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h4 class="mgt">NEWSLETTER</h4>
+                            <p>Subscribe to our newsletter and get <span class="col_1">20%</span> off your first purchase</p>
+                            <div class="input-group">
+                                <input type="text" class="form-control form_2" placeholder="Your Email">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button">
+                                        SUBSCRIBE</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer_1 clearfix">
+                        <div class="col-sm-4">
+                            <div class="footer_1l clearix">
+                                <h4>GALLERY</h4>
+                                <div class="footer_1li clearfix">
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh7.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh8.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh9.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer_1li clearfix">
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh10.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh11.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 space_left col-xs-4">
+                                        <div class="footer_1lii clearfix">
+                                            <div class="grid clearfix">
+                                                <figure class="effect-jazz">
+                                                    <a href="#"><img th:src="@{/home/img/hinh12.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="footer_1m clearix">
+                                <h4>QUICK LINKS</h4>
+                                <div class="footer_1mi clearfix">
+                                    <div class="col-sm-6 space_left col-xs-6">
+                                        <div class="footer_1mil clearfix">
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Our Blends</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">New Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Top Sellers</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">About Us</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">MENU</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Contact Us</a></h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 space_right col-xs-6">
+                                        <div class="footer_1mil clearfix">
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Beans</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Preparation Tools</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Drunk Coffee</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Ice Cream</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Other</a></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="footer_1r clearix">
+                                <h4>GET IN TOUCH</h4>
+                                <p class="font_16"><i class="fa fa-map col_1"></i> Address : -115/Hồ Tùng Mậu/Bến Nghe/Q1/HCM</p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">+91 (123) 456 7890</a></p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">CoffeePAO@gmail.com</a></p>
+                                <ul class="social-network social-circle">
+                                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer_2 text-center clearfix">
+                        <div class="col-sm-12">
+                            <p class="mgt">© 2024 Your Website Coffee  Management System<a class="col_1" th:href="@{/}">Coffee PAO</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="input-group clearfix">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                /*****Fixed Menu******/
+                var secondaryNav = $('.cd-secondary-nav'),
+                        secondaryNavTopPosition = secondaryNav.offset().top;
+                navbar_height = document.querySelector('.navbar').offsetHeight;
+
+                $(window).on('scroll', function () {
+                    if ($(window).scrollTop() > secondaryNavTopPosition + navbar_height) {
+                        secondaryNav.addClass('is-fixed');
+                        document.body.style.paddingTop = navbar_height + 'px';
+
+                    } else {
+                        secondaryNav.removeClass('is-fixed');
+                        document.body.style.paddingTop = '0'
+                    }
+                });
+
+            });
+        </script>
+        <!--        <script th:inline="javascript">
+                    // Số sản phẩm trên mỗi trang
+                    var itemsPerPage = 6;
+        
+                    // Danh sách sản phẩm từ server
+                    var products = /*[[${listp}]]*/ [];
+        
+                    // Lấy username từ server-side
+                    var username = /*[[${username}]]*/ null;
+        
+                    // Tính tổng số trang
+                    var totalPages = Math.ceil(products.length / itemsPerPage);
+        
+                    // Hàm hiển thị sản phẩm trên trang cụ thể
+                    function displayProducts(pageNumber) {
+                        var startIndex = (pageNumber - 1) * itemsPerPage;
+                        var endIndex = pageNumber * itemsPerPage;
+                        var paginatedProducts = products.slice(startIndex, endIndex);
+        
+                        // Hiển thị sản phẩm trong paginatedProducts lên trang
+                        var productListElement = document.getElementById('product-list');
+                        productListElement.innerHTML = ''; // Xóa nội dung cũ trước khi cập nhật
+        
+                        paginatedProducts.forEach(function (product) {
+                            // Kiểm tra nếu sản phẩm hoạt động và có trạng thái 'New'
+                            if (product.active === 'Activated' && product.status === 'New') {
+                                var productElement = document.createElement('div');
+                                productElement.classList.add('col-sm-3');
+                                var bookNowButton = '';
+                                if (username != null) {
+                                    bookNowButton = '<button class="bg_2"><i class="fa fa-shopping-cart"></i></button>';
+                                } else {
+                                    bookNowButton = '<a class="bg_2" href="/login"><i class="fa fa-shopping-cart"></i></a>';
+                                }
+                                productElement.innerHTML = `
+                             <div id="products-container" class="prod_1im clearfix">
+                                 <div class="prod_1i clearfix">
+                                     <div class="prod_1i1 clearfix">
+                                         <div class="grid clearfix">
+                                             <figure class="effect-jazz">
+                                                 <a href="/homedetails/${product.id}">
+                                                     <img src="/images/${product.image}" class="iw" alt="img25" style="height: 200px">
+                                                 </a>
+                                             </figure>
+                                         </div>
+                                     </div>
+                                     <div class="prod_1i2 clearfix">
+                                         <h6 class="mgt bg_1">
+                                             <span>${product.status}</span>
+                                         </h6>
+                                     </div>
+                                 </div>
+                                 <div class="prod_1ib text-center clearfix">
+                                     <h5>${product.productname}</h5>
+                                     <h6 class="col_1 bold">
+                                         <span class="normal">
+                                             <i class="fa fa-dollar col_2"></i>
+                                             <span>${product.price}</span>
+                                         </span>
+                                         <i class="fa fa-dollar">${product.sale}</i>
+                                     </h6>
+                                     <ul>
+                                         <li>
+                                             <a class="bg_1" href="/homedetails/${product.id}">
+                                                 <i class="fa fa-search"></i>
+                                             </a>
+                                             <form class="add-to-cart-form" style="margin-top: -51px; margin-left: 70px;" action="/products" method="post">
+                                                 <input type="hidden" id="id" name="productid.id" value="${product.id}" />
+                                                 <input type="hidden" name="sellingprice" value="${product.sale}" />
+                                                 <input type="hidden" name="status" value="false" />
+                                                 <div>${bookNowButton}</div>
+                                             </form>
+                                         </li>
+                                     </ul>
+                                 </div>
+                             </div>`;
+        
+                                productListElement.appendChild(productElement);
+                            }
+                        });
+                    }
+        
+                    // Hàm tạo nút phân trang
+                    function createPaginationButtons(totalPages) {
+                        var paginationElement = document.getElementById('pagination');
+                        paginationElement.innerHTML = ''; // Xóa nội dung cũ trước khi cập nhật
+        
+                        for (var i = 1; i <= totalPages; i++) {
+                            var button = document.createElement('button');
+                            button.textContent = i;
+                            button.addEventListener('click', function () {
+                                displayProducts(parseInt(this.textContent));
+                            });
+                            var listItem = document.createElement('li');
+                            listItem.appendChild(button);
+                            paginationElement.appendChild(listItem);
+                        }
+                    }
+        
+                    // Hiển thị trang đầu tiên khi trang được tải
+                    displayProducts(1);
+                    // Tạo nút phân trang
+                    createPaginationButtons(totalPages);
+                </script>-->
+
+
+
+
+
+        <script>
+            const addToCart = (formData) => {
+                $.ajax({
+                    type: 'POST',
+                    url: '/products',
+                    data: formData,
+                    success: updateUI,
+                    error: handleAjaxError
+                });
+            };
+
+// Function to update the UI with the response data
+            const updateUI = (response) => {
+                console.log("Response from AJAX request:", response);
+
+                var productId = $(response).find('#productId').val(); // Lấy ID sản phẩm từ phản hồi
+                var productElement = $('#product-' + productId);
+
+                if (productElement.length > 0) {
+                    // Sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
+                    var existingQuantity = parseInt(productElement.find('.quantity').text());
+                    var newQuantity = existingQuantity + 1; // Ví dụ: tăng số lượng lên 1
+
+                    // Cập nhật số lượng trong giao diện người dùng
+                    productElement.find('.quantity').text(newQuantity);
+                } else {
+                    // Nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm sản phẩm mới vào danh sách
+                    $('#products-container').append(response);
+                }
+
+                $('#myPopup').fadeIn('slow').delay(1000).fadeOut('slow');
+            };
+
+
+
+
+// Function to handle AJAX errors
+            const handleAjaxError = (xhr, status, error) => {
+                console.error('Error:', error);
+                // Handle errors appropriately
+            };
+
+            $(document).ready(function () {
+                $('.add-to-cart-form').submit(function (event) {
+                    event.preventDefault(); // Prevent the default form submission behavior
+                    const formData = $(this).serialize(); // Serialize form data
+                    addToCart(formData); // Call the function to handle the AJAX request
+                });
+            });
+        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script th:inline="javascript">
+           /* Thymeleaf script để kiểm tra và hiển thị thông báo thành công */
+           /*<![CDATA[*/
+           var createSuccess = /*[[@{${errorMessageLogin}}]]*/ false; // Lấy giá trị từ Spring Model
+
+           if (createSuccess) {
+               var successMessage = document.getElementById('successMessage');
+               successMessage.style.display = 'block';
+               setTimeout(function () {
+                   successMessage.style.display = 'none';
+               }, 5000); // 5000 milliseconds = 5 seconds
+           }
+           /*]]>*/
+        </script>
+        <script th:inline="javascript">
+                            /*<![CDATA[*/
+                            // Kiểm tra nếu status là 'Not Activated' thì thực hiện logout
+                            var status = /*[[${session.status}]]*/ '';
+                            if (status === 'Not Activated') {
+                                window.location.href = /*[[@{/logout}]]*/ '';
+                            }
+                            /*]]>*/
+                        </script>
+                       
+
+    </body>
+</html>

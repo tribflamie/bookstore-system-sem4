@@ -1,0 +1,82 @@
+.top_1r {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navbar-profile {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-profile img {
+    margin-right: 8px;
+}
+
+.dropdown-menu .preview-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.preview-thumbnail {
+    margin-right: 15px;
+}
+
+.preview-icon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preview-item-content p {
+    margin: 0;
+}
+
+.navbar-nav {
+    margin-left: auto;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+}
+
+.user-header {
+    text-align: center;
+    padding: 10px;
+}
+
+.user-header img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.user-header p {
+    margin: 10px 0 0;
+}
+
+.user-menu .dropdown-menu {
+    width: 250px;
+}
+
+.user-menu .user-footer {
+    padding: 10px;
+    text-align: center;
+}
+
+.user-menu .user-footer .btn {
+    margin: 5px 0;
+}
