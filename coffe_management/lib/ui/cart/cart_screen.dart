@@ -89,31 +89,32 @@ class _CartScreenState extends State<CartScreen> {
       backgroundColor: Color(0xFFfbf6f7),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         title: Padding(
           padding: EdgeInsets.zero,
           child: Row(
             children: [
+              SizedBox(width: 6),
+              ClipRRect(
+                borderRadius:
+                    BorderRadius.circular(20), // Điều chỉnh độ cong tùy ý ở đây
+                child: Image(
+                  image: AssetImage('assets/logoP2.jpg'),
+                  height: 50,
+                  width: 50,
+                  fit: BoxFit
+                      .cover, // Đảm bảo hình ảnh bị cắt ngang hoặc dọc nếu không phù hợp
+                ),
+              ),
               Text(
-                'Coffee',
+                'Book',
                 style: TextStyle(
                     color: Color(0xFF3e6d99),
                     fontSize: 24,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(width: 6),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(30), // Điều chỉnh độ cong tùy ý ở đây
-                child: Image(
-                  image: AssetImage('assets/logoP2.jpg'),
-                  height: 50,
-                  width: 50,
-                  fit: BoxFit.cover, // Đảm bảo hình ảnh bị cắt ngang hoặc dọc nếu không phù hợp
-                ),
-              ),
-
-              SizedBox(width: 6),
-              Text('PAO',
+              Text('Store',
                   style: TextStyle(
                       color: Color(0xFFbdc53b),
                       fontSize: 24,
@@ -133,10 +134,10 @@ class _CartScreenState extends State<CartScreen> {
                     color: Color(0xFFbdc53b),
                   ),
                   child: PopupMenuButton(
-                    color: Colors.black87,
+                    color: Colors.white,
                     icon: Icon(
                       Icons.person,
-                      color: Colors.black,
+                      color: Color(0xFF3e6d99),
                     ),
                     itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                       PopupMenuItem(
@@ -147,103 +148,103 @@ class _CartScreenState extends State<CartScreen> {
                                 'Welcome',
                                 style: TextStyle(
                                     color: Color(0xFF3e6d99),
-                                    fontSize: 28,
+                                    fontSize: 35,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: 10),
                               Consumer<UserProvider>(
                                   builder: (context, userProvider, child) {
-                                    return Text(userProvider.username,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.normal));
-                                  }),
+                                return Text(userProvider.username,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.normal));
+                              }),
                               Consumer<UserProvider>(
                                   builder: (context, userProvider, child) {
-                                    return Text(userProvider.email,
-                                        style: TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.normal));
-                                  }),
+                                return Text(userProvider.email,
+                                    style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.normal));
+                              }),
                               SizedBox(height: 15),
                               userProvider.isLoggedIn
                                   ? GestureDetector(
-                                onTap: () {
-                                  Provider.of<UserProvider>(context,
-                                      listen: false)
-                                      .logout();
-                                  Navigator.of(context)
-                                      .popUntil((route) => route.isFirst);
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFF848b21),
-                                    borderRadius:
-                                    BorderRadius.circular(3),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  child: Text(
-                                    'Logout',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              )
+                                      onTap: () {
+                                        Provider.of<UserProvider>(context,
+                                                listen: false)
+                                            .logout();
+                                        Navigator.of(context)
+                                            .popUntil((route) => route.isFirst);
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFF848b21),
+                                          borderRadius:
+                                              BorderRadius.circular(3),
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 10),
+                                        child: Text(
+                                          'Logout',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    )
                                   : Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LoginPage()));
-                                    },
-                                    child: Text(
-                                      'LOGIN',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Color(0xFF848b21),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(3),
-                                      ),
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  RegisterPage()));
-                                    },
-                                    child: Text(
-                                      'REGISTER',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Color(0xFF848b21),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(3),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        LoginPage()));
+                                          },
+                                          child: Text(
+                                            'LOGIN',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Color(0xFF848b21),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(3),
+                                            ),
+                                          ),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        RegisterPage()));
+                                          },
+                                          child: Text(
+                                            'REGISTER',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Color(0xFF848b21),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(3),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
                             ],
                           ),
                         ),
@@ -262,7 +263,7 @@ class _CartScreenState extends State<CartScreen> {
             child: Padding(
               padding: EdgeInsets.all(16),
               child: Text(
-                'MY CART',
+                'My Cart',
                 style: TextStyle(
                   color: Color(0xFF2f567a),
                   fontSize: 34,

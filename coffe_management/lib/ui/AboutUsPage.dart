@@ -1,4 +1,3 @@
-
 // import 'package:flutter/cupertino.dart';
 import 'package:coffe_management/service/user_provider.dart';
 import 'package:coffe_management/ui/MyHomePage.dart';
@@ -41,31 +40,32 @@ class _AboutUsPageState extends State<AboutUsPage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         title: Padding(
           padding: EdgeInsets.zero,
           child: Row(
             children: [
+              SizedBox(width: 6),
+              ClipRRect(
+                borderRadius:
+                    BorderRadius.circular(20), // Điều chỉnh độ cong tùy ý ở đây
+                child: Image(
+                  image: AssetImage('assets/logoP2.jpg'),
+                  height: 50,
+                  width: 50,
+                  fit: BoxFit
+                      .cover, // Đảm bảo hình ảnh bị cắt ngang hoặc dọc nếu không phù hợp
+                ),
+              ),
               Text(
-                'Coffee',
+                'Book',
                 style: TextStyle(
                     color: Color(0xFF3e6d99),
                     fontSize: 24,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(width: 6),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(30), // Điều chỉnh độ cong tùy ý ở đây
-                child: Image(
-                  image: AssetImage('assets/logoP2.jpg'),
-                  height: 50,
-                  width: 50,
-                  fit: BoxFit.cover, // Đảm bảo hình ảnh bị cắt ngang hoặc dọc nếu không phù hợp
-                ),
-              ),
-
-              SizedBox(width: 6),
-              Text('PAO',
+              Text('Store',
                   style: TextStyle(
                       color: Color(0xFFbdc53b),
                       fontSize: 24,
@@ -85,10 +85,10 @@ class _AboutUsPageState extends State<AboutUsPage> {
                     color: Color(0xFFbdc53b),
                   ),
                   child: PopupMenuButton(
-                    color: Colors.black87,
+                    color: Colors.white,
                     icon: Icon(
                       Icons.person,
-                      color: Colors.black,
+                      color: Color(0xFF3e6d99),
                     ),
                     itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                       PopupMenuItem(
@@ -99,103 +99,103 @@ class _AboutUsPageState extends State<AboutUsPage> {
                                 'Welcome',
                                 style: TextStyle(
                                     color: Color(0xFF3e6d99),
-                                    fontSize: 28,
+                                    fontSize: 35,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: 10),
                               Consumer<UserProvider>(
                                   builder: (context, userProvider, child) {
-                                    return Text(userProvider.username,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.normal));
-                                  }),
+                                return Text(userProvider.username,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.normal));
+                              }),
                               Consumer<UserProvider>(
                                   builder: (context, userProvider, child) {
-                                    return Text(userProvider.email,
-                                        style: TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.normal));
-                                  }),
+                                return Text(userProvider.email,
+                                    style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.normal));
+                              }),
                               SizedBox(height: 15),
                               userProvider.isLoggedIn
                                   ? GestureDetector(
-                                onTap: () {
-                                  Provider.of<UserProvider>(context,
-                                      listen: false)
-                                      .logout();
-                                  Navigator.of(context)
-                                      .popUntil((route) => route.isFirst);
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFF848b21),
-                                    borderRadius:
-                                    BorderRadius.circular(3),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  child: Text(
-                                    'Logout',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              )
+                                      onTap: () {
+                                        Provider.of<UserProvider>(context,
+                                                listen: false)
+                                            .logout();
+                                        Navigator.of(context)
+                                            .popUntil((route) => route.isFirst);
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFF848b21),
+                                          borderRadius:
+                                              BorderRadius.circular(3),
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 10),
+                                        child: Text(
+                                          'Logout',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    )
                                   : Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LoginPage()));
-                                    },
-                                    child: Text(
-                                      'LOGIN',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Color(0xFF848b21),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(3),
-                                      ),
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  RegisterPage()));
-                                    },
-                                    child: Text(
-                                      'REGISTER',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Color(0xFF848b21),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(3),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        LoginPage()));
+                                          },
+                                          child: Text(
+                                            'LOGIN',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Color(0xFF848b21),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(3),
+                                            ),
+                                          ),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        RegisterPage()));
+                                          },
+                                          child: Text(
+                                            'REGISTER',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Color(0xFF848b21),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(3),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
                             ],
                           ),
                         ),
@@ -230,89 +230,6 @@ class _AboutUsPageState extends State<AboutUsPage> {
                 padding: EdgeInsets.all(18),
                 child: Image(image: AssetImage('assets/about.jpg')),
               ),
-              Wrap(
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        selectedButton = 1;
-                        changeColor(1);
-                      });
-                    },
-                    child: Text(
-                      'OUR MISSION',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                    style: TextButton.styleFrom(
-                      backgroundColor: colorChangeButton == 1
-                          ? Color(0xFF629bd0)
-                          : Color(0xFFf2f9ff),
-                      foregroundColor: colorChangeButton == 1
-                          ? Colors.white
-                          : Color(0xFF629bd0),
-                      fixedSize: Size(140, 30),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        selectedButton = 2;
-                        changeColor(2);
-                      });
-                    },
-                    child: Text(
-                      'QUALITY CONTROL',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                    style: TextButton.styleFrom(
-                      backgroundColor: colorChangeButton == 2
-                          ? Color(0xFF629bd0)
-                          : Color(0xFFf2f9ff),
-                      foregroundColor: colorChangeButton == 2
-                          ? Colors.white
-                          : Color(0xFF629bd0),
-                      fixedSize: Size(190, 30),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        selectedButton = 3;
-                        changeColor(3);
-                      });
-                    },
-                    child: Text(
-                      'OUR GOALS',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                    style: TextButton.styleFrom(
-                      backgroundColor: colorChangeButton == 3
-                          ? Color(0xFF629bd0)
-                          : Color(0xFFf2f9ff),
-                      foregroundColor: colorChangeButton == 3
-                          ? Colors.white
-                          : Color(0xFF629bd0),
-                      fixedSize: Size(130, 30),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               Container(
                 padding: EdgeInsets.all(20),
                 child: Column(
@@ -322,7 +239,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                         child: Column(
                           children: [
                             Text(
-                              'INTEGRATING INNOVATIONS INTO COFFEE TRADITIONS',
+                              'OUR INNOVATIONS AND MISSIONS',
                               style: TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
@@ -331,7 +248,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                             ),
                             SizedBox(height: 12),
                             Text(
-                              'Our mission is to create a sustainable, environmentally and technologically advanced coffee shop. We adhere to natural coffee traditions combined with innovation. Our mission is to create a sustainable, environmentally and technologically advanced coffee shop. We adhere to natural coffee traditions combined with innovation.',
+                              'At Boostore, our mission is to empower customers by providing a seamless shopping experience that combines quality products, exceptional service, and innovative technology. We strive to inspire and support our community through a curated selection of items that enhance everyday life, all while fostering sustainability and social responsibility.',
                               style: TextStyle(
                                 fontSize: 16,
                               ),
@@ -383,26 +300,6 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   ],
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AboutUsPage()));
-                },
-                child: Text(
-                  'READ MORE',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFc9d14c),
-                  fixedSize: Size(150, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(3),
-                  ),
-                ),
-              ),
               SizedBox(height: 20),
             ],
           ),
@@ -414,7 +311,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
             child: Padding(
               padding: EdgeInsets.all(20),
               child: Text(
-                "Why We're Different",
+                "WHY WE ARE DIFFERENT",
                 style: TextStyle(
                   color: Color(0xFF2f567a),
                   fontSize: 50,
@@ -452,7 +349,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                         child: Align(
                             alignment: Alignment.center,
                             child: Text(
-                              "Litora Torquent Conubia",
+                              "Curated Selection",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 24,
@@ -462,7 +359,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                       ),
                     ),
                     Text(
-                      "Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu.",
+                      "We carefully handpick our products to ensure quality and uniqueness, offering items that stand out in the marketplace.",
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -497,17 +394,17 @@ class _AboutUsPageState extends State<AboutUsPage> {
                         child: Align(
                             alignment: Alignment.center,
                             child: Text(
-                              "Litora Augue",
+                              "Customer-Centric Approach",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 24,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
                       ),
                     ),
                     Text(
-                      "Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu.",
+                      " We prioritize our customers’ needs, providing personalized recommendations and exceptional support to create a memorable shopping experience.",
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -542,7 +439,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                         child: Align(
                             alignment: Alignment.center,
                             child: Text(
-                              "Litora Sagittis",
+                              "Innovative Technology",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 24,
@@ -552,7 +449,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                       ),
                     ),
                     Text(
-                      "Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu.",
+                      "Our platform utilizes cutting-edge technology to streamline the shopping process, making it easier and faster for customers to find exactly what they need.",
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -587,17 +484,17 @@ class _AboutUsPageState extends State<AboutUsPage> {
                         child: Align(
                             alignment: Alignment.center,
                             child: Text(
-                              "Litora Torquent Conubia",
+                              "Sustainability Commitment",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 24,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             )),
                       ),
                     ),
                     Text(
-                      "Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu.",
+                      "We actively seek out eco-friendly products and practices, ensuring our operations contribute positively to the environment.",
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -632,7 +529,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                         child: Align(
                             alignment: Alignment.center,
                             child: Text(
-                              "Litora Augue",
+                              "Community Engagement",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 24,
@@ -642,7 +539,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                       ),
                     ),
                     Text(
-                      "Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu.",
+                      "We believe in giving back and actively support local initiatives, fostering a sense of community and social responsibility.",
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -677,7 +574,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                         child: Align(
                             alignment: Alignment.center,
                             child: Text(
-                              "Litora Sagittis",
+                              "Transparent Practices",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 24,
@@ -687,7 +584,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                       ),
                     ),
                     Text(
-                      "Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu.",
+                      "We maintain transparency in our sourcing and pricing, building trust with our customers.",
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -698,334 +595,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
             ],
           ),
           // End Why We're Different
-
-          // Start Popular Categories
-          Title(
-            color: Color(0xFF2f567a),
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Text(
-                "Popular Categories",
-                style: TextStyle(
-                  color: Color(0xFF2f567a),
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Column(
-            children: [
-              Container(
-                  width: 350,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFfdffc8),
-                    border: Border.all(
-                      color: Color(0xFFfdffc8),
-                      width: 1,
-                    ),
-                  ),
-                  child: ListView(
-                    physics: NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.all(18),
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 200,
-                            height: 300,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'COFFEE MACHINE',
-                                  style: TextStyle(
-                                      color: Color(0xFF2f567a),
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  'Morbi sed aliquet felis pellentesque daculis multricies metus.',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Image(
-                            image: AssetImage('assets/hinh13.jpg'),
-                            width: 110,
-                            height: 110,
-                          )
-                        ],
-                      ),
-                    ],
-                  )),
-              SizedBox(height: 15),
-              Container(
-                  width: 350,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFfdffc8),
-                    border: Border.all(
-                      color: Color(0xFFfdffc8),
-                      width: 1,
-                    ),
-                  ),
-                  child: ListView(
-                    physics: NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.all(18),
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 200,
-                            height: 300,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'DRINK COFFEE',
-                                  style: TextStyle(
-                                      color: Color(0xFF2f567a),
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  'Morbi sed aliquet felis pellentesque daculis multricies metus.',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Image(
-                            image: AssetImage('assets/hinh14.png'),
-                            width: 110,
-                            height: 110,
-                          )
-                        ],
-                      ),
-                    ],
-                  )),
-              SizedBox(height: 15),
-              Container(
-                  width: 350,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFfdffc8),
-                    border: Border.all(
-                      color: Color(0xFFfdffc8),
-                      width: 1,
-                    ),
-                  ),
-                  child: ListView(
-                    physics: NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.all(18),
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 200,
-                            height: 300,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'FILTER BAG COFFEE',
-                                  style: TextStyle(
-                                      color: Color(0xFF2f567a),
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  'Morbi sed aliquet felis pellentesque daculis multricies metus.',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Image(
-                            image: AssetImage('assets/hinh16.png'),
-                            width: 110,
-                            height: 110,
-                          )
-                        ],
-                      ),
-                    ],
-                  )),
-              SizedBox(height: 15),
-              Container(
-                  width: 350,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFfdffc8),
-                    border: Border.all(
-                      color: Color(0xFFfdffc8),
-                      width: 1,
-                    ),
-                  ),
-                  child: ListView(
-                    physics: NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.all(18),
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 200,
-                            height: 300,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'POPULAR',
-                                  style: TextStyle(
-                                      color: Color(0xFF2f567a),
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  'Morbi sed aliquet felis pellentesque daculis multricies metus.',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Image(
-                            image: AssetImage('assets/hinh17.jpg'),
-                            width: 110,
-                            height: 110,
-                          )
-                        ],
-                      ),
-                    ],
-                  )),
-              SizedBox(height: 15),
-              Container(
-                  width: 350,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFfdffc8),
-                    border: Border.all(
-                      color: Color(0xFFfdffc8),
-                      width: 1,
-                    ),
-                  ),
-                  child: ListView(
-                    physics: NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.all(18),
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 200,
-                            height: 300,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'NEW',
-                                  style: TextStyle(
-                                      color: Color(0xFF2f567a),
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  'Morbi sed aliquet felis pellentesque daculis multricies metus.',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Image(
-                            image: AssetImage('assets/hinh18.jpg'),
-                            width: 110,
-                            height: 110,
-                          )
-                        ],
-                      ),
-                    ],
-                  )),
-              SizedBox(height: 15),
-              Container(
-                  width: 350,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFfdffc8),
-                    border: Border.all(
-                      color: Color(0xFFfdffc8),
-                      width: 1,
-                    ),
-                  ),
-                  child: ListView(
-                    physics: NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.all(18),
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 200,
-                            height: 300,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'BEST',
-                                  style: TextStyle(
-                                      color: Color(0xFF2f567a),
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  'Morbi sed aliquet felis pellentesque daculis multricies metus.',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Image(
-                            image: AssetImage('assets/hinh19.jpg'),
-                            width: 110,
-                            height: 110,
-                          )
-                        ],
-                      ),
-                    ],
-                  )),
-            ],
-          ),
-          // End Popular Categories
-
+          
           // Start Our Team
           Title(
             color: Color(0xFF2f567a),
@@ -1046,22 +616,22 @@ class _AboutUsPageState extends State<AboutUsPage> {
             children: [
               SizedBox(
                   child: Container(
-                    width: 370,
-                    height: 370,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Color(0xFFe1f0ff),
-                        width: 15,
-                      ),
-                    ),
-                    child: ClipOval(
-                      child: Image(
-                        image: AssetImage('assets/222.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  )),
+                width: 370,
+                height: 370,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Color(0xFFe1f0ff),
+                    width: 15,
+                  ),
+                ),
+                child: ClipOval(
+                  child: Image(
+                    image: AssetImage('assets/222.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              )),
               SizedBox(height: 18),
               Text(
                 'Lorem Magnis',
@@ -1198,22 +768,22 @@ class _AboutUsPageState extends State<AboutUsPage> {
             children: [
               SizedBox(
                   child: Container(
-                    width: 370,
-                    height: 370,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Color(0xFFe1f0ff),
-                        width: 15,
-                      ),
-                    ),
-                    child: ClipOval(
-                      child: Image(
-                        image: AssetImage('assets/223.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  )),
+                width: 370,
+                height: 370,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Color(0xFFe1f0ff),
+                    width: 15,
+                  ),
+                ),
+                child: ClipOval(
+                  child: Image(
+                    image: AssetImage('assets/223.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              )),
               SizedBox(height: 18),
               Text(
                 'Eget Nulla',
@@ -1350,22 +920,22 @@ class _AboutUsPageState extends State<AboutUsPage> {
             children: [
               SizedBox(
                   child: Container(
-                    width: 370,
-                    height: 370,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Color(0xFFe1f0ff),
-                        width: 15,
-                      ),
-                    ),
-                    child: ClipOval(
-                      child: Image(
-                        image: AssetImage('assets/224.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  )),
+                width: 370,
+                height: 370,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Color(0xFFe1f0ff),
+                    width: 15,
+                  ),
+                ),
+                child: ClipOval(
+                  child: Image(
+                    image: AssetImage('assets/224.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              )),
               SizedBox(height: 18),
               Text(
                 'Dapibus Diam',
@@ -1527,18 +1097,18 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   children: [
                     RichText(
                         text: TextSpan(children: [
-                          TextSpan(
-                            text: 'Subscribe to our newsletter and get ',
-                            style: TextStyle(fontSize: 18, color: Colors.black),
-                          ),
-                          TextSpan(
-                              text: '20%',
-                              style: TextStyle(
-                                  fontSize: 18, color: Color(0xFF629bd0))),
-                          TextSpan(
-                              text: '  off your first purchase',
-                              style: TextStyle(fontSize: 18, color: Colors.black))
-                        ])),
+                      TextSpan(
+                        text: 'Subscribe to our newsletter and get ',
+                        style: TextStyle(fontSize: 18, color: Colors.black),
+                      ),
+                      TextSpan(
+                          text: '20%',
+                          style: TextStyle(
+                              fontSize: 18, color: Color(0xFF629bd0))),
+                      TextSpan(
+                          text: '  off your first purchase',
+                          style: TextStyle(fontSize: 18, color: Colors.black))
+                    ])),
                   ],
                 ),
                 Container(
@@ -1626,25 +1196,25 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   children: [
                     Container(
                         child: Image(
-                          image: AssetImage('assets/hinh7.jpg'),
-                          width: 100,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        )),
+                      image: AssetImage('assets/hinh7.jpg'),
+                      width: 100,
+                      height: 70,
+                      fit: BoxFit.cover,
+                    )),
                     Container(
                         child: Image(
-                          image: AssetImage('assets/hinh8.jpg'),
-                          width: 100,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        )),
+                      image: AssetImage('assets/hinh8.jpg'),
+                      width: 100,
+                      height: 70,
+                      fit: BoxFit.cover,
+                    )),
                     Container(
                         child: Image(
-                          image: AssetImage('assets/hinh9.jpg'),
-                          width: 100,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        )),
+                      image: AssetImage('assets/hinh9.jpg'),
+                      width: 100,
+                      height: 70,
+                      fit: BoxFit.cover,
+                    )),
                   ],
                 ),
                 SizedBox(height: 25),
@@ -1653,25 +1223,25 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   children: [
                     Container(
                         child: Image(
-                          image: AssetImage('assets/hinh10.jpg'),
-                          width: 100,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        )),
+                      image: AssetImage('assets/hinh10.jpg'),
+                      width: 100,
+                      height: 70,
+                      fit: BoxFit.cover,
+                    )),
                     Container(
                         child: Image(
-                          image: AssetImage('assets/hinh11.jpg'),
-                          width: 100,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        )),
+                      image: AssetImage('assets/hinh11.jpg'),
+                      width: 100,
+                      height: 70,
+                      fit: BoxFit.cover,
+                    )),
                     Container(
                         child: Image(
-                          image: AssetImage('assets/hinh12.jpg'),
-                          width: 100,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        )),
+                      image: AssetImage('assets/hinh12.jpg'),
+                      width: 100,
+                      height: 70,
+                      fit: BoxFit.cover,
+                    )),
                   ],
                 ),
                 Title(
@@ -1699,7 +1269,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'Our Blends',
+                              'Our Categories',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -1751,7 +1321,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'MeNu',
+                              'Help',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -1782,7 +1352,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'Coffee Beans ',
+                              'New Authors',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -1795,7 +1365,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'Coffee Product',
+                              'All Products',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -1808,7 +1378,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'Preparation Tools',
+                              'Privacy Policy',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -1821,7 +1391,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'Drunk Coffee',
+                              'Terms of Service',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -1834,7 +1404,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'Ice Cream',
+                              'Forums',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -1847,7 +1417,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'Other',
+                              'Download',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -1885,7 +1455,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                               color: Color(0xFF629bd0)),
                           SizedBox(width: 10),
                           Text(
-                            ' Address :115 HoTungMau.Q1.TP.HCM',
+                            'Address: 9786 Bernier Mountains Suite 328',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
@@ -1901,7 +1471,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           Icon(Icons.phone, color: Color(0xFF629bd0)),
                           SizedBox(width: 10),
                           Text(
-                            '+84 (356) 456 7890',
+                            '+99 (999) 999 9999',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
@@ -1917,7 +1487,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           Icon(Icons.email, color: Color(0xFF629bd0)),
                           SizedBox(width: 10),
                           Text(
-                            'CoffeePAO@gmail.com',
+                            'Bookstore@gmail.com',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
@@ -2047,23 +1617,24 @@ class _AboutUsPageState extends State<AboutUsPage> {
                 ),
                 Padding(
                   padding:
-                  EdgeInsets.only(left: 18, top: 10, bottom: 10, right: 18),
+                      EdgeInsets.only(left: 18, top: 10, bottom: 10, right: 18),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       RichText(
                           text: TextSpan(children: [
-                            TextSpan(
-                              text: '© 2024 Your Website Coffee Management System ',
-                              style: TextStyle(fontSize: 16.5, color: Colors.black),
-                            ),
-                            TextSpan(
-                                text: 'TemplateOnWeb',
-                                style: TextStyle(
-                                    fontSize: 16.5,
-                                    height: 1.5,
-                                    color: Color(0xFF629bd0))),
-                          ])),
+                        TextSpan(
+                          text:
+                              '© 2024 Your Website Bookstore Management System ',
+                          style: TextStyle(fontSize: 16.5, color: Colors.black),
+                        ),
+                        TextSpan(
+                            text: 'TemplateOnWeb',
+                            style: TextStyle(
+                                fontSize: 16.5,
+                                height: 1.5,
+                                color: Color(0xFF629bd0))),
+                      ])),
                     ],
                   ),
                 )

@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Bookstore Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Color(0xFFfeffe7)),
         // Thiết lập màu sắc theo seedColor

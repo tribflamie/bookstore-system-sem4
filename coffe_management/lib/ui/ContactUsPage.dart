@@ -30,31 +30,32 @@ class _ContactUsPageState extends State<ContactUsPage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         title: Padding(
           padding: EdgeInsets.zero,
           child: Row(
             children: [
+              SizedBox(width: 6),
+              ClipRRect(
+                borderRadius:
+                    BorderRadius.circular(20), // Điều chỉnh độ cong tùy ý ở đây
+                child: Image(
+                  image: AssetImage('assets/logoP2.jpg'),
+                  height: 50,
+                  width: 50,
+                  fit: BoxFit
+                      .cover, // Đảm bảo hình ảnh bị cắt ngang hoặc dọc nếu không phù hợp
+                ),
+              ),
               Text(
-                'Coffee',
+                'Book',
                 style: TextStyle(
                     color: Color(0xFF3e6d99),
                     fontSize: 24,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(width: 6),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(30), // Điều chỉnh độ cong tùy ý ở đây
-                child: Image(
-                  image: AssetImage('assets/logoP2.jpg'),
-                  height: 50,
-                  width: 50,
-                  fit: BoxFit.cover, // Đảm bảo hình ảnh bị cắt ngang hoặc dọc nếu không phù hợp
-                ),
-              ),
-
-              SizedBox(width: 6),
-              Text('PAO',
+              Text('Store',
                   style: TextStyle(
                       color: Color(0xFFbdc53b),
                       fontSize: 24,
@@ -74,10 +75,10 @@ class _ContactUsPageState extends State<ContactUsPage> {
                     color: Color(0xFFbdc53b),
                   ),
                   child: PopupMenuButton(
-                    color: Colors.black87,
+                    color: Colors.white,
                     icon: Icon(
                       Icons.person,
-                      color: Colors.black,
+                      color: Color(0xFF3e6d99),
                     ),
                     itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                       PopupMenuItem(
@@ -88,103 +89,103 @@ class _ContactUsPageState extends State<ContactUsPage> {
                                 'Welcome',
                                 style: TextStyle(
                                     color: Color(0xFF3e6d99),
-                                    fontSize: 28,
+                                    fontSize: 35,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: 10),
                               Consumer<UserProvider>(
                                   builder: (context, userProvider, child) {
-                                    return Text(userProvider.username,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.normal));
-                                  }),
+                                return Text(userProvider.username,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.normal));
+                              }),
                               Consumer<UserProvider>(
                                   builder: (context, userProvider, child) {
-                                    return Text(userProvider.email,
-                                        style: TextStyle(
-                                            color: Colors.grey,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.normal));
-                                  }),
+                                return Text(userProvider.email,
+                                    style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.normal));
+                              }),
                               SizedBox(height: 15),
                               userProvider.isLoggedIn
                                   ? GestureDetector(
-                                onTap: () {
-                                  Provider.of<UserProvider>(context,
-                                      listen: false)
-                                      .logout();
-                                  Navigator.of(context)
-                                      .popUntil((route) => route.isFirst);
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFF848b21),
-                                    borderRadius:
-                                    BorderRadius.circular(3),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  child: Text(
-                                    'Logout',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              )
+                                      onTap: () {
+                                        Provider.of<UserProvider>(context,
+                                                listen: false)
+                                            .logout();
+                                        Navigator.of(context)
+                                            .popUntil((route) => route.isFirst);
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFF848b21),
+                                          borderRadius:
+                                              BorderRadius.circular(3),
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 10),
+                                        child: Text(
+                                          'Logout',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    )
                                   : Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LoginPage()));
-                                    },
-                                    child: Text(
-                                      'LOGIN',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Color(0xFF848b21),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(3),
-                                      ),
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  RegisterPage()));
-                                    },
-                                    child: Text(
-                                      'REGISTER',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Color(0xFF848b21),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(3),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        LoginPage()));
+                                          },
+                                          child: Text(
+                                            'LOGIN',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Color(0xFF848b21),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(3),
+                                            ),
+                                          ),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        RegisterPage()));
+                                          },
+                                          child: Text(
+                                            'REGISTER',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Color(0xFF848b21),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(3),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
                             ],
                           ),
                         ),
@@ -205,7 +206,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                 'Contact Us',
                 style: TextStyle(
                   color: Color(0xFF2f567a),
-                  fontSize: 50,
+                  fontSize: 34,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
@@ -228,22 +229,6 @@ class _ContactUsPageState extends State<ContactUsPage> {
             ),
             child: Column(
               children: [
-                SizedBox(height: 30),
-                Text(
-                  'Get in touch',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF629bd0)),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Write Us A Message',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF2f567a)),
-                ),
                 SizedBox(height: 30),
                 Container(
                   width: 320,
@@ -466,17 +451,11 @@ class _ContactUsPageState extends State<ContactUsPage> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        '+84 356-456-7890',
+                        '+99 999-999-9999',
                         style: TextStyle(
                           fontSize: 16,
                         ),
-                      ),
-                      Text(
-                        '+84 456-789-2310',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
+                      )
                     ],
                   ),
                 ),
@@ -509,17 +488,11 @@ class _ContactUsPageState extends State<ContactUsPage> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'CoffeePAO@gmail.com',
+                        'Bookstore@gmail.com',
                         style: TextStyle(
                           fontSize: 16,
                         ),
-                      ),
-                      Text(
-                        'Hotro@gmail.com',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
+                      )
                     ],
                   ),
                 ),
@@ -552,13 +525,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        '115 Ho Tung Mau.P Ben Nghe .Q1',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        'TP.Ho Chi Minh',
+                        '9786 Bernier Mountains Suite 328',
                         style: TextStyle(
                           fontSize: 16,
                         ),
@@ -672,7 +639,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
           ),
           // End News Letter
 
-          // Start Footer
+                    // Start Footer
           Container(
             color: Color(0xFFfeffe7),
             child: Column(
@@ -697,25 +664,25 @@ class _ContactUsPageState extends State<ContactUsPage> {
                   children: [
                     Container(
                         child: Image(
-                          image: AssetImage('assets/hinh7.jpg'),
-                          width: 100,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        )),
+                      image: AssetImage('assets/hinh7.jpg'),
+                      width: 100,
+                      height: 70,
+                      fit: BoxFit.cover,
+                    )),
                     Container(
                         child: Image(
-                          image: AssetImage('assets/hinh8.jpg'),
-                          width: 100,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        )),
+                      image: AssetImage('assets/hinh8.jpg'),
+                      width: 100,
+                      height: 70,
+                      fit: BoxFit.cover,
+                    )),
                     Container(
                         child: Image(
-                          image: AssetImage('assets/hinh9.jpg'),
-                          width: 100,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        )),
+                      image: AssetImage('assets/hinh9.jpg'),
+                      width: 100,
+                      height: 70,
+                      fit: BoxFit.cover,
+                    )),
                   ],
                 ),
                 SizedBox(height: 25),
@@ -724,25 +691,25 @@ class _ContactUsPageState extends State<ContactUsPage> {
                   children: [
                     Container(
                         child: Image(
-                          image: AssetImage('assets/hinh10.jpg'),
-                          width: 100,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        )),
+                      image: AssetImage('assets/hinh10.jpg'),
+                      width: 100,
+                      height: 70,
+                      fit: BoxFit.cover,
+                    )),
                     Container(
                         child: Image(
-                          image: AssetImage('assets/hinh11.jpg'),
-                          width: 100,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        )),
+                      image: AssetImage('assets/hinh11.jpg'),
+                      width: 100,
+                      height: 70,
+                      fit: BoxFit.cover,
+                    )),
                     Container(
                         child: Image(
-                          image: AssetImage('assets/hinh12.jpg'),
-                          width: 100,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        )),
+                      image: AssetImage('assets/hinh12.jpg'),
+                      width: 100,
+                      height: 70,
+                      fit: BoxFit.cover,
+                    )),
                   ],
                 ),
                 Title(
@@ -770,7 +737,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'Our Blends',
+                              'Our Categories',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -822,7 +789,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'MeNU',
+                              'Help',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -853,7 +820,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'Coffee Beans',
+                              'New Authors',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -866,7 +833,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'Coffee Products',
+                              'All Products',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -879,7 +846,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'Preparation Tools',
+                              'Privacy Policy',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -892,7 +859,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'Drunk Coffee',
+                              'Terms of Service',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -905,7 +872,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'Ice Cream',
+                              'Forums',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -918,7 +885,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                           children: [
                             Icon(Icons.arrow_right, color: Color(0xFF629bd0)),
                             Text(
-                              'Other',
+                              'Download',
                               style: TextStyle(
                                   color: Color(0xFF325976),
                                   fontSize: 16,
@@ -956,7 +923,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                               color: Color(0xFF629bd0)),
                           SizedBox(width: 10),
                           Text(
-                            ' Address :115 HoTungMau.Q1.TP.HCM',
+                            'Address: 9786 Bernier Mountains Suite 328',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
@@ -972,7 +939,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                           Icon(Icons.phone, color: Color(0xFF629bd0)),
                           SizedBox(width: 10),
                           Text(
-                            '+84 (356) 456 7890',
+                            '+99 (999) 999 9999',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
@@ -988,7 +955,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                           Icon(Icons.email, color: Color(0xFF629bd0)),
                           SizedBox(width: 10),
                           Text(
-                            'CoffeePAO@gmail.com',
+                            'Bookstore@gmail.com',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
@@ -1118,23 +1085,23 @@ class _ContactUsPageState extends State<ContactUsPage> {
                 ),
                 Padding(
                   padding:
-                  EdgeInsets.only(left: 18, top: 10, bottom: 10, right: 18),
+                      EdgeInsets.only(left: 18, top: 10, bottom: 10, right: 18),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       RichText(
                           text: TextSpan(children: [
-                            TextSpan(
-                              text: '© 2024 Your Website Coffee Management System ',
-                              style: TextStyle(fontSize: 16.5, color: Colors.black),
-                            ),
-                            TextSpan(
-                                text: 'TemplateOnWeb',
-                                style: TextStyle(
-                                    fontSize: 16.5,
-                                    height: 1.5,
-                                    color: Color(0xFF629bd0))),
-                          ])),
+                        TextSpan(
+                          text: '© 2024 Your Website Bookstore Management System ',
+                          style: TextStyle(fontSize: 16.5, color: Colors.black),
+                        ),
+                        TextSpan(
+                            text: 'TemplateOnWeb',
+                            style: TextStyle(
+                                fontSize: 16.5,
+                                height: 1.5,
+                                color: Color(0xFF629bd0))),
+                      ])),
                     ],
                   ),
                 )
