@@ -1,5 +1,5 @@
 class SD_CLIENT {
-  static final String DOMAIN_APP_API = "http://172.16.3.139:9999";
+  static final String DOMAIN_APP_API = "http://10.0.2.2:9999";
 
   //Login Api
   static final String api_loginurl = DOMAIN_APP_API + "/api/auth/login";
