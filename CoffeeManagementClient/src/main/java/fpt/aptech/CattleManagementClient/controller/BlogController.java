@@ -147,51 +147,63 @@ public String showCreateForm(Model model, HttpSession session) {
 }
 
 
-    @PostMapping("/createblog")
-    public String createblog(@ModelAttribute("blog") Blog blog,
-            @Valid BindingResult result, Model model,
-            @RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) throws IOException {
-        if (result.hasErrors()) {
-            return "Admin/blog/createblog";
-        }
-        String fileName = file.getOriginalFilename();
-        String filePath = fileUpload + "/" + fileName;
-        File dest = new File(filePath);
-        FileCopyUtils.copy(file.getBytes(), dest);
-
-        Date date = new Date();
-
-        blog.setImage(fileName);
-        blog.setDate(date.toString());
-        try {
-            String createUrl = urlblog + "/createblog"; // Endpoint của RESTful API để tạo đối tượng mới
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-
-            HttpEntity<Blog> requestEntity = new HttpEntity<>(blog, headers);
-            ResponseEntity<String> response = rest.exchange(
-                    createUrl,
-                    HttpMethod.POST,
-                    requestEntity,
-                    String.class
-            );
-
-            if (response.getStatusCode() == HttpStatus.CREATED) {
-                redirectAttributes.addFlashAttribute("successblog", true);
-                return "redirect:/listblog"; // Trả về trang thành công sau khi cập nhật
-            } else {
-                redirectAttributes.addFlashAttribute("errorblog", true);
-                return "redirect:/createblog?blogname"; // Xử lý lỗi nếu cần
-            }
-        } catch (HttpClientErrorException.Conflict ex) {
-            redirectAttributes.addFlashAttribute("errorblog", true);
-            return "redirect:/createblog?blogname"; // Xử lý trường hợp categoryname đã tồn tại
-        } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("errorblog", true);
-            return "redirect:/createblog?blogname"; // Xử lý các lỗi khác nếu có
-        }
+@PostMapping("/createblog")
+public String createblog(@ModelAttribute("blog") Blog blog,
+        @Valid BindingResult result, Model model,
+        @RequestParam("file") MultipartFile file,
+        RedirectAttributes redirectAttributes) throws IOException {
+    if (result.hasErrors()) {
+        return "Admin/blog/createblog";
     }
+
+    String fileName = file.getOriginalFilename();
+    String filePath = fileUpload + "/" + fileName;
+    File dest = new File(filePath);
+
+    // Create directories if they do not exist
+    if (!dest.getParentFile().exists()) {
+        dest.getParentFile().mkdirs();
+    }
+
+    try {
+        FileCopyUtils.copy(file.getBytes(), dest);
+    } catch (IOException e) {
+        redirectAttributes.addFlashAttribute("errorblog", "File upload failed!");
+        return "redirect:/createblog";
+    }
+
+    Date date = new Date();
+    blog.setImage(fileName);
+    blog.setDate(date.toString());
+
+    try {
+        String createUrl = urlblog + "/createblog"; // RESTful API endpoint
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Blog> requestEntity = new HttpEntity<>(blog, headers);
+        ResponseEntity<String> response = rest.exchange(
+                createUrl,
+                HttpMethod.POST,
+                requestEntity,
+                String.class
+        );
+
+        if (response.getStatusCode() == HttpStatus.CREATED) {
+            redirectAttributes.addFlashAttribute("successblog", true);
+            return "redirect:/listblog"; // Success page
+        } else {
+            redirectAttributes.addFlashAttribute("errorblog", true);
+            return "redirect:/createblog?blogname"; // Handle failure
+        }
+    } catch (HttpClientErrorException.Conflict ex) {
+        redirectAttributes.addFlashAttribute("errorblog", true);
+        return "redirect:/createblog?blogname"; // Handle conflict error
+    } catch (Exception ex) {
+        redirectAttributes.addFlashAttribute("errorblog", true);
+        return "redirect:/createblog?blogname"; // Handle other exceptions
+    }
+}
 
     @GetMapping("/detailsblog/{id}")
 public String detailsblog(@PathVariable int id, Model model, HttpSession session) {
