@@ -5,6 +5,7 @@
 package fpt.aptech.CattleManagementClient.dto;
 
 import fpt.aptech.CattleManagementClient.entities.Category;
+import io.micrometer.common.lang.Nullable;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -36,7 +37,7 @@ public class ProductDto {
     @NotNull(message = "Quantity is required")
     @Size(min = 1, message = "Quantity cannot be empty")
     private Integer quantity;
-    @NotNull(message = "Units is required")
+    @Nullable
     @Size(min = 1, message = "Units cannot be empty")
     private String units;
     @NotNull(message = "Description is required")

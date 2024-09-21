@@ -306,15 +306,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                                                                                  alt="abc"></a>
                                             <h5 class="mgt"><a th:href="@{/homedetails/{id}(id = ${p.id})}" th:text="${p.productname}"></a></h5>
                                             <h6 th:text="${p.price}"></h6>
-                                            <span class="col_5">
-                                                <div class="rating">
-                                                        <span class="star" th:classappend="${averageRating >= 1 ? 'filled' : 'empty'}"></span>
-                                                        <span class="star" th:classappend="${averageRating >= 2 ? 'filled' : 'empty'}"></span>
-                                                        <span class="star" th:classappend="${averageRating >= 3 ? 'filled' : 'empty'}"></span>
-                                                        <span class="star" th:classappend="${averageRating >= 4 ? 'filled' : 'empty'}"></span>
-                                                        <span class="star" th:classappend="${averageRating >= 5 ? 'filled' : 'empty'}"></span>
-                                                    </div>
-                                            </span>
                                         </div>
                                     </div>
                                 </div>
