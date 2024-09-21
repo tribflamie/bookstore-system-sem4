@@ -166,7 +166,7 @@ public class AuthController {
                 // Xử lý dựa trên vai trò của người dùng
                 switch (loggedInUser.getRole()) {
                     case "Admin":
-                        return "redirect:/admin";
+                        return "redirect:/product";
                     case "Employee":
                         return "redirect:/listuser";
                     case "User":
