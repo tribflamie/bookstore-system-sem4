@@ -133,20 +133,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </head>
     <body>
         <div class="container-scroller">
-            <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-                    <a class="sidebar-brand brand-logo" th:href="@{/admin}"><img alt="abc" th:src="@{/home/img/logoimage.jpg}" style="width: 30%; height: 20%; border-radius: 50%"></a>
-                    <a class="sidebar-brand brand-logo-mini" th:href="@{/admin}"><img alt="abc" th:src="@{/home/img/logoimage.jpg}" style="width: 30%; height: 20%; border-radius: 50%"></a>
+                    <a class="sidebar-brand brand-logo" th:href="@{/product}"><img alt="abc" th:src="@{/home/img/logo.jpg}" style="width: 30%; height: 20%; border-radius: 50%"></a>
+                    <a class="sidebar-brand brand-logo-mini" th:href="@{/product}"><img alt="abc" th:src="@{/home/img/logo.jpg}" style="width: 50%; height: 50%; border-radius: 50%"></a>
                 </div>
                 <ul class="nav">
                     <li class="nav-item nav-category">
                         <span class="nav-link">Navigation</span>
                     </li>
+
                     <li class="nav-item menu-items">
                         <a class="nav-link" th:href="@{/listblog}">
                             <span class="menu-icon">
-                                <img th:src="@{/admin/assets/images/newsimage.png}" height="38px"/>
+                                <img th:src="@{/admin/assets/images/card.png}" height="38px"/>
                             </span>
                             <span class="menu-title">News</span>
                         </a>
@@ -154,7 +154,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <li class="nav-item menu-items">
                         <a class="nav-link" th:href="@{/product}">
                             <span class="menu-icon">
-                                <img th:src="@{/admin/assets/images/bookimage.png}" height="38px"/>
+                                <img th:src="@{/admin/assets/images/search1.png}" height="38px"/>
                             </span>
                             <span class="menu-title">Product</span>
                         </a>
@@ -162,7 +162,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <li class="nav-item menu-items">
                         <a class="nav-link" th:href="@{/category}">
                             <span class="menu-icon">
-                                <img th:src="@{/admin/assets/images/categoryimage.png}" height="38px"/>
+                                <img th:src="@{/admin/assets/images/categories.png}" height="38px"/>
                             </span>
                             <span class="menu-title">Category</span>
                         </a>
@@ -179,7 +179,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <li class="nav-item menu-items">
                         <a class="nav-link" th:href="@{/admin/feedbacks/all}">
                             <span class="menu-icon">
-                                <img th:src="@{/admin/assets/images/hinh24.png}" height="38px"/>
+                                <img th:src="@{/admin/assets/images/comment.png}" height="38px"/>
                             </span>
                             <span class="menu-title">Feedback</span>
                         </a>
@@ -203,7 +203,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     </li>
                 </ul>
             </nav>
-            <!-- partial -->
             <div class="container-fluid page-body-wrapper">
                 <!-- partial:partials/_navbar.html -->
                 <nav class="navbar p-0 fixed-top d-flex flex-row">
