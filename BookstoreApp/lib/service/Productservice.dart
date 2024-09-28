@@ -41,26 +41,25 @@ class Productservice {
   }
 
   Future<Map<String, dynamic>> getOrderDetailsById(int id) async {
-    try {
-      final response = await http.get(
-        Uri.parse('${SD_CLIENT.api_detailproduct}/$id'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
+  try {
+    final response = await http.get(
+      Uri.parse('${SD_CLIENT.api_detailproduct}/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> orderDetails = jsonDecode(response.body);
+      return orderDetails;
+    } else {
+      throw Exception(
+        'Failed to fetch order details with status: ${response.statusCode}',
       );
-
-      if (response.statusCode == 200) {
-
-        Map<String, dynamic> orderDetails = jsonDecode(response.body);
-        return orderDetails;
-      } else {
-        throw Exception(
-          'Failed to fetch order details with status: ${response.statusCode}',
-        );
-      }
-    } catch (e) {
-      // Xử lý lỗi nếu có
-      throw Exception('Failed to fetch order details: $e');
     }
+  } catch (e) {
+    // Handle error
+    throw Exception('Failed to fetch order details: $e');
   }
+}
 }

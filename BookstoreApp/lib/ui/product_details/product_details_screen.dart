@@ -36,8 +36,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   Future<void> getProductDetails() async {
     try {
-      final details =
-      await Productservice().getOrderDetailsById(widget.productDetails);
+      final details = await Productservice().getOrderDetailsById(widget.productDetails);
       setState(() {
         productDetailsData = details;
       });
