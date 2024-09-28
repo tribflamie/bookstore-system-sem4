@@ -6,12 +6,12 @@
     display: inline-block;
     width: 20px; /* Adjust size as needed */
     height: 20px; /* Adjust size as needed */
-    background-image: url('../img/filled-star1.png'); /* Path to your star icon */
+    background-image: url('../img/filled-star12.png'); /* Path to your star icon */
     background-size: contain;
 }
 
 .star.filled {
-    background-image: url('../img/star1.png'); /* Path to your filled star icon */
+    background-image: url('../img/star12.png'); /* Path to your filled star icon */
 }
 
 .rating {

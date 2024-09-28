@@ -97,9 +97,9 @@ public class ProductController {
 @ResponseStatus(HttpStatus.CREATED)
 public ResponseEntity<String> saveproduct(@Validated @RequestBody Product newproduct) {
     // Kiểm tra xem productname đã tồn tại chưa
-    if (productService.existsByProductname(newproduct.getProductname())) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
-    }
+    // if (productService.existsByProductname(newproduct.getProductname())) {
+    //     return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    // }
 
     // Lấy thông tin của người dùng và gán vào Product
     User user = new User();

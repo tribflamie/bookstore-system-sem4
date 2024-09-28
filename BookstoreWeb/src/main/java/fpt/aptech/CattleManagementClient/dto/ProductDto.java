@@ -22,7 +22,6 @@ public class ProductDto {
     @Size(min = 1, message = "Productname cannot be empty")
     private String productname;
     @NotNull(message = "Sale is required")
-    @Size(min = 1, message = "Sale cannot be empty")
     @Positive(message = "Sale must be greater than 0")
     private Double sale;
 
@@ -31,11 +30,9 @@ public class ProductDto {
     @Size(min = 1, message = "Date cannot be empty")
     private String date;
     @NotNull(message = "Price is required")
-    @Size(min = 1, message = "Price cannot be empty")
     @Positive(message = "Price must be greater than 0")
     private double price;
     @NotNull(message = "Quantity is required")
-    @Size(min = 1, message = "Quantity cannot be empty")
     private Integer quantity;
     @Nullable
     @Size(min = 1, message = "Units cannot be empty")

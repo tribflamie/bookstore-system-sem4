@@ -51,7 +51,7 @@ public class Product {
     private double price;
     @Column(name = "quantity")
     private Integer quantity;
-    @Column(name = " units")
+    @Column(name = "units")
     private String units;
     private String active;
     @Lob

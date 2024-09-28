@@ -113,18 +113,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-                    <a class="sidebar-brand brand-logo" th:href="@{/product}"><img alt="abc" th:src="@{/home/img/logo.jpg}" style="width: 30%; height: 20%; border-radius: 50%"></a>
-                    <a class="sidebar-brand brand-logo-mini" th:href="@{/product}"><img alt="abc" th:src="@{/home/img/logo.jpg}" style="width: 50%; height: 50%; border-radius: 50%"></a>
+                    <a class="sidebar-brand brand-logo" th:href="@{/admin}"><img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 50%; border-radius: 50%"></a>
+                    <a class="sidebar-brand brand-logo-mini" th:href="@{/admin}"><img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 50%; border-radius: 50%"></a>
                 </div>
                 <ul class="nav">
                     <li class="nav-item nav-category">
                         <span class="nav-link">Navigation</span>
                     </li>
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" th:href="@{/admin}">
+                            <span class="menu-icon">
+                                <img th:src="@{/admin/assets/images/speedometer.png}" height="35px"/>
+                            </span>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </li><br>
 
                     <li class="nav-item menu-items">
                         <a class="nav-link" th:href="@{/listblog}">
                             <span class="menu-icon">
-                                <img th:src="@{/admin/assets/images/card.png}" height="38px"/>
+                                <img th:src="@{/admin/assets/images/blog-template.png}" height="38px"/>
                             </span>
                             <span class="menu-title">News</span>
                         </a>
@@ -132,7 +140,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <li class="nav-item menu-items">
                         <a class="nav-link" th:href="@{/product}">
                             <span class="menu-icon">
-                                <img th:src="@{/admin/assets/images/search1.png}" height="38px"/>
+                                <img th:src="@{/admin/assets/images/dairy-products.png}" height="38px"/>
                             </span>
                             <span class="menu-title">Product</span>
                         </a>
@@ -145,7 +153,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <span class="menu-title">Category</span>
                         </a>
                     </li><br>
-                    <!-- <li class="nav-item menu-items">
+                    <li class="nav-item menu-items">
                         <a class="nav-link" th:href="@{/comment}">
                             <span class="menu-icon">
                                 <img th:src="@{/admin/assets/images/comment.png}" height="38px"/>
@@ -153,15 +161,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <span class="menu-title">Comment</span>
                         </a>
                     </li><br>
-                -->
                     <li class="nav-item menu-items">
                         <a class="nav-link" th:href="@{/admin/feedbacks/all}">
                             <span class="menu-icon">
-                                <img th:src="@{/admin/assets/images/comment.png}" height="38px"/>
+                                <img th:src="@{/admin/assets/images/hinh24.png}" height="38px"/>
                             </span>
                             <span class="menu-title">Feedback</span>
                         </a>
-                    </li><br> 
+                    </li><br>
 
                     <li class="nav-item menu-items">
                         <a class="nav-link" th:href="@{/order}">
@@ -174,7 +181,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <li class="nav-item menu-items">
                         <a class="nav-link" th:href="@{/listuser}">
                             <span class="menu-icon">
-                                <img th:src="@{/admin/assets/images/usermanage.png}" height="38px"/>
+                                <img th:src="@{/admin/assets/images/office.png}" height="38px"/>
                             </span>
                             <span class="menu-title">User Management</span>
                         </a>
