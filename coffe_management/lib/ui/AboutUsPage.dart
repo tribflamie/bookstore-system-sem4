@@ -404,7 +404,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                       ),
                     ),
                     Text(
-                      " We prioritize our customers’ needs, providing personalized recommendations and exceptional support to create a memorable shopping experience.",
+                      "We prioritize our customers’ needs, providing personalized recommendations and exceptional support to create a memorable shopping experience.",
                       style: TextStyle(
                         fontSize: 16,
                       ),

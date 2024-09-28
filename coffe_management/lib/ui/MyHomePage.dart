@@ -501,7 +501,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               textAlign: TextAlign.center,
                             ),
                             Text(
-                              'Exciting new room launched this October! Join us to explore the possibilities and enjoy exclusive offers available this month.',
+                              'Exciting new room launched this October! Join us to explore the possibilities and enjoy exclusive offers available this month',
                               style:
                                   TextStyle(fontSize: 16, color: Colors.white),
                             ),
