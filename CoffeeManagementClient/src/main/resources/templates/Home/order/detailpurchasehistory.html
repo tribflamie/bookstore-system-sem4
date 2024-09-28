@@ -67,22 +67,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <div class="top_1 clearfix">
                         <div class="col-sm-4">
                             <div class="top_1m text-center clearfix">
-                                <h3 class="mgt"><a th:href="@{/}"><span class="col_3">Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a></h3>
+                                <h3 class="mgt"><a th:href="@{/}">
+                                        <img alt="abc" th:src="@{/home/img/logo.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_3">Book </span><span class="col_6">Store</span></a>
+                                </h3>
                             </div>
                         </div>
                         <div class="col-sm-5">
                             <div class="top_1l clearfix">
-                                <p class="mgt font_16 text-center"><i class="fa fa-map col_1"></i> <span class="col_6">Address:</span> 115 Hồ Tùng Mậu.P Bến Nghé.Q1.TP.HCM</p>
+                                <p class="mgt font_16 text-center"><i class="fa fa-map col_1"></i> <span class="col_6">Address: </span>Số 391A, Nam Kỳ Khởi Nghĩa, Q.3, Hồ Chí Minh</p>
                             </div>
                         </div>
-
                         <div class="col-sm-3">
                             <div class="top_1r text-right clearfix">
                                 <div th:if="${username != null}">
-                                    <h6 class="big mgt">Welcome, <span th:text="${username}"></span>
-                                        <a class="button mgt" th:href="@{/userdetails/{id}(id=${session.user})}">Profile</a>
-                                        <a class="button mgt" th:href="@{/logout}">Logout</a>
-                                    </h6>
+                                    <div th:if="${session.status == 'Not Activated'}">
+                                        <h6 class="big mgt">
+                                            <span class="error-message">Your account is not activated. Please contact support.</span>
+                                        </h6>
+                                    </div>
+                                    <div th:if="${session.status != 'Not Activated'}">
+                                        <h6 class="big mgt">Welcome, <span th:text="${username}"></span>
+                                            <a class="button mgt" th:href="@{/userdetails/{id}(id=${session.user})}">Profile</a>
+                                            <a class="button mgt" th:href="@{/logout}">Logout</a>
+                                        </h6>
+                                    </div>
                                 </div>
                                 <div th:if="${username == null}">
                                     <h6 class="big mgt">
@@ -107,16 +115,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.html"> Coffee</span> <img alt="abc" th:src="@{/home/img/logoP2.jpg}" style="width: 20%; border-radius: 50%"> <span class="col_6">PAO</span></a>
+                        <a class="navbar-brand" href="index.html"><img alt="abc" th:src="@{/home/img/logo.jpg}" style="width: 25%; border-radius: 50%"><span class="col_3">Book</span>  <span class="col_6">Store</span></a>
                     </div>
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
 
-                            <li><a class="m_tag" th:href="@{/}">Home</a></li>
+                            <li><a class="m_tag active_tab" th:href="@{/}">Home</a></li>
                             <li><a class="m_tag" th:href="@{/about}">About</a></li>
-                            <li><a class="m_tag" th:href="@{/products}">Menu</a></li>
+                            <li><a class="m_tag" th:href="@{/products}">Books</a></li>
                             <li><a class="m_tag" th:href="@{/blog}">News</a></li>
 
                             <li><a class="m_tag" th:href="@{/contactus}">Contact Us</a></li>
@@ -125,7 +133,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <ul class="dropdown-menu drop_3" role="menu">
                                     <li><a th:href="@{/mycart}">Shopping Cart</a></li>
                                     <li th:if="${username != null}"><a class="border_none" th:href="@{/purchasehistory}">Product History</a></li>
-
                                 </ul>
                             </li>
                         </ul>
@@ -140,7 +147,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                     <li>
                                         <div class="drop_1i clearfix">
                                             <div class="col-sm-6">
-
+                                                <!--                                                <div class="drop_1il clearfix"><h5 class="mgt">2 ITEMS</h5></div>-->
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="drop_1il text-right clearfix"><h5 class="mgt"><a href="cart.html">VIEW CART</a></h5></div>
@@ -183,23 +190,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </div>
                 <!-- /.container-fluid -->
             </nav>
-
         </section>
-
-        <section id="center" class="center_o clearfix">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="center_o1 text-center">
-                            <h1 class="mgt">Details History Product</h1>
-                            <h4><a href="#">Home</a> / Details History Product</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
 
         <section id="center_2" class="clearfix">
             <div class="container">
@@ -253,27 +244,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </div>
         </section>
 
-
-        <section id="enquiry">
-            <div class="container">
-                <div class="row">
-                    <div class="enquiry_1 text-center clearfix">
-                        <div class="col-sm-12">
-                            <h4 class="mgt">NEWSLETTER</h4>
-                            <p>Subscribe to our newsletter and get <span class="col_1">20%</span> off your first purchase</p>
-                            <div class="input-group">
-                                <input type="text" class="form-control form_2" placeholder="Your Email">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="button">
-                                        SUBSCRIBE</button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section id="footer">
             <div class="container">
                 <div class="row">
@@ -286,7 +256,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                         <div class="footer_1lii clearfix">
                                             <div class="grid clearfix">
                                                 <figure class="effect-jazz">
-                                                    <a href="#"><img th:src="@{/home/img/hinh7.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                    <a href="#"><img th:src="@{/home/img/footer1.jpg}" height="70px" class="iw" alt="img25"></a>
                                                 </figure>
                                             </div>
                                         </div>
@@ -295,7 +265,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                         <div class="footer_1lii clearfix">
                                             <div class="grid clearfix">
                                                 <figure class="effect-jazz">
-                                                    <a href="#"><img th:src="@{/home/img/hinh8.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                    <a href="#"><img th:src="@{/home/img/footer2.jpg}" height="70px" class="iw" alt="img25"></a>
                                                 </figure>
                                             </div>
                                         </div>
@@ -304,7 +274,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                         <div class="footer_1lii clearfix">
                                             <div class="grid clearfix">
                                                 <figure class="effect-jazz">
-                                                    <a href="#"><img th:src="@{/home/img/hinh9.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                    <a href="#"><img th:src="@{/home/img/footer3.jpg}" height="70px" class="iw" alt="img25"></a>
                                                 </figure>
                                             </div>
                                         </div>
@@ -315,7 +285,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                         <div class="footer_1lii clearfix">
                                             <div class="grid clearfix">
                                                 <figure class="effect-jazz">
-                                                    <a href="#"><img th:src="@{/home/img/hinh10.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                    <a href="#"><img th:src="@{/home/img/footer4.jpg}" height="70px" class="iw" alt="img25"></a>
                                                 </figure>
                                             </div>
                                         </div>
@@ -324,7 +294,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                         <div class="footer_1lii clearfix">
                                             <div class="grid clearfix">
                                                 <figure class="effect-jazz">
-                                                    <a href="#"><img th:src="@{/home/img/hinh11.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                    <a href="#"><img th:src="@{/home/img/footer5.jpg}" height="70px" class="iw" alt="img25"></a>
                                                 </figure>
                                             </div>
                                         </div>
@@ -333,7 +303,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                         <div class="footer_1lii clearfix">
                                             <div class="grid clearfix">
                                                 <figure class="effect-jazz">
-                                                    <a href="#"><img th:src="@{/home/img/hinh12.jpg}" height="70px" class="iw" alt="img25"></a>
+                                                    <a href="#"><img th:src="@{/home/img/footer6.jpg}" height="70px" class="iw" alt="img25"></a>
                                                 </figure>
                                             </div>
                                         </div>
@@ -347,21 +317,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <div class="footer_1mi clearfix">
                                     <div class="col-sm-6 space_left col-xs-6">
                                         <div class="footer_1mil clearfix">
-                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Our Blends</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Our Categories</a></h6>
                                             <h6><i class="fa fa-caret-right col_1"></i> <a href="#">New Products</a></h6>
                                             <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Top Sellers</a></h6>
                                             <h6><i class="fa fa-caret-right col_1"></i> <a href="#">About Us</a></h6>
-                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">MENU</a></h6>
-                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Contact Us</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Help</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">New Authors</a></h6>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 space_right col-xs-6">
                                         <div class="footer_1mil clearfix">
-                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Beans</a></h6>
-                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Coffee Products</a></h6>
-                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Preparation Tools</a></h6>
-                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Drunk Coffee</a></h6>
-                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Ice Cream</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">All Products</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Privacy Policy</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Terms of Service</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Forums</a></h6>
+                                            <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Download</a></h6>
                                             <h6><i class="fa fa-caret-right col_1"></i> <a href="#">Other</a></h6>
                                         </div>
                                     </div>
@@ -371,9 +341,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <div class="col-sm-4">
                             <div class="footer_1r clearix">
                                 <h4>GET IN TOUCH</h4>
-                                <p class="font_16"><i class="fa fa-map col_1"></i> Address : -115/Hồ Tùng Mậu/Bến Nghe/Q1/HCM</p>
-                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">+91 (123) 456 7890</a></p>
-                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">CoffeePAO@gmail.com</a></p>
+                                <p class="font_16"><i class="fa fa-map col_1"></i> Address: Số 391A, Nam Kỳ Khởi Nghĩa, Q.3, Hồ Chí Minh</p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">+84 (287) 300 5654</a></p>
+                                <p class="font_16"><i class="fa fa-phone col_1"></i> <a href="#">bookstore@gmail.com</a></p>
                                 <ul class="social-network social-circle">
                                     <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
                                     <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
@@ -386,28 +356,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     </div>
                     <div class="footer_2 text-center clearfix">
                         <div class="col-sm-12">
-                            <p class="mgt">© 2024 Your Website Coffee  Management System<a class="col_1" th:href="@{/}">Coffee PAO</a></p>
+                            <p class="mgt">© 2024 Your Website Bookstore Management System <a class="col_1" th:href="@{/}">Book Store</a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="input-group clearfix">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fa fa-search"></i></button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <script>
             $(document).ready(function () {
